@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="android," />
 
 
 
@@ -84,12 +84,25 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lvc唯爱">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Android笔记-使用通知通知的基本用法
+代码
+
+123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);                Notification notification = new NotificationCo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android笔记-使用通知">
+<meta property="og:url" content="http://yoursite.com/2017/02/05/android笔记-使用通知/index.html">
 <meta property="og:site_name" content="Lvc唯爱">
+<meta property="og:description" content="Android笔记-使用通知通知的基本用法
+代码
+
+123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);                Notification notification = new NotificationCo">
+<meta property="og:updated_time" content="2017-02-05T07:20:49.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lvc唯爱">
+<meta name="twitter:title" content="android笔记-使用通知">
+<meta name="twitter:description" content="Android笔记-使用通知通知的基本用法
+代码
+
+123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);                Notification notification = new NotificationCo">
 
 
 
@@ -117,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/05/android笔记-使用通知/"/>
 
 
 
 
 
-  <title> Lvc唯爱 </title>
+  <title> android笔记-使用通知 | Lvc唯爱 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -144,9 +157,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -262,10 +273,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/02/05/android笔记-使用通知/" itemprop="url">
-                  android笔记-使用通知
-                </a>
+                android笔记-使用通知
               
             
           </h1>
@@ -326,184 +334,83 @@
       
 
       
-        
-          <h1 id="Android笔记-使用通知"><a href="#Android笔记-使用通知" class="headerlink" title="Android笔记-使用通知"></a>Android笔记-使用通知</h1><h2 id="通知的基本用法"><a href="#通知的基本用法" class="headerlink" title="通知的基本用法"></a>通知的基本用法</h2><blockquote>
+        <h1 id="Android笔记-使用通知"><a href="#Android笔记-使用通知" class="headerlink" title="Android笔记-使用通知"></a>Android笔记-使用通知</h1><h2 id="通知的基本用法"><a href="#通知的基本用法" class="headerlink" title="通知的基本用法"></a>通知的基本用法</h2><blockquote>
 <p>代码</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE); </div><div class="line">               Notification notification = new NotificationCompat.Builder(this)</div><div class="line">                       .setContentTitle(&quot;通知&quot;)</div><div class="line">                       .setContentText(&quot;这是一个通知！&quot;)</div><div class="line">                       .setWhen(System.currentTimeMillis())</div><div class="line">                       .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">                       .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))</div><div class="line">                       .build();</div><div class="line">               notificationManager.notify(1,notification);</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/05/android笔记-使用通知/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<a id="more"></a>
+<h2 id="PendingIntent"><a href="#PendingIntent" class="headerlink" title="PendingIntent"></a>PendingIntent</h2><p>可以简单的理解为延迟执行的Intent</p>
+<h3 id="pendingIntent-用法"><a href="#pendingIntent-用法" class="headerlink" title="pendingIntent 用法"></a>pendingIntent 用法</h3><p>1.获取PendingIntent实例：<br>    <code>getActivity()</code><br>    <code>getBroadcast()</code><br>     <code>getService()</code></p>
+<pre><code>&gt; 以上方法参数相同：
+    * 1 context
+    * 2 0 通常传入0
+    * 3 Intent对象
+    * 4 用于确定PendingIntent的行为 有4个值：FLAG_ONE_SHOT  FLAG_ON_CREATE  FLAG_CANEL_CURRENT FLAG_UPDATE_CURRENT
+</code></pre><h2 id="给通知添加响应"><a href="#给通知添加响应" class="headerlink" title="给通知添加响应"></a>给通知添加响应</h2><blockquote>
+<p>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(this,NotificationActivity.class);</div><div class="line">               Intent[] intents = &#123;intent&#125;;</div><div class="line">               PendingIntent pi = PendingIntent.getActivities(this,0,intents,0);</div><div class="line">               NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</div><div class="line">               Notification notification = new NotificationCompat.Builder(this)</div><div class="line">                       .setContentTitle(&quot;通知&quot;)</div><div class="line">                       .setContentText(&quot;这是一个通知！&quot;)</div><div class="line">                       .setWhen(System.currentTimeMillis())</div><div class="line">                       .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">                       .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))</div><div class="line">                       .setContentIntent(pi)</div><div class="line">                       .build();</div><div class="line">               notificationManager.notify(1,notification);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="取消通知栏上的通知"><a href="#取消通知栏上的通知" class="headerlink" title="取消通知栏上的通知"></a>取消通知栏上的通知</h2><pre><code>`.setAutoCancel(true)` 
+
+在响应的Activity中 添加 
+    1.NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    2.notificationManager.cancel(1);
+</code></pre>
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/03/我的第一篇博客/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="lvc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Lvc唯爱">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Lvc唯爱" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/03/我的第一篇博客/" itemprop="url">
-                  我的第一篇博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-03T17:20:13+08:00">
-                2017-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/android/" rel="tag"># android</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/03/我的第一篇博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/03/我的第一篇博客/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <blockquote>
-<p>没有正式文章，仅作为当前内容的测试！</p>
-<p>做个简单的小结<br>昨天在慕课网手记中看到 hexo + github pages 搭建个人博客<br>  经过长时间的学习，再一次觉得开源的伟大!<br>  用了不到一天的时间，杂七杂八的也就成这个样子了</p>
-</blockquote>
-<p>  实践才是检验真理的唯一标准</p>
-<blockquote>
-<p>坚持每天学点东西吧。<br>这也算还了我一个小愿望！<br>2017 任重而道远! 下一步，开发一个APP！ ——Lvc</p>
-</blockquote>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/03/我的第一篇博客/" rel="next" title="我的第一篇博客">
+                <i class="fa fa-chevron-left"></i> 我的第一篇博客
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
+          <span class="post-nav-divider"></span>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -511,6 +418,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/05/android笔记-使用通知/"
+           data-title="android笔记-使用通知" data-url="http://yoursite.com/2017/02/05/android笔记-使用通知/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -530,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -580,6 +504,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android笔记-使用通知"><span class="nav-number">1.</span> <span class="nav-text">Android笔记-使用通知</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通知的基本用法"><span class="nav-number">1.1.</span> <span class="nav-text">通知的基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PendingIntent"><span class="nav-number">1.2.</span> <span class="nav-text">PendingIntent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pendingIntent-用法"><span class="nav-number">1.2.1.</span> <span class="nav-text">pendingIntent 用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给通知添加响应"><span class="nav-number">1.3.</span> <span class="nav-text">给通知添加响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消通知栏上的通知"><span class="nav-number">1.4.</span> <span class="nav-text">取消通知栏上的通知</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -679,6 +619,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
