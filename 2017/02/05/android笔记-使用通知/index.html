@@ -87,7 +87,7 @@
 <meta name="description" content="Android笔记-使用通知通知的基本用法
 代码
 
-123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);                Notification notification = new NotificationCo">
+123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);               Notification notification = new NotificationCom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android笔记-使用通知">
 <meta property="og:url" content="http://pjc.party/2017/02/05/android笔记-使用通知/index.html">
@@ -95,14 +95,14 @@
 <meta property="og:description" content="Android笔记-使用通知通知的基本用法
 代码
 
-123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);                Notification notification = new NotificationCo">
-<meta property="og:updated_time" content="2017-02-05T07:20:49.750Z">
+123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);               Notification notification = new NotificationCom">
+<meta property="og:updated_time" content="2017-02-09T15:45:58.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android笔记-使用通知">
 <meta name="twitter:description" content="Android笔记-使用通知通知的基本用法
 代码
 
-123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);                Notification notification = new NotificationCo">
+123456789NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);               Notification notification = new NotificationCom">
 
 
 
@@ -342,6 +342,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -391,7 +413,7 @@
         <h1 id="Android笔记-使用通知"><a href="#Android笔记-使用通知" class="headerlink" title="Android笔记-使用通知"></a>Android笔记-使用通知</h1><h2 id="通知的基本用法"><a href="#通知的基本用法" class="headerlink" title="通知的基本用法"></a>通知的基本用法</h2><blockquote>
 <p>代码</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE); </div><div class="line">               Notification notification = new NotificationCompat.Builder(this)</div><div class="line">                       .setContentTitle(&quot;通知&quot;)</div><div class="line">                       .setContentText(&quot;这是一个通知！&quot;)</div><div class="line">                       .setWhen(System.currentTimeMillis())</div><div class="line">                       .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">                       .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))</div><div class="line">                       .build();</div><div class="line">               notificationManager.notify(1,notification);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</div><div class="line">               Notification notification = new NotificationCompat.Builder(this)</div><div class="line">                       .setContentTitle(&quot;通知&quot;)</div><div class="line">                       .setContentText(&quot;这是一个通知！&quot;)</div><div class="line">                       .setWhen(System.currentTimeMillis())</div><div class="line">                       .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">                       .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))</div><div class="line">                       .build();</div><div class="line">               notificationManager.notify(1,notification);</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="PendingIntent"><a href="#PendingIntent" class="headerlink" title="PendingIntent"></a>PendingIntent</h2><p>可以简单的理解为延迟执行的Intent</p>
 <h3 id="pendingIntent-用法"><a href="#pendingIntent-用法" class="headerlink" title="pendingIntent 用法"></a>pendingIntent 用法</h3><p>1.获取PendingIntent实例：<br>    <code>getActivity()</code><br>    <code>getBroadcast()</code><br>     <code>getService()</code></p>
@@ -403,9 +425,9 @@
 </code></pre><h2 id="给通知添加响应"><a href="#给通知添加响应" class="headerlink" title="给通知添加响应"></a>给通知添加响应</h2><blockquote>
 <p>代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Intent intent = new Intent(this,NotificationActivity.class);</div><div class="line">               Intent[] intents = &#123;intent&#125;;</div><div class="line">               PendingIntent pi = PendingIntent.getActivities(this,0,intents,0);</div><div class="line">               NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</div><div class="line">               Notification notification = new NotificationCompat.Builder(this)</div><div class="line">                       .setContentTitle(&quot;通知&quot;)</div><div class="line">                       .setContentText(&quot;这是一个通知！&quot;)</div><div class="line">                       .setWhen(System.currentTimeMillis())</div><div class="line">                       .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">                       .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))</div><div class="line">                       .setContentIntent(pi)</div><div class="line">                       .build();</div><div class="line">               notificationManager.notify(1,notification);</div></pre></td></tr></table></figure></p>
 </blockquote>
-<h2 id="取消通知栏上的通知"><a href="#取消通知栏上的通知" class="headerlink" title="取消通知栏上的通知"></a>取消通知栏上的通知</h2><pre><code>`.setAutoCancel(true)` 
+<h2 id="取消通知栏上的通知"><a href="#取消通知栏上的通知" class="headerlink" title="取消通知栏上的通知"></a>取消通知栏上的通知</h2><pre><code>`.setAutoCancel(true)`
 
-在响应的Activity中 添加 
+在响应的Activity中 添加
     1.NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     2.notificationManager.cancel(1);
 </code></pre>
@@ -573,18 +595,25 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="andiroid," />
+  <meta name="keywords" content="android," />
 
 
 
@@ -85,28 +85,28 @@
 
 
 <meta name="description" content="调用摄像头调用摄像头拍照获取图片
-Demo：效果展示    
+Demo：效果展示
 
 
-重要代码123456789101112131415161718192021//创建File 对象，用于存储拍照后的图片File outputImage = new File(getExternalCacheDir(),&amp;quot;output_image.jsp&amp;quot;);try &amp;#123;    if(outputImage">
+重要代码123456789101112131415161718192021//创建File 对象，用于存储拍照后的图片File outputImage = new File(getExternalCacheDir(),&amp;quot;output_image.jsp&amp;quot;);try &amp;#123;    if(outputImage.exi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android笔记-调用摄像头相册">
 <meta property="og:url" content="http://pjc.party/2017/02/06/android笔记-调用摄像头相册/index.html">
 <meta property="og:site_name" content="Lvc唯爱">
 <meta property="og:description" content="调用摄像头调用摄像头拍照获取图片
-Demo：效果展示    
+Demo：效果展示
 
 
-重要代码123456789101112131415161718192021//创建File 对象，用于存储拍照后的图片File outputImage = new File(getExternalCacheDir(),&amp;quot;output_image.jsp&amp;quot;);try &amp;#123;    if(outputImage">
+重要代码123456789101112131415161718192021//创建File 对象，用于存储拍照后的图片File outputImage = new File(getExternalCacheDir(),&amp;quot;output_image.jsp&amp;quot;);try &amp;#123;    if(outputImage.exi">
 <meta property="og:image" content="http://p1.bpimg.com/567571/1e99c5d0d9dd9c9a.png ">
-<meta property="og:updated_time" content="2017-02-06T13:04:53.013Z">
+<meta property="og:updated_time" content="2017-02-09T15:45:56.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android笔记-调用摄像头相册">
 <meta name="twitter:description" content="调用摄像头调用摄像头拍照获取图片
-Demo：效果展示    
+Demo：效果展示
 
 
-重要代码123456789101112131415161718192021//创建File 对象，用于存储拍照后的图片File outputImage = new File(getExternalCacheDir(),&amp;quot;output_image.jsp&amp;quot;);try &amp;#123;    if(outputImage">
+重要代码123456789101112131415161718192021//创建File 对象，用于存储拍照后的图片File outputImage = new File(getExternalCacheDir(),&amp;quot;output_image.jsp&amp;quot;);try &amp;#123;    if(outputImage.exi">
 <meta name="twitter:image" content="http://p1.bpimg.com/567571/1e99c5d0d9dd9c9a.png ">
 
 
@@ -347,6 +347,28 @@ Demo：效果展示
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -394,7 +416,7 @@ Demo：效果展示
 
       
         <h1 id="调用摄像头"><a href="#调用摄像头" class="headerlink" title="调用摄像头"></a>调用摄像头</h1><h2 id="调用摄像头拍照获取图片"><a href="#调用摄像头拍照获取图片" class="headerlink" title="调用摄像头拍照获取图片"></a>调用摄像头拍照获取图片</h2><blockquote>
-<p>Demo：<br>效果展示    </p>
+<p>Demo：<br>效果展示</p>
 </blockquote>
 <p><img src="http://p1.bpimg.com/567571/1e99c5d0d9dd9c9a.png " width="25%" height="20%"></p>
 <h3 id="重要代码"><a href="#重要代码" class="headerlink" title="重要代码"></a>重要代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//创建File 对象，用于存储拍照后的图片</div><div class="line">File outputImage = new File(getExternalCacheDir(),&quot;output_image.jsp&quot;);</div><div class="line">try &#123;</div><div class="line">    if(outputImage.exists())&#123;</div><div class="line">        outputImage.delete();</div><div class="line">    &#125;</div><div class="line">    outputImage.createNewFile();</div><div class="line">&#125;catch (IOException e)&#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line">if(Build.VERSION.SDK_INT&gt;=24)&#123;</div><div class="line">    imageUri = FileProvider.getUriForFile(MainActivity.this,&quot;com.example.cramea.fileprovider&quot;,</div><div class="line">            outputImage);</div><div class="line"></div><div class="line">&#125;else&#123;</div><div class="line">    imageUri = Uri.fromFile(outputImage);</div><div class="line">&#125;</div><div class="line">//启动相机程序</div><div class="line">Intent intent = new Intent(&quot;android.media.action.IMAGE_CAPTURE&quot;);</div><div class="line">intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);</div><div class="line">startActivityForResult(intent,TAKE_PHOTO);</div></pre></td></tr></table></figure>
@@ -446,7 +468,7 @@ Demo：效果展示
       
         <div class="post-tags">
           
-            <a href="/tags/andiroid/" rel="tag"># andiroid</a>
+            <a href="/tags/android/" rel="tag"># android</a>
           
         </div>
       
@@ -567,18 +589,25 @@ Demo：效果展示
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

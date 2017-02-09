@@ -1,0 +1,1127 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="android笔记-Android文件下载单线程下载效果展示：
+主要过程：1.新建DownloadLinstener接口2.新建DoadloadTask继承AsycnTak3.新建DownloadService 继承service4.UI和Mainactivity实现
+
+
+代码
+
+
+DownloadLinstener接口实现*
+1234567891011121314public interface">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android笔记-Android文件下载">
+<meta property="og:url" content="http://pjc.party/2017/02/09/android笔记-Android文件下载/index.html">
+<meta property="og:site_name" content="Lvc唯爱">
+<meta property="og:description" content="android笔记-Android文件下载单线程下载效果展示：
+主要过程：1.新建DownloadLinstener接口2.新建DoadloadTask继承AsycnTak3.新建DownloadService 继承service4.UI和Mainactivity实现
+
+
+代码
+
+
+DownloadLinstener接口实现*
+1234567891011121314public interface">
+<meta property="og:image" content="http://p1.bpimg.com/567571/e3f2b78e00e9b469.png">
+<meta property="og:image" content="http://p1.bpimg.com/567571/eb37ee9e4aa6869b.png">
+<meta property="og:updated_time" content="2017-02-09T15:44:21.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android笔记-Android文件下载">
+<meta name="twitter:description" content="android笔记-Android文件下载单线程下载效果展示：
+主要过程：1.新建DownloadLinstener接口2.新建DoadloadTask继承AsycnTak3.新建DownloadService 继承service4.UI和Mainactivity实现
+
+
+代码
+
+
+DownloadLinstener接口实现*
+1234567891011121314public interface">
+<meta name="twitter:image" content="http://p1.bpimg.com/567571/e3f2b78e00e9b469.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pjc.party/2017/02/09/android笔记-Android文件下载/"/>
+
+
+
+
+
+  <title> android笔记-Android文件下载 | Lvc唯爱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?91a5cf9a85639ea8ef8502003a9f1e44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lvc唯爱</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">在这条路上走的越来越远，就不回来了</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/09/android笔记-Android文件下载/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lvc">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Lvc唯爱">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Lvc唯爱" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                android笔记-Android文件下载
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T23:07:34+08:00">
+                2017-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/09/android笔记-Android文件下载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/09/android笔记-Android文件下载/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/09/android笔记-Android文件下载/" class="leancloud_visitors" data-flag-title="android笔记-Android文件下载">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="android笔记-Android文件下载"><a href="#android笔记-Android文件下载" class="headerlink" title="android笔记-Android文件下载"></a>android笔记-Android文件下载</h1><h2 id="单线程下载"><a href="#单线程下载" class="headerlink" title="单线程下载"></a>单线程下载</h2><p>效果展示：<br><img src="http://p1.bpimg.com/567571/e3f2b78e00e9b469.png" alt="效果展示"><br><img src="http://p1.bpimg.com/567571/eb37ee9e4aa6869b.png" alt=""></p>
+<blockquote><p>主要过程：<br>1.新建DownloadLinstener接口<br>2.新建DoadloadTask继承AsycnTak<br>3.新建DownloadService 继承service<br>4.UI和Mainactivity实现</p>
+</blockquote>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<ul>
+<li><p>DownloadLinstener接口实现*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public interface DownloadListener &#123;</div><div class="line"></div><div class="line">    void onProgress(int progress);</div><div class="line"></div><div class="line">    void onSuccess();</div><div class="line"></div><div class="line">    void onFailed();</div><div class="line"></div><div class="line">    void onPaused();</div><div class="line"></div><div class="line">    void onCanceled();</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+</li>
+<li><p>DownloadTask实现 *</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div></pre></td><td class="code"><pre><div class="line">package com.lvc.downloaddemo;</div><div class="line"></div><div class="line"></div><div class="line">import android.os.AsyncTask;</div><div class="line">import android.os.Environment;</div><div class="line"></div><div class="line">import java.io.File;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.RandomAccessFile;</div><div class="line"></div><div class="line">import okhttp3.OkHttpClient;</div><div class="line">import okhttp3.Request;</div><div class="line">import okhttp3.Response;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lvc on 2017/2/9.</div><div class="line"> */</div><div class="line"></div><div class="line">public class DownloadTask extends AsyncTask&lt;String ,Integer ,Integer&gt; &#123;</div><div class="line"></div><div class="line">    // 下载常量 标识状态</div><div class="line">    public static final int TYPE_SUCCESS = 0;</div><div class="line">    public static final int TYPE_FAILED = 1;</div><div class="line">    public static final int TYPE_PAUSED = 2;</div><div class="line">    public static final int TYPE_CANCELED = 3;</div><div class="line"></div><div class="line">    private DownloadListener listener;</div><div class="line"></div><div class="line">    private Boolean isPaused =false;</div><div class="line">    private Boolean isCanceled = false;</div><div class="line"></div><div class="line">    private int lastProgress;</div><div class="line"></div><div class="line">    public DownloadTask(DownloadListener listener) &#123;</div><div class="line">        this.listener = listener;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 后台执行的下载逻辑</div><div class="line">    @Override</div><div class="line">    protected Integer doInBackground(String... params) &#123;</div><div class="line"></div><div class="line">        InputStream in = null;</div><div class="line">        RandomAccessFile savedFile = null;</div><div class="line">        File file = null;</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            long downloadLength = 0;</div><div class="line">            String downloadUrl = params[0];</div><div class="line">            String fileName = downloadUrl.substring(downloadUrl.lastIndexOf(&quot;/&quot;));</div><div class="line">            String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();</div><div class="line">            file = new File(directory+fileName);</div><div class="line">            if (file.exists())&#123;</div><div class="line">                downloadLength = file.length();</div><div class="line">            &#125;</div><div class="line">            long contentLength = getContentLength(downloadUrl);</div><div class="line">            if (contentLength == 0)&#123;</div><div class="line">                return TYPE_FAILED;</div><div class="line">            &#125;else if (contentLength == downloadLength)&#123;</div><div class="line">                return TYPE_SUCCESS;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            OkHttpClient client = new OkHttpClient();</div><div class="line">            Request request = new Request.Builder()</div><div class="line">                    //断点下载</div><div class="line">                    .addHeader(&quot;RANGE&quot;, &quot;bytes=&quot; + downloadLength + &quot;-&quot;)</div><div class="line">                    .url(downloadUrl)</div><div class="line">                    .build();</div><div class="line">            Response response = client.newCall(request).execute();</div><div class="line">            if (response != null)&#123;</div><div class="line">                in = response.body().byteStream();</div><div class="line">                savedFile = new RandomAccessFile(file,&quot;rw&quot;);</div><div class="line">                savedFile.seek(downloadLength);</div><div class="line">                byte[] b = new byte[1024];</div><div class="line">                int total =0;</div><div class="line">                int len ;</div><div class="line">                while ((len = in.read(b)) != -1)&#123;</div><div class="line">                    if (isCanceled)&#123;</div><div class="line">                        return  TYPE_CANCELED;</div><div class="line">                    &#125; else  if(isPaused)&#123;</div><div class="line">                        return TYPE_PAUSED;</div><div class="line">                    &#125; else&#123;</div><div class="line">                        total += len;</div><div class="line">                        savedFile.write(b,0,len);</div><div class="line">                        // 计算下载的百分比</div><div class="line">                        int progress = (int)((total+downloadLength)*100 / contentLength);</div><div class="line">                        publishProgress(progress);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                response.body().close();</div><div class="line">                return TYPE_SUCCESS;</div><div class="line">            &#125;</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;finally &#123;</div><div class="line">            if(in != null)&#123;</div><div class="line">                try &#123;</div><div class="line">                    in.close();</div><div class="line">                &#125; catch (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if(savedFile != null)&#123;</div><div class="line">            try &#123;</div><div class="line">                savedFile.close();</div><div class="line">            &#125; catch (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if (isCanceled &amp;&amp; file != null)&#123;</div><div class="line">            file.delete();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return TYPE_FAILED;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    // 更新 下载进度</div><div class="line">    @Override</div><div class="line">    protected void onProgressUpdate(Integer... values) &#123;</div><div class="line"></div><div class="line">        int progress = values[0];</div><div class="line">        if(progress &gt; lastProgress)&#123;</div><div class="line">            listener.onProgress(progress);</div><div class="line">            lastProgress = progress;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    //最终下载的结果</div><div class="line">    @Override</div><div class="line">    protected void onPostExecute(Integer status) &#123;</div><div class="line">        //super.onPostExecute(status);</div><div class="line">        switch (status) &#123;</div><div class="line">            case TYPE_SUCCESS:</div><div class="line">                listener.onSuccess();</div><div class="line">                break;</div><div class="line">            case TYPE_FAILED:</div><div class="line">                listener.onFailed();</div><div class="line">                break;</div><div class="line">            case TYPE_PAUSED:</div><div class="line">                listener.onPaused();</div><div class="line">                break;</div><div class="line">            case TYPE_CANCELED:</div><div class="line">                listener.onCanceled();</div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    private long getContentLength(String downloadUrl) throws IOException &#123;</div><div class="line">        OkHttpClient client = new OkHttpClient();</div><div class="line">        Request request = new Request.Builder()</div><div class="line">                .url(downloadUrl)</div><div class="line">                .build();</div><div class="line">        Response response = client.newCall(request).execute();</div><div class="line">        if (response != null &amp;&amp; response.isSuccessful())&#123;</div><div class="line"></div><div class="line">            long contentlength = response.body().contentLength();</div><div class="line">            response.close();</div><div class="line">            return contentlength;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void pausedDownload()&#123;</div><div class="line">        isPaused = true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void canceledDownlod()&#123;</div><div class="line">        isCanceled = true;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+</li>
+<li><p>DwonloadService实现*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div></pre></td><td class="code"><pre><div class="line">package com.lvc.downloaddemo;</div><div class="line"></div><div class="line">import android.app.Notification;</div><div class="line">import android.app.NotificationManager;</div><div class="line">import android.app.PendingIntent;</div><div class="line">import android.app.Service;</div><div class="line">import android.content.Intent;</div><div class="line">import android.graphics.BitmapFactory;</div><div class="line">import android.os.Binder;</div><div class="line">import android.os.Environment;</div><div class="line">import android.os.IBinder;</div><div class="line">import android.support.v4.app.NotificationCompat;</div><div class="line">import android.util.Log;</div><div class="line">import android.widget.Toast;</div><div class="line"></div><div class="line">import java.io.File;</div><div class="line"></div><div class="line">public class DownloadService extends Service &#123;</div><div class="line"></div><div class="line">    private DownloadTask downloadTask ;</div><div class="line">    private String downloadUrl = null;</div><div class="line">    int i = 0;</div><div class="line"></div><div class="line">    private DownloadListener listener = new DownloadListener() &#123;</div><div class="line">        @Override</div><div class="line">        public void onProgress(int progress) &#123;</div><div class="line">            getNotificationManager().notify(1,getNotification(&quot;正在下载...&quot;,progress));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onSuccess() &#123;</div><div class="line">                downloadTask = null;</div><div class="line">                // 下载成功时将前台服务通知关闭，并创建一个下载成功的通知</div><div class="line">                stopForeground(true);</div><div class="line">                getNotificationManager().notify(1, getNotification(&quot;Download Success&quot;, -1));</div><div class="line">                Toast.makeText(DownloadService.this, &quot;Download Success&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onFailed() &#123;</div><div class="line">            downloadTask = null;</div><div class="line">            // 下载失败时将前台服务通知关闭，并创建一个下载失败的通知</div><div class="line">            stopForeground(true);</div><div class="line">            getNotificationManager().notify(1, getNotification(&quot;Download Failed&quot;, -1));</div><div class="line">            Toast.makeText(DownloadService.this, &quot;Download Failed&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onPaused() &#123;</div><div class="line">            downloadTask = null;</div><div class="line">            Toast.makeText(DownloadService.this, &quot;Paused&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onCanceled() &#123;</div><div class="line"></div><div class="line">            downloadTask = null;</div><div class="line">            stopForeground(true);</div><div class="line">            Toast.makeText(DownloadService.this, &quot;Canceled&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">        &#125;</div><div class="line">    &#125; ;</div><div class="line"></div><div class="line">    private DownloadBinder mBinder =new DownloadBinder();</div><div class="line"></div><div class="line">  /*  public DownloadService() &#123;</div><div class="line">    &#125;*/</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public IBinder onBind(Intent intent) &#123;</div><div class="line">        return mBinder;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class DownloadBinder extends Binder&#123;</div><div class="line"></div><div class="line">        public void startDownload(String url)&#123;</div><div class="line"></div><div class="line">            if(downloadUrl == null)&#123;</div><div class="line">                downloadUrl =url;</div><div class="line">                downloadTask = new DownloadTask(listener);</div><div class="line">                downloadTask.execute(downloadUrl);</div><div class="line">                startForeground(1,getNotification(&quot;正在下载...&quot;,0));</div><div class="line">                Log.i(&quot;判断点击次数&quot;, &quot;startDownload: &quot;+i);</div><div class="line">                i++;</div><div class="line">                Toast.makeText(DownloadService.this, &quot;正在下载...&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void pauseDownload()&#123;</div><div class="line">            if(downloadTask !=null)&#123;</div><div class="line">                downloadTask.pausedDownload();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void cancelDownload()&#123;</div><div class="line">            if(downloadTask != null)&#123;</div><div class="line">                downloadTask.canceledDownlod();</div><div class="line">            &#125;else&#123;</div><div class="line">                if(downloadUrl != null)&#123;</div><div class="line">                    //取消下载时需要将文件删除，并通知关闭</div><div class="line"></div><div class="line">                    String fileName = downloadUrl.substring(downloadUrl.lastIndexOf(&quot;/&quot;));</div><div class="line">                    String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();</div><div class="line">                    File file = new File(directory + fileName);</div><div class="line">                    if(file.exists())&#123;</div><div class="line">                        file.delete();</div><div class="line">                    &#125;</div><div class="line">                    getNotificationManager().cancel(1);</div><div class="line">                    stopForeground(true);</div><div class="line">                    Toast.makeText(DownloadService.this, &quot;Canceled&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    // 获取通知管理器</div><div class="line">    private NotificationManager getNotificationManager()&#123;</div><div class="line">        return (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</div><div class="line">    &#125;</div><div class="line">    //通知详情</div><div class="line">    private Notification getNotification(String title,int progress)&#123;</div><div class="line">       // Intent intent  = new Intent(this,MainActivity.class);</div><div class="line">       // PendingIntent pi = PendingIntent.getActivities(this,0,new Intent[]&#123;intent&#125;,0);</div><div class="line"></div><div class="line">        Intent intent = new Intent(this, MainActivity.class);</div><div class="line">        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);</div><div class="line">        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);</div><div class="line">        builder.setSmallIcon(R.mipmap.ic_launcher);</div><div class="line">        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));</div><div class="line">        builder.setContentIntent(pi);</div><div class="line">        builder.setContentTitle(title);</div><div class="line">        if(progress &gt;= 0)&#123;</div><div class="line">            builder.setContentText(progress + &quot;%&quot;);</div><div class="line">            builder.setProgress(100,progress,false);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return builder.build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+</li>
+<li><p>Mainactivity实现 UI布局简单就不贴了*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">package com.lvc.downloaddemo;</div><div class="line"></div><div class="line">import android.Manifest;</div><div class="line">import android.content.ComponentName;</div><div class="line">import android.content.Intent;</div><div class="line">import android.content.ServiceConnection;</div><div class="line">import android.content.pm.PackageManager;</div><div class="line">import android.os.IBinder;</div><div class="line">import android.support.annotation.NonNull;</div><div class="line">import android.support.v4.app.ActivityCompat;</div><div class="line">import android.support.v4.content.ContextCompat;</div><div class="line">import android.support.v7.app.AppCompatActivity;</div><div class="line">import android.os.Bundle;</div><div class="line">import android.view.View;</div><div class="line">import android.widget.Button;</div><div class="line">import android.widget.Toast;</div><div class="line"></div><div class="line">public class MainActivity extends AppCompatActivity implements View.OnClickListener &#123;</div><div class="line"></div><div class="line">    private DownloadService.DownloadBinder downloadBinder;</div><div class="line">    private ServiceConnection connection = new ServiceConnection() &#123;</div><div class="line">        @Override</div><div class="line">        public void onServiceConnected(ComponentName componentName, IBinder iBinder) &#123;</div><div class="line">            downloadBinder = (DownloadService.DownloadBinder) iBinder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceDisconnected(ComponentName componentName) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        Button startDownload = (Button) findViewById(R.id.btn_start);</div><div class="line">        Button pauseDownload = (Button) findViewById(R.id.btn_paused);</div><div class="line">        Button cancelDownload = (Button) findViewById(R.id.btn_cancel);</div><div class="line">        startDownload.setOnClickListener(this);</div><div class="line">        pauseDownload.setOnClickListener(this);</div><div class="line">        cancelDownload.setOnClickListener(this);</div><div class="line"></div><div class="line">        Intent intent = new Intent(this,DownloadService.class);</div><div class="line">        startService(intent);</div><div class="line">        bindService(intent,connection,BIND_AUTO_CREATE);</div><div class="line">        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">            ActivityCompat.requestPermissions(MainActivity.this, new String[]&#123; Manifest.permission. WRITE_EXTERNAL_STORAGE &#125;, 1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onClick(View view) &#123;</div><div class="line"></div><div class="line">        if (downloadBinder == null) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        switch (view.getId()) &#123;</div><div class="line">            case R.id.btn_start:</div><div class="line">                String url = &quot;http://www.runoob.com/wp-content/uploads/2015/09/DownLoadDemo1.zip&quot;;</div><div class="line">                downloadBinder.startDownload(url);</div><div class="line">                break;</div><div class="line">            case R.id.btn_paused:</div><div class="line">                downloadBinder.pauseDownload();</div><div class="line">                break;</div><div class="line">            case R.id.btn_cancel:</div><div class="line">                downloadBinder.cancelDownload();</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) &#123;</div><div class="line">        switch (requestCode) &#123;</div><div class="line">            case 1:</div><div class="line">                if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                    Toast.makeText(this, &quot;拒绝权限将无法使用程序&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">                    finish();</div><div class="line">                &#125;</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        unbindService(connection);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.png" alt="lvc WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="lvc Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/07/android笔记-HttpURLConnection/" rel="next" title="android笔记-HttpURLConnection">
+                <i class="fa fa-chevron-left"></i> android笔记-HttpURLConnection
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/09/android笔记-Android文件下载/"
+           data-title="android笔记-Android文件下载" data-url="http://pjc.party/2017/02/09/android笔记-Android文件下载/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lvc" />
+          <p class="site-author-name" itemprop="name">lvc</p>
+          <p class="site-description motion-element" itemprop="description">在这条路上走的越来越远，就不回来了</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lvcai" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2883343161?refer_flag=1001030101_" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/lvc-29/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://pjc.party" title="lvc" target="_blank">lvc</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=25727660&auto=1&height=66"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android笔记-Android文件下载"><span class="nav-number">1.</span> <span class="nav-text">android笔记-Android文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程下载"><span class="nav-number">1.1.</span> <span class="nav-text">单线程下载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lvc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pjcparty"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2vi1e3YzavT3TWjpTtkVlqY-gzGzoHsz", "muWQop9KBdv1ENJRlfahVXM3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
