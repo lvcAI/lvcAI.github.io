@@ -85,24 +85,18 @@
 
 
 <meta name="description" content="android笔记-HttpURLConnection报错
- 调用InputStream in = connection.getErrorStream(); 报错
-
-主要代码  使用okhttp直接上代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535">
+ 调用InputStream in = connection.getErrorStream(); 报错">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android笔记-HttpURLConnection">
 <meta property="og:url" content="http://pjc.party/2017/02/07/android笔记-HttpURLConnection/index.html">
 <meta property="og:site_name" content="Lvc唯爱">
 <meta property="og:description" content="android笔记-HttpURLConnection报错
- 调用InputStream in = connection.getErrorStream(); 报错
-
-主要代码  使用okhttp直接上代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535">
-<meta property="og:updated_time" content="2017-02-09T15:51:55.218Z">
+ 调用InputStream in = connection.getErrorStream(); 报错">
+<meta property="og:updated_time" content="2017-02-10T11:13:20.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android笔记-HttpURLConnection">
 <meta name="twitter:description" content="android笔记-HttpURLConnection报错
- 调用InputStream in = connection.getErrorStream(); 报错
-
-主要代码  使用okhttp直接上代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535">
+ 调用InputStream in = connection.getErrorStream(); 报错">
 
 
 
@@ -412,8 +406,9 @@
       
         <h1 id="android笔记-HttpURLConnection"><a href="#android笔记-HttpURLConnection" class="headerlink" title="android笔记-HttpURLConnection"></a>android笔记-HttpURLConnection</h1><h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><blockquote>
 <p> 调用<code>InputStream in = connection.getErrorStream();</code> 报错</p>
-</blockquote>
+<a id="more"></a>
 <h1 id="主要代码-使用okhttp"><a href="#主要代码-使用okhttp" class="headerlink" title="主要代码  使用okhttp"></a>主要代码  使用okhttp</h1><p>直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">package com.lvc.nnetworktest.util;</div><div class="line"></div><div class="line">import java.io.BufferedReader;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.InputStreamReader;</div><div class="line">import java.net.HttpURLConnection;</div><div class="line"></div><div class="line">import java.net.URL;</div><div class="line"></div><div class="line">import okhttp3.OkHttpClient;</div><div class="line">import okhttp3.Request;</div><div class="line">import okhttp3.Response;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by lvc on 2017/2/7.</div><div class="line"> * 网络请求util</div><div class="line"> * 封装了 httpURLConnection   &amp;  okhttp3</div><div class="line"> */</div><div class="line"></div><div class="line">public class HtppUtil &#123;</div><div class="line"></div><div class="line">    public static void sendHttpRequest(final String address,final HttpCallbackListener listener)&#123;</div><div class="line">       new Thread(new Runnable() &#123;</div><div class="line">           @Override</div><div class="line">           public void run() &#123;</div><div class="line">               HttpURLConnection connection = null;</div><div class="line">               //InputStream in =null;</div><div class="line">               try &#123;</div><div class="line">                   URL url = new URL(address);</div><div class="line">                   connection = (HttpURLConnection) url.openConnection();</div><div class="line">                   connection.setRequestMethod(&quot;GET&quot;);</div><div class="line">                   connection.setConnectTimeout(8000);</div><div class="line">                   connection.setReadTimeout(8000);</div><div class="line">                   connection.setDoInput(true);</div><div class="line">                   connection.setDoOutput(true);</div><div class="line">                   InputStream in = connection.getErrorStream();</div><div class="line">                   BufferedReader reader = new BufferedReader(new InputStreamReader(in));</div><div class="line">                   StringBuilder response = new StringBuilder();</div><div class="line">                   String line;</div><div class="line">                   while((line =reader.readLine())!=null)&#123;</div><div class="line">                       response.append(line);</div><div class="line">                   &#125;</div><div class="line"></div><div class="line">                   if(listener != null)&#123;</div><div class="line">                       listener.onFinish(response.toString());</div><div class="line">                   &#125;</div><div class="line">               &#125; catch (Exception e) &#123;</div><div class="line">                   e.printStackTrace();</div><div class="line"></div><div class="line">                   if(listener != null)&#123;</div><div class="line">                       listener.onError(e);</div><div class="line">                   &#125;</div><div class="line">               &#125;finally &#123;</div><div class="line">                   if(connection != null)&#123;</div><div class="line">                       connection.disconnect();</div><div class="line">                   &#125;</div><div class="line">              /*    if (in != null)&#123;</div><div class="line">                      try &#123;</div><div class="line">                          in.close();</div><div class="line">                      &#125; catch (IOException e) &#123;</div><div class="line">                          e.printStackTrace();</div><div class="line">                      &#125;</div><div class="line">                  &#125;*/</div><div class="line">               &#125;</div><div class="line"></div><div class="line">           &#125;</div><div class="line">       &#125;).start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public interface HttpCallbackListener&#123;</div><div class="line">        void onFinish(String response);</div><div class="line">        void onError(Exception e);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * okhttp3</div><div class="line">     */</div><div class="line">    public static void sendOkhttpRequest(String address , okhttp3.Callback callback)&#123;</div><div class="line">        OkHttpClient client = new OkHttpClient();</div><div class="line">        Request request = new Request.Builder()</div><div class="line">                .url(address)</div><div class="line">                .build();</div><div class="line">        client.newCall(request).enqueue(callback); //调用回调</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
+</blockquote>
 
       
     </div>
@@ -579,7 +574,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -597,7 +592,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
