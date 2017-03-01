@@ -106,7 +106,7 @@ libs：导入第三方jar包
 assets：存放资源文件，比方说mp3、视频文件
 bin：存放编译打包后的文件
 res：存放资源文件，存放在此文件夹下的所有资源文件都会生成资源">
-<meta property="og:updated_time" content="2017-02-25T03:03:32.542Z">
+<meta property="og:updated_time" content="2017-03-01T13:55:39.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android上课笔记-快速入门">
 <meta name="twitter:description" content="Android项目的目录结构
@@ -450,10 +450,11 @@ res：存放资源文件，存放在此文件夹下的所有资源文件都会�
 <li>的配置对整个应用生效</li>
 <li>的配置对该activity生效<h1 id="DDMS"><a href="#DDMS" class="headerlink" title="DDMS"></a>DDMS</h1></li>
 <li>Dalvik debug monitor service</li>
-<li><p>Dalvik调试监控服务</p>
-<h1 id="常用的adb指令"><a href="#常用的adb指令" class="headerlink" title="常用的adb指令"></a>常用的adb指令</h1><h2 id="Android-debug-bridge：安卓调试桥"><a href="#Android-debug-bridge：安卓调试桥" class="headerlink" title="Android debug bridge：安卓调试桥"></a>Android debug bridge：安卓调试桥</h2></li>
-<li><p>adb start-server:启动adb进程</p>
-</li>
+<li>Dalvik调试监控服务</li>
+</ul>
+<a id="more"></a>
+<h1 id="常用的adb指令"><a href="#常用的adb指令" class="headerlink" title="常用的adb指令"></a>常用的adb指令</h1><h2 id="Android-debug-bridge：安卓调试桥"><a href="#Android-debug-bridge：安卓调试桥" class="headerlink" title="Android debug bridge：安卓调试桥"></a>Android debug bridge：安卓调试桥</h2><ul>
+<li>adb start-server:启动adb进程</li>
 <li>adb kill-server：杀死adb进程</li>
 <li>adb devices：查看当前与开发环境连接的设备，此命令也可以启动adb进程</li>
 <li>adb install XXX.apk：往模拟器安装apk</li>
@@ -478,7 +479,7 @@ res：存放资源文件，存放在此文件夹下的所有资源文件都会�
 <li>给按钮设置侦听<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> //通过id拿到按钮对象</div><div class="line">Button bt_call = (Button) findViewById(R.id.bt_call);</div><div class="line">//给按钮设置点击</div><div class="line">bt_call.setOnClickListener(new MyListener());</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="3-得到用户输入的号码"><a href="#3-得到用户输入的号码" class="headerlink" title="3. 得到用户输入的号码"></a>3. 得到用户输入的号码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//得到用户输入的号码，先拿到输入框组件</div><div class="line">EditText et_phone = (EditText) findViewById(R.id.et_phone);</div><div class="line">String phone = et_phone.getText().toString();</div></pre></td></tr></table></figure> 
+<h2 id="3-得到用户输入的号码"><a href="#3-得到用户输入的号码" class="headerlink" title="3. 得到用户输入的号码"></a>3. 得到用户输入的号码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//得到用户输入的号码，先拿到输入框组件</div><div class="line">EditText et_phone = (EditText) findViewById(R.id.et_phone);</div><div class="line">String phone = et_phone.getText().toString();</div></pre></td></tr></table></figure>
 <h2 id="4-把号码打出去"><a href="#4-把号码打出去" class="headerlink" title="4. 把号码打出去"></a>4. 把号码打出去</h2><ul>
 <li>Android系统中基于动作机制，来调用系统的应用，你告诉系统你想做什么动作，系统就会把能做这个动作的应用给你，如果没有这个应用，会抛异常</li>
 <li>设置动作，通过意图告知系统<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//把号码打出去</div><div class="line">    //先创建一个意图对象</div><div class="line">    Intent intent = new Intent();</div><div class="line">    //设置动作，打电话</div><div class="line">    intent.setAction(Intent.ACTION_CALL);</div><div class="line">    intent.setData(Uri.parse(&quot;tel:&quot; + phone));</div><div class="line">    //把意图告诉系统</div><div class="line">    startActivity(intent);</div></pre></td></tr></table></figure></li>
@@ -587,6 +588,10 @@ res：存放资源文件，存放在此文件夹下的所有资源文件都会�
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/03/01/javaee上课笔记-DBUtils工具/" rel="prev" title="javaee上课笔记:DBUtils工具">
+                javaee上课笔记:DBUtils工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -685,7 +690,7 @@ res：存放资源文件，存放在此文件夹下的所有资源文件都会�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -703,7 +708,7 @@ res：存放资源文件，存放在此文件夹下的所有资源文件都会�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

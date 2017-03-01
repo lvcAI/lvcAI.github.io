@@ -94,7 +94,7 @@ Drawable的分类BitmapDrawable  几乎是是最简单的Drawable，它就是表
 <meta property="og:description" content="Android 的 Drawable  Drawable 表示的是一中可以在Canvas上进行绘制的抽象概念，它的种类很多，最常见的颜色和  图片度可以是一个Drawable。  Drawable一般都是通过XML定义的，也可以使用代码来创建。
 Drawable的分类BitmapDrawable  几乎是是最简单的Drawable，它就是表示一张图片。  xml文件，
 属性123456789and">
-<meta property="og:updated_time" content="2017-02-24T05:53:22.911Z">
+<meta property="og:updated_time" content="2017-03-01T13:53:44.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android笔记-Drawable">
 <meta name="twitter:description" content="Android 的 Drawable  Drawable 表示的是一中可以在Canvas上进行绘制的抽象概念，它的种类很多，最常见的颜色和  图片度可以是一个Drawable。  Drawable一般都是通过XML定义的，也可以使用代码来创建。
@@ -410,7 +410,53 @@ Drawable的分类BitmapDrawable  几乎是是最简单的Drawable，它就是表
         <h1 id="Android-的-Drawable"><a href="#Android-的-Drawable" class="headerlink" title="Android 的 Drawable"></a>Android 的 Drawable</h1><p>  Drawable 表示的是一中可以在Canvas上进行绘制的抽象概念，它的种类很多，最常见的颜色和<br>  图片度可以是一个Drawable。<br>  Drawable一般都是通过XML定义的，也可以使用代码来创建。</p>
 <h1 id="Drawable的分类"><a href="#Drawable的分类" class="headerlink" title="Drawable的分类"></a>Drawable的分类</h1><h2 id="BitmapDrawable"><a href="#BitmapDrawable" class="headerlink" title="BitmapDrawable"></a>BitmapDrawable</h2><p>  几乎是是最简单的Drawable，它就是表示一张图片。<br>  xml文件，<bitmap></bitmap></p>
 <h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android:antialias		抗锯齿            </div><div class="line">android:dither		  抖动效果        </div><div class="line">android:filter		  过滤效果</div><div class="line">android:gravity		  对图片进行定位，当图片小于容器时。</div><div class="line">android:mipMap	     </div><div class="line">android:src		      </div><div class="line">android:tileMode		平铺模式          disabled 、clamp、reapt 、mirror</div><div class="line">android:tileModeX</div><div class="line">android:tileModeY</div></pre></td></tr></table></figure>
-<h2 id="ShapeDrawable"><a href="#ShapeDrawable" class="headerlink" title="ShapeDrawable"></a>ShapeDrawable</h2><h2 id="LayerDrawable"><a href="#LayerDrawable" class="headerlink" title="LayerDrawable"></a>LayerDrawable</h2><h2 id="StateListDrawable"><a href="#StateListDrawable" class="headerlink" title="StateListDrawable"></a>StateListDrawable</h2><h2 id="LeveListDrawable"><a href="#LeveListDrawable" class="headerlink" title="LeveListDrawable"></a>LeveListDrawable</h2><h2 id="TransitionDrawablw"><a href="#TransitionDrawablw" class="headerlink" title="TransitionDrawablw"></a>TransitionDrawablw</h2><h2 id="InsetDrawable"><a href="#InsetDrawable" class="headerlink" title="InsetDrawable"></a>InsetDrawable</h2><h2 id="ScaleDrawable"><a href="#ScaleDrawable" class="headerlink" title="ScaleDrawable"></a>ScaleDrawable</h2><h2 id="clipDrawable"><a href="#clipDrawable" class="headerlink" title="clipDrawable"></a>clipDrawable</h2><h1 id="自定义Drawable"><a href="#自定义Drawable" class="headerlink" title="自定义Drawable"></a>自定义Drawable</h1>
+<a id="more"></a>
+<h2 id="ShapeDrawable"><a href="#ShapeDrawable" class="headerlink" title="ShapeDrawable"></a>ShapeDrawable</h2><blockquote>
+<p>形状的Drawable咯,定义基本的几何图形,如(矩形,圆形,线条等),根元素是<shape..> 节点比较多，相关的节点如下：</shape..></p>
+<ul>
+<li>① shape:</li>
+<li>~ visible:设置是否可见</li>
+<li>~ shape:形状,可选:rectangle(矩形,包括正方形),oval(椭圆,包括圆),line(线段),ring(环形)</li>
+<li>~ innerRadiusRatio:当shape为ring才有效,表示环内半径所占半径的比率,如果设置了innerRadius, 他会被忽略</li>
+<li>~ innerRadius:当shape为ring才有效,表示环的内半径的尺寸</li>
+<li>~ thicknessRatio:当shape为ring才有效,表环厚度占半径的比率</li>
+<li>~ thickness:当shape为ring才有效,表示环的厚度,即外半径与内半径的差</li>
+<li>~ useLevel:当shape为ring才有效,表示是否允许根据level来显示环的一部分</li>
+<li>② size</li>
+<li>~ width:图形形状宽度</li>
+<li>~ height:图形形状高度</li>
+<li>③ &lt;gradient 》 后面GradientDrawable再讲~</li>
+<li>④ solid</li>
+<li>~ color:背景填充色,设置solid后会覆盖gradient设置的所有效果!!!!!!</li>
+<li>⑤ stroke</li>
+<li>~ width:边框的宽度</li>
+<li>~ color:边框的颜色</li>
+<li>~ dashWidth:边框虚线段的长度</li>
+<li>~ dashGap:边框的虚线段的间距</li>
+<li>⑥ conner</li>
+<li>~ radius:圆角半径,适用于上下左右四个角</li>
+<li>~ topLeftRadius,topRightRadius,BottomLeftRadius,tBottomRightRadius: 依次是左上,右上,左下,右下的圆角值,按自己需要设置!</li>
+<li>⑦ padding</li>
+<li>left,top,right,bottm:依次是左上右下方向上的边距!</li>
+</ul>
+</blockquote>
+<h2 id="LayerDrawable"><a href="#LayerDrawable" class="headerlink" title="LayerDrawable"></a>LayerDrawable</h2><h2 id="StateListDrawable"><a href="#StateListDrawable" class="headerlink" title="StateListDrawable"></a>StateListDrawable</h2><p>属性：</p>
+<ul>
+<li>drawable:引用的Drawable位图,我们可以把他放到最前面,就表示组件的正常状态~</li>
+<li>state_focused:是否获得焦点</li>
+<li>state_window_focused:是否获得窗口焦点</li>
+<li>state_enabled:控件是否可用</li>
+<li>state_checkable:控件可否被勾选,eg:checkbox</li>
+<li>state_checked:控件是否被勾选</li>
+<li>state_selected:控件是否被选择,针对有滚轮的情况</li>
+<li>state_pressed:控件是否被按下</li>
+<li>state_active:控件是否处于活动状态,eg:slidingTab</li>
+<li>state_single:控件包含多个子控件时,确定是否只显示一个子控件</li>
+<li>state_first:控件包含多个子控件时,确定第一个子控件是否处于显示状态</li>
+<li>state_middle:控件包含多个子控件时,确定中间一个子控件是否处于显示状态</li>
+<li>state_last:控件包含多个子控件时,确定最后一个子控件是否处于显示状态</li>
+</ul>
+<h2 id="LeveListDrawable"><a href="#LeveListDrawable" class="headerlink" title="LeveListDrawable"></a>LeveListDrawable</h2><h2 id="TransitionDrawablw"><a href="#TransitionDrawablw" class="headerlink" title="TransitionDrawablw"></a>TransitionDrawablw</h2><h2 id="InsetDrawable"><a href="#InsetDrawable" class="headerlink" title="InsetDrawable"></a>InsetDrawable</h2><h2 id="ScaleDrawable"><a href="#ScaleDrawable" class="headerlink" title="ScaleDrawable"></a>ScaleDrawable</h2><h2 id="clipDrawable"><a href="#clipDrawable" class="headerlink" title="clipDrawable"></a>clipDrawable</h2><h1 id="自定义Drawable"><a href="#自定义Drawable" class="headerlink" title="自定义Drawable"></a>自定义Drawable</h1>
       
     </div>
 
@@ -575,7 +621,7 @@ Drawable的分类BitmapDrawable  几乎是是最简单的Drawable，它就是表
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -593,7 +639,7 @@ Drawable的分类BitmapDrawable  几乎是是最简单的Drawable，它就是表
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
