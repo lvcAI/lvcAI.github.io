@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="感悟," />
+  <meta name="keywords" content="javaee上课笔记," />
 
 
 
@@ -84,37 +84,31 @@
 
 
 
-<meta name="description" content="春雏集:优雅的活着
-我和丽丽有相同的观点就是，优雅的活着
+<meta name="description" content="学习目标
+掌握监听器的相关API
+掌握监听器域对象中的属性变更
+掌握感知被HttpSession绑定的事件监听器
 
-每天一句早安，每天一句晚安，相逢总是思念。
-她想优雅的活着，我想优雅的陪她，陪伴每个366天，多一天都是值得。
-那一天，在回寝室的路上，抬头看落叶的飘零，不知为何，又想起了优雅的活着，优雅的生活，心中的那个念头，牵扯了感触。
-今天给她分享了，李宗盛的《山丘》，她说，看不懂。其实很简单，我想，越过每一个山丘，然后陪你。
-越发想念的越是醉人的">
+#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="春雏集:优雅的活着">
-<meta property="og:url" content="http://pjc.party/2017/02/22/春雏集-优雅的活着/index.html">
+<meta property="og:title" content="javaee上课笔记-Servlet事件监听器">
+<meta property="og:url" content="http://pjc.party/2017/03/03/javaee上课笔记-Servlet事件监听器/index.html">
 <meta property="og:site_name" content="Lvc唯爱">
-<meta property="og:description" content="春雏集:优雅的活着
-我和丽丽有相同的观点就是，优雅的活着
+<meta property="og:description" content="学习目标
+掌握监听器的相关API
+掌握监听器域对象中的属性变更
+掌握感知被HttpSession绑定的事件监听器
 
-每天一句早安，每天一句晚安，相逢总是思念。
-她想优雅的活着，我想优雅的陪她，陪伴每个366天，多一天都是值得。
-那一天，在回寝室的路上，抬头看落叶的飘零，不知为何，又想起了优雅的活着，优雅的生活，心中的那个念头，牵扯了感触。
-今天给她分享了，李宗盛的《山丘》，她说，看不懂。其实很简单，我想，越过每一个山丘，然后陪你。
-越发想念的越是醉人的">
-<meta property="og:updated_time" content="2017-02-22T15:16:32.316Z">
+#">
+<meta property="og:updated_time" content="2017-03-03T07:40:11.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="春雏集:优雅的活着">
-<meta name="twitter:description" content="春雏集:优雅的活着
-我和丽丽有相同的观点就是，优雅的活着
+<meta name="twitter:title" content="javaee上课笔记-Servlet事件监听器">
+<meta name="twitter:description" content="学习目标
+掌握监听器的相关API
+掌握监听器域对象中的属性变更
+掌握感知被HttpSession绑定的事件监听器
 
-每天一句早安，每天一句晚安，相逢总是思念。
-她想优雅的活着，我想优雅的陪她，陪伴每个366天，多一天都是值得。
-那一天，在回寝室的路上，抬头看落叶的飘零，不知为何，又想起了优雅的活着，优雅的生活，心中的那个念头，牵扯了感触。
-今天给她分享了，李宗盛的《山丘》，她说，看不懂。其实很简单，我想，越过每一个山丘，然后陪你。
-越发想念的越是醉人的">
+#">
 
 
 
@@ -142,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://pjc.party/2017/02/22/春雏集-优雅的活着/"/>
+  <link rel="canonical" href="http://pjc.party/2017/03/03/javaee上课笔记-Servlet事件监听器/"/>
 
 
 
 
 
-  <title> 春雏集:优雅的活着 | Lvc唯爱 </title>
+  <title> javaee上课笔记-Servlet事件监听器 | Lvc唯爱 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -304,7 +298,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/22/春雏集-优雅的活着/">
+  <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/03/javaee上课笔记-Servlet事件监听器/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="lvc">
@@ -328,7 +322,7 @@
             
             
               
-                春雏集:优雅的活着
+                javaee上课笔记-Servlet事件监听器
               
             
           </h1>
@@ -343,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-22T22:45:39+08:00">
-                2017-02-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T14:23:33+08:00">
+                2017-03-03
               </time>
             
 
@@ -366,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/春雏集/" itemprop="url" rel="index">
-                    <span itemprop="name">春雏集</span>
+                  <a href="/categories/javaee上课笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee上课笔记</span>
                   </a>
                 </span>
 
@@ -384,8 +378,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/22/春雏集-优雅的活着/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/22/春雏集-优雅的活着/" itemprop="commentCount"></span>
+                <a href="/2017/03/03/javaee上课笔记-Servlet事件监听器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/03/javaee上课笔记-Servlet事件监听器/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,7 +389,7 @@
 
           
           
-             <span id="/2017/02/22/春雏集-优雅的活着/" class="leancloud_visitors" data-flag-title="春雏集:优雅的活着">
+             <span id="/2017/03/03/javaee上课笔记-Servlet事件监听器/" class="leancloud_visitors" data-flag-title="javaee上课笔记-Servlet事件监听器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -422,18 +416,12 @@
       
 
       
-        <h1 id="春雏集-优雅的活着"><a href="#春雏集-优雅的活着" class="headerlink" title="春雏集:优雅的活着"></a>春雏集:优雅的活着</h1><blockquote>
-<p>我和丽丽有相同的观点就是，优雅的活着</p>
-</blockquote>
-<p>每天一句早安，<br>每天一句晚安，<br>相逢总是思念。</p>
-<p>她想优雅的活着，<br>我想优雅的陪她，<br>陪伴每个366天，<br>多一天都是值得。</p>
-<p>那一天，<br>在回寝室的路上，<br>抬头看落叶的飘零，<br>不知为何，又想起了<br>优雅的活着，<br>优雅的生活，<br>心中的那个念头，牵扯了感触。</p>
-<p>今天给她分享了，<br>李宗盛的《山丘》，<br>她说，看不懂。<br>其实很简单，<br>我想，<br>越过每一个山丘，<br>然后陪你。</p>
-<p>越发想念的越是醉人的，<br>迷蒙的夜色神游的我俩。</p>
-<p>晚安，亲爱的丽丽!<br>我想陪你，过优雅的日子。</p>
-<blockquote>
-<p>我希望有个如你一般的人<br>如山间清爽的风<br>如古城温暖的光<br>从清晨到夜晚<br>由山野到书房<br>只要最后是你<br>就好<br>           ——张嘉佳 《从你的全世界路过》</p>
-</blockquote>
+        <h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>掌握监听器的相关API</li>
+<li>掌握监听器域对象中的属性变更</li>
+<li>掌握感知被HttpSession绑定的事件监听器</li>
+</ul>
+<p># </p>
 
       
     </div>
@@ -478,7 +466,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/感悟/" rel="tag"># 感悟</a>
+            <a href="/tags/javaee上课笔记/" rel="tag"># javaee上课笔记</a>
           
         </div>
       
@@ -487,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/20/Android上课笔记-第一课/" rel="next" title="Android上课笔记-第一课">
-                <i class="fa fa-chevron-left"></i> Android上课笔记-第一课
+              <a href="/2017/03/01/春雏集：看见花落也凋零/" rel="next" title="春雏集：看见花落也凋零">
+                <i class="fa fa-chevron-left"></i> 春雏集：看见花落也凋零
               </a>
             
           </div>
@@ -497,8 +485,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/24/android笔记-Drawable/" rel="prev" title="android笔记-Drawable">
-                android笔记-Drawable <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/05/春雏集-流动的思绪/" rel="prev" title="春雏集-流动的思绪">
+                春雏集-流动的思绪 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,8 +539,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/22/春雏集-优雅的活着/"
-           data-title="春雏集:优雅的活着" data-url="http://pjc.party/2017/02/22/春雏集-优雅的活着/">
+      <div class="ds-thread" data-thread-key="2017/03/03/javaee上课笔记-Servlet事件监听器/"
+           data-title="javaee上课笔记-Servlet事件监听器" data-url="http://pjc.party/2017/03/03/javaee上课笔记-Servlet事件监听器/">
       </div>
     
   </div>
@@ -697,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#春雏集-优雅的活着"><span class="nav-number">1.</span> <span class="nav-text">春雏集:优雅的活着</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习目标"><span class="nav-number">1.</span> <span class="nav-text">学习目标</span></a></li></ol></div>
             
 
           </div>

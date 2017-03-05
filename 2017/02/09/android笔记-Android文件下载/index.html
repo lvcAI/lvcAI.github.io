@@ -108,7 +108,7 @@ DownloadLinstener接口实现*
 1234567891011121314public interface">
 <meta property="og:image" content="http://p1.bpimg.com/567571/e3f2b78e00e9b469.png">
 <meta property="og:image" content="http://p1.bpimg.com/567571/eb37ee9e4aa6869b.png">
-<meta property="og:updated_time" content="2017-02-10T11:14:01.121Z">
+<meta property="og:updated_time" content="2017-03-03T06:17:28.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android笔记-Android文件下载">
 <meta name="twitter:description" content="android笔记-Android文件下载单线程下载效果展示：
@@ -449,6 +449,18 @@ DownloadLinstener接口实现*
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">package com.lvc.downloaddemo;</div><div class="line"></div><div class="line">import android.Manifest;</div><div class="line">import android.content.ComponentName;</div><div class="line">import android.content.Intent;</div><div class="line">import android.content.ServiceConnection;</div><div class="line">import android.content.pm.PackageManager;</div><div class="line">import android.os.IBinder;</div><div class="line">import android.support.annotation.NonNull;</div><div class="line">import android.support.v4.app.ActivityCompat;</div><div class="line">import android.support.v4.content.ContextCompat;</div><div class="line">import android.support.v7.app.AppCompatActivity;</div><div class="line">import android.os.Bundle;</div><div class="line">import android.view.View;</div><div class="line">import android.widget.Button;</div><div class="line">import android.widget.Toast;</div><div class="line"></div><div class="line">public class MainActivity extends AppCompatActivity implements View.OnClickListener &#123;</div><div class="line"></div><div class="line">    private DownloadService.DownloadBinder downloadBinder;</div><div class="line">    private ServiceConnection connection = new ServiceConnection() &#123;</div><div class="line">        @Override</div><div class="line">        public void onServiceConnected(ComponentName componentName, IBinder iBinder) &#123;</div><div class="line">            downloadBinder = (DownloadService.DownloadBinder) iBinder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onServiceDisconnected(ComponentName componentName) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        Button startDownload = (Button) findViewById(R.id.btn_start);</div><div class="line">        Button pauseDownload = (Button) findViewById(R.id.btn_paused);</div><div class="line">        Button cancelDownload = (Button) findViewById(R.id.btn_cancel);</div><div class="line">        startDownload.setOnClickListener(this);</div><div class="line">        pauseDownload.setOnClickListener(this);</div><div class="line">        cancelDownload.setOnClickListener(this);</div><div class="line"></div><div class="line">        Intent intent = new Intent(this,DownloadService.class);</div><div class="line">        startService(intent);</div><div class="line">        bindService(intent,connection,BIND_AUTO_CREATE);</div><div class="line">        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">            ActivityCompat.requestPermissions(MainActivity.this, new String[]&#123; Manifest.permission. WRITE_EXTERNAL_STORAGE &#125;, 1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onClick(View view) &#123;</div><div class="line"></div><div class="line">        if (downloadBinder == null) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        switch (view.getId()) &#123;</div><div class="line">            case R.id.btn_start:</div><div class="line">                String url = &quot;http://www.runoob.com/wp-content/uploads/2015/09/DownLoadDemo1.zip&quot;;</div><div class="line">                downloadBinder.startDownload(url);</div><div class="line">                break;</div><div class="line">            case R.id.btn_paused:</div><div class="line">                downloadBinder.pauseDownload();</div><div class="line">                break;</div><div class="line">            case R.id.btn_cancel:</div><div class="line">                downloadBinder.cancelDownload();</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) &#123;</div><div class="line">        switch (requestCode) &#123;</div><div class="line">            case 1:</div><div class="line">                if (grantResults.length &gt; 0 &amp;&amp; grantResults[0] != PackageManager.PERMISSION_GRANTED) &#123;</div><div class="line">                    Toast.makeText(this, &quot;拒绝权限将无法使用程序&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">                    finish();</div><div class="line">                &#125;</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        unbindService(connection);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="多线程下载"><a href="#多线程下载" class="headerlink" title="多线程下载"></a>多线程下载</h2><p>  多线程的下载流程</p>
+<blockquote>
+<ul>
+<li>获取网络连接<ul>
+<li>本地磁盘创建相同大小的空文件</li>
+<li>计算每条线程需从文件哪个部分开始下载，结束</li>
+<li>依次创建，启动多条线程来下载网络资源的指定部分</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>核心代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -614,7 +626,7 @@ DownloadLinstener接口实现*
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -623,7 +635,7 @@ DownloadLinstener接口实现*
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -632,7 +644,7 @@ DownloadLinstener接口实现*
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -712,7 +724,7 @@ DownloadLinstener接口实现*
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android笔记-Android文件下载"><span class="nav-number">1.</span> <span class="nav-text">android笔记-Android文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程下载"><span class="nav-number">1.1.</span> <span class="nav-text">单线程下载</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android笔记-Android文件下载"><span class="nav-number">1.</span> <span class="nav-text">android笔记-Android文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程下载"><span class="nav-number">1.1.</span> <span class="nav-text">单线程下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程下载"><span class="nav-number">1.2.</span> <span class="nav-text">多线程下载</span></a></li></ol></li></ol></div>
             
 
           </div>

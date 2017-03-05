@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javaEE上课笔记," />
+  <meta name="keywords" content="javaee上课笔记," />
 
 
 
@@ -104,7 +104,7 @@ API介绍核心类 &amp;amp; 接口
 API介绍核心类 &amp;amp; 接口
 类  org.apache.commons.dbutils.DbUtils  org.apache.commons.dbutils.QueryRunner
 接口  o">
-<meta property="og:updated_time" content="2017-03-01T13:53:45.451Z">
+<meta property="og:updated_time" content="2017-03-03T06:24:27.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaee上课笔记:DBUtils工具">
 <meta name="twitter:description" content="javaee上课笔记:DBUtils工具学习目标
@@ -366,8 +366,8 @@ API介绍核心类 &amp;amp; 接口
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaEE上课笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaEE上课笔记</span>
+                  <a href="/categories/javaee上课笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee上课笔记</span>
                   </a>
                 </span>
 
@@ -425,7 +425,7 @@ API介绍核心类 &amp;amp; 接口
         <h1 id="javaee上课笔记-DBUtils工具"><a href="#javaee上课笔记-DBUtils工具" class="headerlink" title="javaee上课笔记:DBUtils工具"></a>javaee上课笔记:DBUtils工具</h1><h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
 <li>了解DBUtils工具中的api</li>
 <li>学会使用DBUtils工具对数据库进行增删改查的操作</li>
-<li>学会使用DBUtils工具处理事务<br><a href="http://pjc.party">点我下载DBUtils</a></li>
+<li>学会使用DBUtils工具处理事务<br><a href="http://commons.apache.org/dbutils/index.html" target="_blank" rel="external">点我下载DBUtils</a></li>
 </ul>
 <h1 id="API介绍"><a href="#API介绍" class="headerlink" title="API介绍"></a>API介绍</h1><h2 id="核心类-amp-接口"><a href="#核心类-amp-接口" class="headerlink" title="核心类 &amp; 接口"></a>核心类 &amp; 接口</h2><blockquote>
 <p>类<br>  <code>org.apache.commons.dbutils.DbUtils</code><br>  <code>org.apache.commons.dbutils.QueryRunner</code></p>
@@ -470,6 +470,9 @@ API介绍核心类 &amp;amp; 接口
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="ArrayHandler-和-ArrayListHandler"><a href="#ArrayHandler-和-ArrayListHandler" class="headerlink" title="ArrayHandler 和 ArrayListHandler"></a>ArrayHandler 和 ArrayListHandler</h3></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static void testArrayHandler() throws SQLException&#123;</div><div class="line"></div><div class="line">		BaseDao beseDao = new BaseDao();</div><div class="line">		String sql = &quot;select * from NEWSINFO where nid=?&quot;;</div><div class="line">		Object[] arr = (Object[]) BaseDao.query(sql, new ArrayHandler(), new Object[]&#123;50&#125;);</div><div class="line">		for(int i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			System.out.println(arr[i]+&quot;,&quot;);</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p>  1.创建QueryRunner对象 （配置了C3p0数据池，参数获取数据源）<br>  <code>QueryRunner runner = new QueryRunner（C3p0Utils.getDateSource（））</code><br>  2.编写Sql语句<br>  <code>String sql = &quot;&quot;</code><br>  3.调用QueryRunner中的方法<br>  <code>runner.query()</code><br>  <code>runner.update()</code><br>  参数参考上面</p>
+<h1 id="DBUtils-处理事务"><a href="#DBUtils-处理事务" class="headerlink" title="DBUtils 处理事务"></a>DBUtils 处理事务</h1><p>  创建JDBCUtils,该类封装了创建连接，开启事务，关闭事务等方法<br>  需要注意的是，请求中的一个事务涉及到了多个数据库操作，如果这些Connection是<br>  从连接池中获取的，两个DAO操作就用到了两个Connection，这样是没办法完成一个事务的，<br>  所以，需要借助ThreadLoacl类。<br>  ThreadLoacl类的作用是在一个线程里记录变量。可以生成一个连接放在这个线程中，<br>  只要是这个线程中的任何对象都可以共享这个连接，当线程结束后就删除这个连接，这样，<br>  就保证了一个事务，一个连接。直接上代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">package party.lvc.jdbc.utils;</div><div class="line">import java.sql.Connection;</div><div class="line">import java.sql.SQLException;</div><div class="line">import javax.sql.DataSource;</div><div class="line">import com.mchange.v2.c3p0.ComboPooledDataSource;</div><div class="line">public class JDBCUtils &#123;</div><div class="line">	// 创建一个ThreadLocal 对象，以当前线程作为key</div><div class="line">	private static ThreadLocal&lt;Connection&gt; threadLocal =</div><div class="line">             new ThreadLocal&lt;Connection&gt;();</div><div class="line">	// 从c3p0-config.xml配置文件中读取默认的数据库配置，生成c3p0数据源</div><div class="line">	private static DataSource ds = new ComboPooledDataSource();</div><div class="line">	// 返回数据源对象</div><div class="line">	public static DataSource getDataSource() &#123;</div><div class="line">		return ds;</div><div class="line">	&#125;</div><div class="line">	// 获取c3p0数据库连接池中的连接对象</div><div class="line">	public static Connection getConnection() throws SQLException &#123;</div><div class="line">		Connection conn = threadLocal.get();</div><div class="line">		if (conn == null) &#123;</div><div class="line">			conn = ds.getConnection();</div><div class="line">			threadLocal.set(conn);</div><div class="line">		&#125;</div><div class="line">		return conn;</div><div class="line">	&#125;</div><div class="line">	// 开启事务</div><div class="line">	public static void startTransaction() &#123;</div><div class="line">		try &#123;</div><div class="line">			// 获得链接</div><div class="line">			Connection conn = getConnection();</div><div class="line">			// 开启事务</div><div class="line">			conn.setAutoCommit(false);</div><div class="line">		&#125; catch (SQLException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	// 提交事务</div><div class="line">	public static void commit() &#123;</div><div class="line">		try &#123;</div><div class="line">			// 获得链接</div><div class="line">			Connection conn = threadLocal.get();</div><div class="line">			// 提交事务</div><div class="line">			if (conn != null)</div><div class="line">				conn.commit();</div><div class="line">		&#125; catch (SQLException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	// 回滚事务</div><div class="line">	public static void rollback() &#123;</div><div class="line">		try &#123;</div><div class="line">			// 获得链接</div><div class="line">			Connection conn = threadLocal.get();</div><div class="line">			// 回滚事务</div><div class="line">			if (conn != null)</div><div class="line">				conn.rollback();</div><div class="line">		&#125; catch (SQLException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	// 关闭数据库连接，释放资源</div><div class="line">	public static void close() &#123;</div><div class="line">		// 获得链接</div><div class="line">		Connection conn = threadLocal.get();</div><div class="line">		// 关闭事务</div><div class="line">		if (conn != null) &#123;</div><div class="line">			try &#123;</div><div class="line">				conn.close();</div><div class="line">			&#125; catch (SQLException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125; finally &#123;</div><div class="line">				// 从集合中移除当前绑定的连接</div><div class="line">				threadLocal.remove();</div><div class="line">				conn = null;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>事务的实现。通过银行转账业务，来举个栗子。<br>创建Business，该类包括了转账过程的逻辑方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">package party.lvc.example;</div><div class="line">import java.sql.SQLException;</div><div class="line">import cn.itcast.jdbc.example.dao.AccountDao;</div><div class="line">import cn.itcast.jdbc.example.domain.Account;</div><div class="line">import cn.itcast.jdbc.utils.JDBCUtils;</div><div class="line">public class Business &#123;</div><div class="line">	public static void transfer(String sourceAccountName,</div><div class="line">                 String toAccountName,  float money) &#123;</div><div class="line">		try &#123;</div><div class="line">			// 开启事务</div><div class="line">			JDBCUtils.startTransaction();</div><div class="line">			// 根据用户名查询数据并存入实体类对象中</div><div class="line">			AccountDao dao = new AccountDao();</div><div class="line">			Account accountfrom = dao.find(sourceAccountName);</div><div class="line">			Account accountto = dao.find(toAccountName);</div><div class="line">			// 完成转账操作</div><div class="line">			if(money&lt;accountfrom.getMoney())&#123;</div><div class="line">				accountfrom.setMoney(accountfrom.getMoney()-money);</div><div class="line">			&#125;else&#123;</div><div class="line">				System.out.println(&quot;转出账户余额不足&quot;);</div><div class="line">			&#125;		</div><div class="line">			accountto.setMoney(accountto.getMoney()+money);</div><div class="line">			dao.update(accountfrom);</div><div class="line">			dao.update(accountto);</div><div class="line">			// 提交事务</div><div class="line">			JDBCUtils.commit();</div><div class="line">			System.out.println(&quot;提交成功&quot;);</div><div class="line">		&#125; catch (SQLException e) &#123;</div><div class="line">			System.out.println(&quot;提交失败&quot;);</div><div class="line">			JDBCUtils.rollback();</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; finally &#123;</div><div class="line">			// 关闭事务</div><div class="line">			JDBCUtils.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	public static void main(String[] args) throws SQLException &#123;</div><div class="line">		// 调用方法，实现a向b转账200元操作</div><div class="line">		transfer(&quot;a&quot;, &quot;b&quot;, 200);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -514,7 +517,7 @@ API介绍核心类 &amp;amp; 接口
       
         <div class="post-tags">
           
-            <a href="/tags/javaEE上课笔记/" rel="tag"># javaEE上课笔记</a>
+            <a href="/tags/javaee上课笔记/" rel="tag"># javaee上课笔记</a>
           
         </div>
       
@@ -635,7 +638,7 @@ API介绍核心类 &amp;amp; 接口
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -644,7 +647,7 @@ API介绍核心类 &amp;amp; 接口
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -653,7 +656,7 @@ API介绍核心类 &amp;amp; 接口
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -733,7 +736,7 @@ API介绍核心类 &amp;amp; 接口
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#javaee上课笔记-DBUtils工具"><span class="nav-number">1.</span> <span class="nav-text">javaee上课笔记:DBUtils工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习目标"><span class="nav-number">2.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API介绍"><span class="nav-number">3.</span> <span class="nav-text">API介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心类-amp-接口"><span class="nav-number">3.1.</span> <span class="nav-text">核心类 & 接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBUtils-类"><span class="nav-number">3.2.</span> <span class="nav-text">DBUtils 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QueryRunner-类"><span class="nav-number">3.3.</span> <span class="nav-text">QueryRunner 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">3.4.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayHandler-和-ArrayListHandler"><span class="nav-number">3.4.1.</span> <span class="nav-text">ArrayHandler 和 ArrayListHandler</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#javaee上课笔记-DBUtils工具"><span class="nav-number">1.</span> <span class="nav-text">javaee上课笔记:DBUtils工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习目标"><span class="nav-number">2.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#API介绍"><span class="nav-number">3.</span> <span class="nav-text">API介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心类-amp-接口"><span class="nav-number">3.1.</span> <span class="nav-text">核心类 & 接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBUtils-类"><span class="nav-number">3.2.</span> <span class="nav-text">DBUtils 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QueryRunner-类"><span class="nav-number">3.3.</span> <span class="nav-text">QueryRunner 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">3.4.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayHandler-和-ArrayListHandler"><span class="nav-number">3.4.1.</span> <span class="nav-text">ArrayHandler 和 ArrayListHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">3.4.2.</span> <span class="nav-text">实现步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DBUtils-处理事务"><span class="nav-number">4.</span> <span class="nav-text">DBUtils 处理事务</span></a></li></ol></div>
             
 
           </div>
