@@ -284,6 +284,193 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/08/javaee上课笔记：文件的上传与下载/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="lvc">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Lvc唯爱">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Lvc唯爱" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/08/javaee上课笔记：文件的上传与下载/" itemprop="url">
+                  javaee上课笔记：文件的上传与下载
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T14:42:35+08:00">
+                2017-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/08/javaee上课笔记：文件的上传与下载/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/08/javaee上课笔记：文件的上传与下载/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/08/javaee上课笔记：文件的上传与下载/" class="leancloud_visitors" data-flag-title="javaee上课笔记：文件的上传与下载">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="文件的上传"><a href="#文件的上传" class="headerlink" title="文件的上传"></a>文件的上传</h1><h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ul>
+<li>创建DiskFileItemFactory </li>
+<li>设置文件缓存路径</li>
+<li>创建fileupload 组件</li>
+<li>解析request</li>
+<li>遍历 FileItem 集合<ul>
+<li>判断 fileItem 的类型<ul>
+<li>普通字段 获取字段名 和 值</li>
+<li>上传文件 <ul>
+<li>获得文件上传的路径</li>
+<li>截取文件名 文件名唯一</li>
+<li>设置 文件保存路径</li>
+<li>创建文件</li>
+<li>获得上传文件流</li>
+<li>获得写入文件流</li>
+<li>流的对拷</li>
+<li>关闭流</li>
+<li>删除临时文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">package com.lvc.chapter6;</div><div class="line"></div><div class="line">import java.io.File;</div><div class="line">import java.io.FileOutputStream;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.OutputStream;</div><div class="line">import java.io.PrintWriter;</div><div class="line">import java.util.List;</div><div class="line">import java.util.UUID;</div><div class="line"></div><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.http.HttpServlet;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line">import org.apache.commons.fileupload.FileItem;</div><div class="line">import org.apache.commons.fileupload.FileUploadException;</div><div class="line">import org.apache.commons.fileupload.disk.DiskFileItemFactory;</div><div class="line">import org.apache.commons.fileupload.servlet.ServletFileUpload;</div><div class="line"></div><div class="line"></div><div class="line">public class UpLoadServlet extends HttpServlet &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</div><div class="line">		this.doPost(request, response);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		</div><div class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</div><div class="line">		 try &#123;</div><div class="line">		//创建工厂</div><div class="line">		DiskFileItemFactory factory = new DiskFileItemFactory();</div><div class="line">		File f = new File(&quot;e:/Target&quot;);</div><div class="line">		if(!f.exists())&#123;</div><div class="line">			f.mkdirs();</div><div class="line">		&#125;</div><div class="line">		//设置文件缓存路径</div><div class="line">		factory.setRepository(f);</div><div class="line">		//创建fileUpload 组件</div><div class="line">		ServletFileUpload fileUpload = new ServletFileUpload(factory);</div><div class="line">		fileUpload.setHeaderEncoding(&quot;gbk&quot;);</div><div class="line">		//解析request</div><div class="line">		</div><div class="line">			List&lt;FileItem&gt; fileItems = fileUpload.parseRequest(request);</div><div class="line">			PrintWriter writer = response.getWriter();</div><div class="line">			//遍历集合</div><div class="line">			for (FileItem fileItem : fileItems )&#123;</div><div class="line">				if (fileItem.isFormField())&#123;</div><div class="line">					String name = fileItem.getFieldName();</div><div class="line">					String value = fileItem.getString(&quot;gbk&quot;);</div><div class="line">					writer.print(&quot;上传者：&quot;+value+&quot;&lt;br/&gt;&quot;);</div><div class="line">				&#125;else&#123;</div><div class="line">					String fileName = fileItem.getName();</div><div class="line">					writer.println(&quot;文件来源:&quot;+fileName+&quot;&lt;br/&gt;&quot;);</div><div class="line">					//fileName=fileName.substring(fileName.lastIndexOf(&quot;\\&quot;));</div><div class="line">					writer.println(&quot;成功上传的文件:&quot;+fileName);</div><div class="line">					fileName=UUID.randomUUID().toString()+&quot;_&quot;+fileName;</div><div class="line">					String  webPath  = &quot;/upload/&quot;;</div><div class="line">					String filePath = getServletContext().getRealPath(webPath+fileName);</div><div class="line">					File file  = new File(&quot;E:/V/&quot;+fileName);</div><div class="line">					file.getParentFile().mkdirs();</div><div class="line">					file.createNewFile();</div><div class="line">					InputStream in = fileItem.getInputStream();</div><div class="line">					OutputStream out = new FileOutputStream(file);</div><div class="line">					byte[] buffer = new byte[1024];</div><div class="line">					int len;</div><div class="line">					while((len=in.read(buffer))&gt;0)&#123;</div><div class="line">						out.write(buffer, 0, len);</div><div class="line">					&#125;</div><div class="line">					in.close();</div><div class="line">					out.close();</div><div class="line">					fileItem.delete();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125; catch (FileUploadException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;			</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="文件的下载"><a href="#文件的下载" class="headerlink" title="文件的下载"></a>文件的下载</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
+<li>获得下载文件路径，取得文件对象</li>
+<li>设置响应头<ul>
+<li>通知浏览器文件的使用方式</li>
+</ul>
+</li>
+<li>获取输入流</li>
+<li>获取输出流</li>
+</ul>
+<h2 id="代码实例-1"><a href="#代码实例-1" class="headerlink" title="代码实例"></a>代码实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">package com.lvc.chapter6;</div><div class="line"></div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.OutputStream;</div><div class="line"></div><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.http.HttpServlet;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line">/**</div><div class="line"> * </div><div class="line"> * @author lvc</div><div class="line"> *该类设置索要下载文件及文件在浏览器中的 打开方式</div><div class="line"> */</div><div class="line">public class DownLoadServlet extends HttpServlet&#123;</div><div class="line">	@Override</div><div class="line">	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</div><div class="line">		this.doPost(request, response);</div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</div><div class="line">		response.addHeader(&quot;Content-Type&quot;, &quot;application/octet-stream&quot;);</div><div class="line">		response.addHeader(&quot;Content-Disposition&quot;, </div><div class="line">         		&quot;attachment;filename=login.jsp&quot;);</div><div class="line">		InputStream in = getServletContext().getResourceAsStream(&quot;login.jsp&quot;);</div><div class="line">		OutputStream out = response.getOutputStream();</div><div class="line">		byte[] buffer = new byte[1024];</div><div class="line">		int len;</div><div class="line">		while((len=in.read(buffer))!=-1)&#123;</div><div class="line">			out.write(buffer, 0, len);</div><div class="line">		&#125;</div><div class="line">			</div><div class="line">			</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h3><pre><code>${pageContext.request.contextPath} JSP取得绝对路径
+</code></pre><blockquote>
+<p>一．问题<br>    JSP中究竟采用绝对路径还是采用相对路径随着所采用技术的越来越复杂，这个问题也变得越来越难以解决。<br>１）采用相对路径遇到的问题<br>     相对路径固然比较灵活，但如果想复制页面内的代码却变得比较困难，因为不同的页面具有不同的相对路径，复制后必须修改每一个连接的路径。<br>如果页面被多于一个的页面所包含，那么被包含页面中的相对路径将是不正确的。<br>如果采用Struts的Action返回页面，那么由于页面路径与Action路径不同，使得浏览器无法正确解释页面中的路径，如页面为/pages/cust/cust.jsp，图片所有目录为/images/title.gif，这时在/pages/cust/cust.jsp中的所用的路径为”<a href="http://images.cnblogs.com/title.gif”，但是如果某一个Action的Forward指向这个JSP文件，而这个Action的路径为/cust/manage.do，那么页面内容中”http://images.cnblogs.com/title.gif”就不再指向正确的路径了。" target="_blank" rel="external">http://images.cnblogs.com/title.gif”，但是如果某一个Action的Forward指向这个JSP文件，而这个Action的路径为/cust/manage.do，那么页面内容中”http://images.cnblogs.com/title.gif”就不再指向正确的路径了。</a><br>解决以上问题似乎只有使用绝对路径了。</p>
+<p>２）采用绝对路径遇到的问题<br>     随着不同的Web应用发布方式，绝对路径的值也不同。如Web应用发布为MyApp，则路径”/MyApp/images/title.gif”是正确的，但发布为另一应用时如MyApp2，这个路径就不对了，也许这个情况比较少，但以default方式发布Web应用时以上绝对路径也不同：”/images/title.gif”。 </p>
+<p>二．解决方案<br>１）采用绝对路径，但为了解决不同部署方式的差别，在所有非struts标签的路径前加${pageContext.request.contextPath}，如原路径为：<br>”/images/title.gif”，改为<br>“${pageContext.request.contextPath}/images/title.gif”。<br>代码” ${pageContext.request.contextPath}”的作用是取出部署的应用程序名，这样不管如何部署，所用路径都是正确的。</p>
+<p>缺点：<br>操作不便，其他工具无法正确解释${pageContext.request.contextPath}<br> ２） 采用相对路径，在每个JSP文件中加入base标签，如： </p>
+<p><base href="http://${header['host']}${pageContext.request.contextPath}/pages/cust/relation.jsp"><br>这样所有的路径都可以使用相对路径。</p>
+<p>缺点：<br>对于被包含的文件依然无效。<br>    真正使用时需要灵活应用１）和２），写出更加健壮的代码。 </p>
+<p>在使用的时候可以使用${pageContext.request.contextPath}，也同时可以使用&lt;%=request.getContextPath()%&gt;达到同样的效果，同时，也可以将${pageContext.request.contextPath}，放入一个JSP文件中，&gt; 将用C：set放入一个变量中，然后在用的时候用EL表达式取出来。  </p>
+<p>如： </p>
+</blockquote>
+<p><code>&lt;c:set var=&quot;ctx&quot; value=&quot;${pageContext.request.contextPath}&quot; /&gt;</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/05/学习方法：黑马高薪学习方法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1865,175 +2052,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/20/javaweb实战：网上书城/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="lvc">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Lvc唯爱">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Lvc唯爱" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/20/javaweb实战：网上书城/" itemprop="url">
-                  javaweb实战：网上书城
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-20T11:03:43+08:00">
-                2017-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaee上课笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaee上课笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/20/javaweb实战：网上书城/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/20/javaweb实战：网上书城/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/20/javaweb实战：网上书城/" class="leancloud_visitors" data-flag-title="javaweb实战：网上书城">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="javawe实战：网上书城-前台"><a href="#javawe实战：网上书城-前台" class="headerlink" title="javawe实战：网上书城  前台"></a>javawe实战：网上书城  前台</h1><h2 id="项目概述"><a href="#项目概述" class="headerlink" title="项目概述"></a>项目概述</h2><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><blockquote>
-<p> 1.统一友好的操作界面，具有良好的用户体验。<br>  2.商品分类详尽，可按不同类别查看商品信息。<br>  3.公告栏，本周热卖。<br>  4.网站首页轮播图满足图书广告的需要。<br>  5.用户信息的注册和验证。<br>  6.通过图书名模糊搜索相关商品。<br>  7.通过购物车一次购买多件商品。<br>  8.提供简单的安全模型，用户必须登录后购买商品。<br>  9.用户选择商品后可以在线提交订单。<br>  10.用户可以查看自己的订单信息。<br>  11.设计网站后台，管理网站的各项基本数据.<br>  12.系统运行安全稳定且响应及时。</p>
-</blockquote>
-<h3 id="功能结构"><a href="#功能结构" class="headerlink" title="功能结构"></a>功能结构</h3><p>  <img src="http://ol5smga16.bkt.clouddn.com/17-2-21/15084346-file_1487665255746_e9af.png"  class="full-image" /><br>  <img src="http://ol5smga16.bkt.clouddn.com/17-2-21/34070112-file_1487665738129_caba.png" width="500px" heigth="500px" class="full-image" /><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/20/javaweb实战：网上书城/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2081,7 +2099,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
