@@ -270,6 +270,546 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/01/javaee上课笔记-DBUtils工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/01/javaee上课笔记-DBUtils工具/" itemprop="url">
+                  javaee上课笔记:DBUtils工具
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T13:56:54+08:00">
+                2017-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaee/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/01/javaee上课笔记-DBUtils工具/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/javaee上课笔记-DBUtils工具/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/01/javaee上课笔记-DBUtils工具/" class="leancloud_visitors" data-flag-title="javaee上课笔记:DBUtils工具">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="javaee上课笔记-DBUtils工具"><a href="#javaee上课笔记-DBUtils工具" class="headerlink" title="javaee上课笔记:DBUtils工具"></a>javaee上课笔记:DBUtils工具</h1><h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>了解DBUtils工具中的api</li>
+<li>学会使用DBUtils工具对数据库进行增删改查的操作</li>
+<li>学会使用DBUtils工具处理事务<br><a href="http://commons.apache.org/dbutils/index.html">点我下载DBUtils</a></li>
+</ul>
+<h1 id="API介绍"><a href="#API介绍" class="headerlink" title="API介绍"></a>API介绍</h1><h2 id="核心类-amp-接口"><a href="#核心类-amp-接口" class="headerlink" title="核心类 &amp; 接口"></a>核心类 &amp; 接口</h2><blockquote>
+<p>类<br>  <code>org.apache.commons.dbutils.DbUtils</code><br>  <code>org.apache.commons.dbutils.QueryRunner</code></p>
+<p>接口<br>  <code>org.apache.commons.dbutils.ResultSetHandler</code></p>
+</blockquote>
+<h2 id="DBUtils-类"><a href="#DBUtils-类" class="headerlink" title="DBUtils 类"></a>DBUtils 类</h2><p>  DBUtils类 主要为如何关闭，装载JDBC驱动程序之类的常规工作提供方法，它提供的方法都是静态方法，</p>
+<ul>
+<li><p>1.close() 方法<br>关闭数据库连接</p>
+</li>
+<li><p>2.closeQuietly(Connection con,Statement stmt,ResultSet rs) 方法<br>该方法用来关闭Connection，Statement和ResultSet对象。<br>还会隐藏一些在程序中抛出的sql异常</p>
+</li>
+<li><p>3.commitAndCloseQuiely(Connection con)<br>该方法用来提交连接，然后关闭连接， 且在关闭时不抛出sql异常</p>
+</li>
+<li><p>4.LoadDrive（java.lang.String driverClassName）<br>该方法用于装载jdbc驱动程序，如果成功返回true。<br>使用时，不需要捕捉ClassNotFoundException异常</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/01/javaee上课笔记-DBUtils工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/25/Android上课笔记-快速入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/25/Android上课笔记-快速入门/" itemprop="url">
+                  Android上课笔记-快速入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-25T10:41:51+08:00">
+                2017-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/25/Android上课笔记-快速入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/Android上课笔记-快速入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/02/25/Android上课笔记-快速入门/" class="leancloud_visitors" data-flag-title="Android上课笔记-快速入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Android项目的目录结构"><a href="#Android项目的目录结构" class="headerlink" title="Android项目的目录结构"></a>Android项目的目录结构</h1><ul>
+<li>Activity：应用被打开时显示的界面</li>
+<li>src：项目代码</li>
+<li>R.java：项目中所有资源文件的资源id</li>
+<li>Android.jar：Android的jar包，导入此包方可使用Android的api</li>
+<li>libs：导入第三方jar包</li>
+<li>assets：存放资源文件，比方说mp3、视频文件</li>
+<li>bin：存放编译打包后的文件</li>
+<li>res：存放资源文件，存放在此文件夹下的所有资源文件都会生成资源id</li>
+<li>drawable：存放图片资源</li>
+<li>layout：存放布局文件，把布局文件通过资源id指定给activity，界面就会显示出该布局文件定义的布局</li>
+<li>menu：定义菜单的样式</li>
+<li>Strings.xml：存放字符串资源，每个资源都会有一个资源id</li>
+</ul>
+<h2 id="Android的配置文件（清单文件）"><a href="#Android的配置文件（清单文件）" class="headerlink" title="Android的配置文件（清单文件）"></a>Android的配置文件（清单文件）</h2><ul>
+<li><p>指定应用的包名</p>
+<blockquote>
+<p>package=”com.itheima.helloworld”<br>data/data/com.itheima.helloworld(上面代码指定的包名)<br>应用生成的文件都会存放在此路径下</p>
+</blockquote>
+</li>
+<li><p>Android的四大组件在使用前全部需要在清单文件中配置</p>
+</li>
+<li>的配置对整个应用生效</li>
+<li>的配置对该activity生效<h1 id="DDMS"><a href="#DDMS" class="headerlink" title="DDMS"></a>DDMS</h1></li>
+<li>Dalvik debug monitor service</li>
+<li>Dalvik调试监控服务</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/25/Android上课笔记-快速入门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/24/android笔记-Drawable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/24/android笔记-Drawable/" itemprop="url">
+                  android笔记-Drawable
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T09:22:51+08:00">
+                2017-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/24/android笔记-Drawable/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/24/android笔记-Drawable/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/02/24/android笔记-Drawable/" class="leancloud_visitors" data-flag-title="android笔记-Drawable">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Android-的-Drawable"><a href="#Android-的-Drawable" class="headerlink" title="Android 的 Drawable"></a>Android 的 Drawable</h1><p>  Drawable 表示的是一中可以在Canvas上进行绘制的抽象概念，它的种类很多，最常见的颜色和<br>  图片度可以是一个Drawable。<br>  Drawable一般都是通过XML定义的，也可以使用代码来创建。</p>
+<h1 id="Drawable的分类"><a href="#Drawable的分类" class="headerlink" title="Drawable的分类"></a>Drawable的分类</h1><h2 id="BitmapDrawable"><a href="#BitmapDrawable" class="headerlink" title="BitmapDrawable"></a>BitmapDrawable</h2><p>  几乎是是最简单的Drawable，它就是表示一张图片。<br>  xml文件，<bitmap /></p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android:antialias		抗锯齿            </div><div class="line">android:dither		  抖动效果        </div><div class="line">android:filter		  过滤效果</div><div class="line">android:gravity		  对图片进行定位，当图片小于容器时。</div><div class="line">android:mipMap	     </div><div class="line">android:src		      </div><div class="line">android:tileMode		平铺模式          disabled 、clamp、reapt 、mirror</div><div class="line">android:tileModeX</div><div class="line">android:tileModeY</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/24/android笔记-Drawable/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/22/春雏集-优雅的活着/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -504,8 +1044,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Android笔记</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -675,8 +1215,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaee笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaee笔记</span>
+                  <a href="/categories/javaee/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee</span>
                   </a>
                 </span>
 
@@ -843,8 +1383,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaEE上课笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaEE上课笔记</span>
+                  <a href="/categories/javaee/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee</span>
                   </a>
                 </span>
 
@@ -1449,509 +1989,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/06/闲言碎语-西游降魔篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lvc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lvc唯爱">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/06/闲言碎语-西游降魔篇/" itemprop="url">
-                  闲言碎语-西游降魔篇
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-06T20:00:44+08:00">
-                2017-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/春雏集/" itemprop="url" rel="index">
-                    <span itemprop="name">春雏集</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/06/闲言碎语-西游降魔篇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/06/闲言碎语-西游降魔篇/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/02/06/闲言碎语-西游降魔篇/" class="leancloud_visitors" data-flag-title="闲言碎语-西游降魔篇">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://img31.mtime.cn/mg/2013/05/10/233548.64005207.jpg" alt="女孩子闭上眼睛就是要你亲她" title="女孩子闭上眼睛就是要你亲她"></p>
-<h1 id="西游真的是那个西游吗"><a href="#西游真的是那个西游吗" class="headerlink" title="西游真的是那个西游吗"></a>西游真的是那个西游吗</h1><div align="center"><br>许久不见，或许是一种情怀！<br>可这又有什么关系呢？<br><br>佛是什么？你又是什么？我又是什么？<br>西游真的是西游吗？<br><br>22部天竺真经真的能普度众生吗？<br>度的人，应该是他自己吧。<br></div>
-
-<h1 id="一生所爱-是被用坏了的情怀吗？"><a href="#一生所爱-是被用坏了的情怀吗？" class="headerlink" title="一生所爱 是被用坏了的情怀吗？"></a>一生所爱 是被用坏了的情怀吗？</h1><div align="center"><br>终究你我将不复存在<br>关于执念你我懂多少<br>不同的人有不同世界<br>一生真的能爱个够吗<br><br>陈先生历经千辛万苦<br>只寻普度众生的良药<br>可是大爱小爱<br>说不清道不明<br><br><br>在制服猪刚鬣的之时<br>孙先生出了一个法子<br>在月圆之夜，绝山之巅<br>段小姐翩然起舞，<br>宛若谪仙，人间不应有<br>一生所爱的歌声，<br>纵然是情怀作祟。<br></div>
-
-<h1 id="我的西游"><a href="#我的西游" class="headerlink" title="我的西游"></a>我的西游</h1><div align="center"><br>我希望寻找自己的西游之路，<br>不为普度众生只为度我自己。<br><br>西游终究是被烙印在骨子里，<br>流淌的血液在轰轰的燃烧着，<br><br>可是红尘真的有 真 善 美 ？<br><br>愿意相信的谎言，<br>我愿意，那就有。<br><br></div>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/06/android笔记-调用摄像头相册/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lvc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lvc唯爱">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/06/android笔记-调用摄像头相册/" itemprop="url">
-                  android笔记-调用摄像头相册
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-06T13:59:28+08:00">
-                2017-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/06/android笔记-调用摄像头相册/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/06/android笔记-调用摄像头相册/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/02/06/android笔记-调用摄像头相册/" class="leancloud_visitors" data-flag-title="android笔记-调用摄像头相册">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="调用摄像头"><a href="#调用摄像头" class="headerlink" title="调用摄像头"></a>调用摄像头</h1><h2 id="调用摄像头拍照获取图片"><a href="#调用摄像头拍照获取图片" class="headerlink" title="调用摄像头拍照获取图片"></a>调用摄像头拍照获取图片</h2><blockquote>
-<p>Demo：<br>效果展示</p>
-</blockquote>
-<p><img src="http://p1.bpimg.com/567571/1e99c5d0d9dd9c9a.png " width="25%" height="20%" /></p>
-<h3 id="重要代码"><a href="#重要代码" class="headerlink" title="重要代码"></a>重要代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//创建File 对象，用于存储拍照后的图片</div><div class="line">File outputImage = new File(getExternalCacheDir(),&quot;output_image.jsp&quot;);</div><div class="line">try &#123;</div><div class="line">    if(outputImage.exists())&#123;</div><div class="line">        outputImage.delete();</div><div class="line">    &#125;</div><div class="line">    outputImage.createNewFile();</div><div class="line">&#125;catch (IOException e)&#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line">if(Build.VERSION.SDK_INT&gt;=24)&#123;</div><div class="line">    imageUri = FileProvider.getUriForFile(MainActivity.this,&quot;com.example.cramea.fileprovider&quot;,</div><div class="line">            outputImage);</div><div class="line"></div><div class="line">&#125;else&#123;</div><div class="line">    imageUri = Uri.fromFile(outputImage);</div><div class="line">&#125;</div><div class="line">//启动相机程序</div><div class="line">Intent intent = new Intent(&quot;android.media.action.IMAGE_CAPTURE&quot;);</div><div class="line">intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);</div><div class="line">startActivityForResult(intent,TAKE_PHOTO);</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/06/android笔记-调用摄像头相册/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/05/android笔记-使用通知/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lvc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lvc唯爱">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/05/android笔记-使用通知/" itemprop="url">
-                  android笔记-使用通知
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T13:58:06+08:00">
-                2017-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/05/android笔记-使用通知/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/05/android笔记-使用通知/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/02/05/android笔记-使用通知/" class="leancloud_visitors" data-flag-title="android笔记-使用通知">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Android笔记-使用通知"><a href="#Android笔记-使用通知" class="headerlink" title="Android笔记-使用通知"></a>Android笔记-使用通知</h1><h2 id="通知的基本用法"><a href="#通知的基本用法" class="headerlink" title="通知的基本用法"></a>通知的基本用法</h2><blockquote>
-<p>代码</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);</div><div class="line">               Notification notification = new NotificationCompat.Builder(this)</div><div class="line">                       .setContentTitle(&quot;通知&quot;)</div><div class="line">                       .setContentText(&quot;这是一个通知！&quot;)</div><div class="line">                       .setWhen(System.currentTimeMillis())</div><div class="line">                       .setSmallIcon(R.mipmap.ic_launcher)</div><div class="line">                       .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))</div><div class="line">                       .build();</div><div class="line">               notificationManager.notify(1,notification);</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/05/android笔记-使用通知/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2001,7 +2038,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

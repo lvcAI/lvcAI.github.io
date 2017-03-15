@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title><![CDATA[Struts2框架入门]]></title>
+      <url>%2F2017%2F03%2F15%2FStruts2%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%2F</url>
+      <content type="text"><![CDATA[Struts2框架系列（一）—— Struts2框架入门Struts2简介什么是Struts2？参见百度百科：Struts2Struts2是一个基于MVC设计模式的Web应用框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互。Struts 2是Struts的下一代产品，是在 struts 1和WebWork的技术基础上进行了合并的全新的Struts 2框架。其全新的Struts 2的体系结构与Struts 1的体系结构差别巨大。Struts 2以WebWork为核心，采用拦截器的机制来处理用户的请求，这样的设计也使得业务逻辑控制器能够与ServletAPI完全脱离开，所以Struts 2可以理解为WebWork的更新产品。虽然从Struts 1到Struts 2有着太大的变化，但是相对于WebWork，Struts 2的变化很小。 工作原理Struts2的工作原理图 Struts2de 下载和使用下载Struts 官方网站 http://struts.apache.org/ 使用将下载后的 文件解压 入门案例–Struts2： Hello World！ 1.创建web项目 LvcStruts2 2.添加Struts2的依赖基础jar包 3.在src 根目录下新建 struts.xml 12345678 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE struts PUBLIC &quot;-//Apache Software Foundation//DTD Struts Configuration 2.0//EN&quot; &quot;http://struts.apache.org/dtds/struts-2.0.dtd&quot;&gt;&lt;struts&gt;&lt;/struts&gt; 4.配置web.xml文件 添加 struts2 核心过滤器 12345678910 &lt;filter&gt; &lt;filter-name&gt;Struts2&lt;/filter-name&gt; &lt;filter-class&gt; org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter &lt;/filter-class&gt; &lt;/filter&gt; &lt;filter-mapping&gt; &lt;filter-name&gt;Struts2&lt;/filter-name&gt; &lt;url-pattern&gt;/*&lt;/url-pattern&gt;&lt;/filter-mapping&gt; 5.新建HelloWorldAction.java 实现 ActionSupport 类 123456789101112 package party.pjc.action;import com.opensymphony.xwork2.ActionSupport;public class HelloWorldAction extends ActionSupport &#123; @Override public String execute() throws Exception &#123; // TODO Auto-generated method stub return SUCCESS; &#125;&#125; 6.配置Struts.xml 文件 123456789101112131415 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;!DOCTYPE struts PUBLIC &quot;-//Apache Software Foundation//DTD Struts Configuration 2.0//EN&quot; &quot;http://struts.apache.org/dtds/struts-2.0.dtd&quot;&gt;&lt;struts&gt; &lt;package name=&quot;helloWorld&quot; extends=&quot;struts-default&quot;&gt; &lt;action name=&quot;hello&quot; class=&quot;party.pjc.action.HelloWorldAction&quot;&gt; &lt;result name=&quot;success&quot;&gt;helloworld.jsp&lt;/result&gt; &lt;/action&gt; &lt;/package&gt;&lt;/struts&gt; 7.新建helloworld.jsp ` &lt;body&gt; Strust2 Hello world! &lt;/body&gt; ` 8.效果]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[自定义 EL 函数]]></title>
+      <url>%2F2017%2F03%2F15%2F%E8%87%AA%E5%AE%9A%E4%B9%89-EL-%E5%87%BD%E6%95%B0%2F</url>
+      <content type="text"><![CDATA[EL表达式-自定义函数 表达式语言除了可以使用基本的运运算符之外，还可以使用自定义的函数。 通过使用自定义函数，加强了表达式语言功能。 EL表达式函数，主要空能是完成对数据的修改，统一格式化。 使用步骤 1.开发函数处理类，处理类就是普通的 java类；每个函数对应类中的一个静态方法。 2.建立TLD文件，定义表达式函数。 3.在WEB.xml文件中配置（可省略） 4.在jsp 页面引入及使用 案例——自定义 EL 函数防止 HTML 注入 1.开发函数处理类 12345678910111213141516171819202122232425262728293031 package com.lvc.chapter7.utils;public class HTMLFilter &#123; public static String filter(String message) &#123; if (message == null)&#123; return (null); &#125; char content[] = new char[message.length()]; message.getChars(0, message.length(), content, 0); StringBuffer result = new StringBuffer(content.length + 50); for (int i = 0; i &lt; content.length; i++) &#123; switch (content[i]) &#123; case &apos;&lt;&apos;: result.append(&quot;&amp;lt;&quot;); break; case &apos;&gt;&apos;: result.append(&quot;&amp;gt;&quot;); break; case &apos;&amp;&apos;: result.append(&quot;&amp;amp;&quot;); break; case &apos;&quot;&apos;: result.append(&quot;&amp;quot;&quot;); break; default: result.append(content[i]); &#125; &#125; return (result.toString()); &#125;&#125; 2.建立TLD文件 12345678910111213141516171819 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;&lt;taglib xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd&quot; version=&quot;2.0&quot;&gt; &lt;tlib-version&gt;1.0&lt;/tlib-version&gt; &lt;short-name&gt;function&lt;/short-name&gt; &lt;uri&gt;/WEB-INF/ElTag.tld&lt;/uri&gt; &lt;function&gt; &lt;name&gt;filter&lt;/name&gt; &lt;function-class&gt; com.lvc.chapter7.utils.HTMLFilter &lt;/function-class&gt; &lt;function-signature&gt; java.lang.String filter(java.lang.String) &lt;/function-signature&gt; &lt;/function&gt;&lt;/taglib&gt; 3.在web.xml下配置 1234567891011121314151617 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;web-app version=&quot;2.5&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;&gt; &lt;jsp-config&gt; &lt;taglib&gt; &lt;!-- 配置标签的引用地址 JSP页面中引用时使用--&gt; &lt;taglib-uri&gt;/WEB-INF/ElTag.tld&lt;/taglib-uri&gt; &lt;!-- 配置标签的TLD文件地址 --&gt; &lt;taglib-location&gt;/WEB-INF/ElTag.tld&lt;/taglib-location&gt; &lt;/taglib&gt; &lt;/jsp-config&gt; &lt;welcome-file-list&gt; &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt; &lt;/welcome-file-list&gt; &lt;/web-app&gt; 4.在jsp页面中引入和使用 123456789101112 &lt;%@ page language=&quot;java&quot; pageEncoding=&quot;UTF-8&quot;%&gt;&lt;%@ taglib prefix=&quot;lvc&quot; uri=&quot;/WEB-INF/mytaglib.tld&quot; %&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Insert title here&lt;/title&gt;&lt;/head&gt;&lt;body&gt; 用户名:$&#123;name&#125;&lt;br /&gt; 留言:$&#123;message&#125;&lt;br/&gt; 过滤后的留言：$&#123;lvc:filter(message)&#125;&lt;/body&gt;&lt;/html&gt; 显示效果]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[js页面跳转]]></title>
+      <url>%2F2017%2F03%2F13%2Fjs%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%2F</url>
+      <content type="text"><![CDATA[js 页面跳转参考资料: &lt; http://www.w3cschool.com.cn &gt; 当前页面 跳转window.location.self=&quot;url&quot;;‘ ‘ 新建窗口 跳转window.open(&quot;URL&quot;)]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[闲言碎语-心灵访客]]></title>
       <url>%2F2017%2F03%2F11%2F%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD-%E5%BF%83%E7%81%B5%E8%AE%BF%E5%AE%A2%2F</url>
       <content type="text"><![CDATA[《心灵访客》]]></content>
@@ -19,7 +40,7 @@
     <entry>
       <title><![CDATA[深入理解Android中的自定义属性]]></title>
       <url>%2F2017%2F03%2F11%2F%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Android%E4%B8%AD%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%2F</url>
-      <content type="text"><![CDATA[转载请标明出处：http://blog.csdn.net/lmj623565791/article/details/45022631； 本文出自:【张鸿洋的博客】 1.引言对于自定义属性，大家肯定都不陌生，遵循以下几步，就可以实现： * 自定义一个CustomView(extends View )类 * 编写values/attrs.xml，在其中编写styleable和item等标签元素 * 在布局文件中CustomView使用自定义的属性（注意namespace） * 在CustomView的构造方法中通过TypedArray获取]]></content>
+      <content type="text"><![CDATA[转载请标明出处：http://blog.csdn.net/lmj623565791/article/details/45022631 本文出自:【张鸿洋的博客】 1.引言对于自定义属性，大家肯定都不陌生，遵循以下几步，就可以实现： 自定义一个CustomView(extends View )类 编写values/attrs.xml，在其中编写styleable和item等标签元素 在布局文件中CustomView使用自定义的属性（注意namespace） 在CustomView的构造方法中通过TypedArray获取]]></content>
     </entry>
 
     

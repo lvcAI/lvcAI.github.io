@@ -270,6 +270,538 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/15/Struts2框架入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/15/Struts2框架入门/" itemprop="url">
+                  Struts2框架入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T21:05:35+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SSH/" itemprop="url" rel="index">
+                    <span itemprop="name">SSH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/15/Struts2框架入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/15/Struts2框架入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/15/Struts2框架入门/" class="leancloud_visitors" data-flag-title="Struts2框架入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Struts2框架系列（一）——-Struts2框架入门"><a href="#Struts2框架系列（一）——-Struts2框架入门" class="headerlink" title="Struts2框架系列（一）—— Struts2框架入门"></a>Struts2框架系列（一）—— Struts2框架入门</h1><h1 id="Struts2简介"><a href="#Struts2简介" class="headerlink" title="Struts2简介"></a>Struts2简介</h1><h2 id="什么是Struts2？"><a href="#什么是Struts2？" class="headerlink" title="什么是Struts2？"></a>什么是Struts2？</h2><p>参见百度百科：<a href="http://baike.baidu.com/item/Struts%202?fromtitle=Struts2&amp;fromid=10711345&amp;type=syn&amp;sefr=enterbtn" target="_blank" rel="external">Struts2</a><br>Struts2是一个基于MVC设计模式的Web应用框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互。<br>Struts 2是Struts的下一代产品，是在 struts 1和WebWork的技术基础上进行了合并的全新的Struts 2框架。其全新的Struts 2的体系结构与Struts 1的体系结构差别巨大。<br>Struts 2以WebWork为核心，采用拦截器的机制来处理用户的请求，这样的设计也使得<strong>业务逻辑控制器能够与ServletAPI完全脱离开</strong>，所以Struts 2可以理解为WebWork的更新产品。虽然从Struts 1到Struts 2有着太大的变化，但是相对于WebWork，Struts 2的变化很小。</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>Struts2的工作原理图<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-15/27277465-file_1489584101655_650d.png" alt="原理图"></p>
+<h2 id="Struts2de-下载和使用"><a href="#Struts2de-下载和使用" class="headerlink" title="Struts2de 下载和使用"></a>Struts2de 下载和使用</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>Struts 官方网站 <a href="http://struts.apache.org/" target="_blank" rel="external">http://struts.apache.org/</a></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>将下载后的 文件解压<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-15/32194174-file_1489584246861_115ba.png" alt="文件结构"></p>
+<h1 id="入门案例–Struts2：-Hello-World！"><a href="#入门案例–Struts2：-Hello-World！" class="headerlink" title="入门案例–Struts2： Hello World！"></a>入门案例–Struts2： Hello World！</h1><ul>
+<li>1.创建web项目 LvcStruts2</li>
+<li>2.添加Struts2的依赖基础jar包<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-15/90274098-file_1489586140184_b8f9.png" alt="基础jar包"></li>
+<li><p>3.在src 根目录下新建 struts.xml</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">		&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE struts PUBLIC</div><div class="line">    &quot;-//Apache Software Foundation//DTD Struts Configuration 2.0//EN&quot;</div><div class="line">    &quot;http://struts.apache.org/dtds/struts-2.0.dtd&quot;&gt;</div><div class="line"></div><div class="line">&lt;struts&gt;</div><div class="line"></div><div class="line">&lt;/struts&gt;</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>4.配置web.xml文件 添加 struts2 核心过滤器</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">	 &lt;filter&gt;</div><div class="line">       &lt;filter-name&gt;Struts2&lt;/filter-name&gt;</div><div class="line">       &lt;filter-class&gt;</div><div class="line">           org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</div><div class="line">       &lt;/filter-class&gt;</div><div class="line">   &lt;/filter&gt;</div><div class="line">     &lt;filter-mapping&gt;</div><div class="line">       &lt;filter-name&gt;Struts2&lt;/filter-name&gt;</div><div class="line">       &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">&lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>5.新建HelloWorldAction.java  实现 ActionSupport 类  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">			package party.pjc.action;</div><div class="line"></div><div class="line">import com.opensymphony.xwork2.ActionSupport;</div><div class="line"></div><div class="line">public class HelloWorldAction extends ActionSupport &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public String execute() throws Exception &#123;</div><div class="line">		// TODO Auto-generated method stub</div><div class="line">		return SUCCESS;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>6.配置Struts.xml 文件</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">		&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE struts PUBLIC</div><div class="line">    &quot;-//Apache Software Foundation//DTD Struts Configuration 2.0//EN&quot;</div><div class="line">    &quot;http://struts.apache.org/dtds/struts-2.0.dtd&quot;&gt;</div><div class="line"></div><div class="line">&lt;struts&gt;</div><div class="line"></div><div class="line">  &lt;package name=&quot;helloWorld&quot; extends=&quot;struts-default&quot;&gt;</div><div class="line">  	&lt;action name=&quot;hello&quot; class=&quot;party.pjc.action.HelloWorldAction&quot;&gt;</div><div class="line">  		&lt;result name=&quot;success&quot;&gt;helloworld.jsp&lt;/result&gt;</div><div class="line">  	&lt;/action&gt;</div><div class="line"></div><div class="line">  &lt;/package&gt;</div><div class="line"></div><div class="line">&lt;/struts&gt;</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>7.新建helloworld.jsp</p>
+<pre><code>` &lt;body&gt;     Strust2 Hello world! &lt;/body&gt; `
+</code></pre></li>
+<li>8.效果<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-15/92579691-file_1489586721532_743e.png" alt="HelloWorld"></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/15/自定义-EL-函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/15/自定义-EL-函数/" itemprop="url">
+                  自定义 EL 函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T18:50:49+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaee/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/15/自定义-EL-函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/15/自定义-EL-函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/15/自定义-EL-函数/" class="leancloud_visitors" data-flag-title="自定义 EL 函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="EL表达式-自定义函数"><a href="#EL表达式-自定义函数" class="headerlink" title="EL表达式-自定义函数"></a>EL表达式-自定义函数</h1><p>  表达式语言除了可以使用基本的运运算符之外，还可以使用自定义的函数。<br>  通过使用自定义函数，加强了表达式语言功能。</p>
+<p>  EL表达式函数，主要空能是完成对数据的修改，统一格式化。</p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
+<li>1.开发函数处理类，处理类就是普通的 java类；每个函数对应类中的一个<code>静态方法</code>。</li>
+<li>2.建立TLD文件，定义表达式函数。</li>
+<li>3.在WEB.xml文件中配置（可省略）</li>
+<li>4.在jsp 页面引入及使用</li>
+</ul>
+<h1 id="案例——自定义-EL-函数防止-HTML-注入"><a href="#案例——自定义-EL-函数防止-HTML-注入" class="headerlink" title="案例——自定义 EL 函数防止 HTML 注入"></a>案例——自定义 EL 函数防止 HTML 注入</h1><ul>
+<li><p>1.开发函数处理类</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">      package  com.lvc.chapter7.utils;</div><div class="line">public class HTMLFilter &#123;</div><div class="line"></div><div class="line">	public static String filter(String message) &#123;</div><div class="line">		if (message == null)&#123;</div><div class="line">			return (null);</div><div class="line">		&#125;</div><div class="line">		char content[] = new char[message.length()];</div><div class="line">		message.getChars(0, message.length(), content, 0);</div><div class="line">		StringBuffer result = new StringBuffer(content.length + 50);</div><div class="line">		for (int i = 0; i &lt; content.length; i++) &#123;</div><div class="line">			switch (content[i]) &#123;</div><div class="line">			case &apos;&lt;&apos;:</div><div class="line">				result.append(&quot;&amp;lt;&quot;);</div><div class="line">				break;</div><div class="line">			case &apos;&gt;&apos;:</div><div class="line">				result.append(&quot;&amp;gt;&quot;);</div><div class="line">				break;</div><div class="line">			case &apos;&amp;&apos;:</div><div class="line">				result.append(&quot;&amp;amp;&quot;);</div><div class="line">				break;</div><div class="line">			case &apos;&quot;&apos;:</div><div class="line">				result.append(&quot;&amp;quot;&quot;);</div><div class="line">				break;</div><div class="line">			default:</div><div class="line">				result.append(content[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return (result.toString());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>2.建立TLD文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;taglib xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot;       </div><div class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;       </div><div class="line">    xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee   </div><div class="line">    http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd&quot;       </div><div class="line">    version=&quot;2.0&quot;&gt;  </div><div class="line">	&lt;tlib-version&gt;1.0&lt;/tlib-version&gt;</div><div class="line">	&lt;short-name&gt;function&lt;/short-name&gt;</div><div class="line">	&lt;uri&gt;/WEB-INF/ElTag.tld&lt;/uri&gt;</div><div class="line">	&lt;function&gt;</div><div class="line">		&lt;name&gt;filter&lt;/name&gt;</div><div class="line">		&lt;function-class&gt;</div><div class="line">				com.lvc.chapter7.utils.HTMLFilter</div><div class="line">		&lt;/function-class&gt;</div><div class="line">		&lt;function-signature&gt;</div><div class="line">               java.lang.String filter(java.lang.String)</div><div class="line">        &lt;/function-signature&gt;</div><div class="line">	&lt;/function&gt;</div><div class="line">&lt;/taglib&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.在web.xml下配置</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </div><div class="line">&lt;web-app version=&quot;2.5&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;  </div><div class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;  </div><div class="line">    xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee   </div><div class="line">    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;&gt;  </div><div class="line">    &lt;jsp-config&gt;  </div><div class="line">        &lt;taglib&gt;  </div><div class="line">            &lt;!-- 配置标签的引用地址 JSP页面中引用时使用--&gt;  </div><div class="line">            &lt;taglib-uri&gt;/WEB-INF/ElTag.tld&lt;/taglib-uri&gt;  </div><div class="line">            &lt;!-- 配置标签的TLD文件地址 --&gt;  </div><div class="line">            &lt;taglib-location&gt;/WEB-INF/ElTag.tld&lt;/taglib-location&gt;  </div><div class="line">        &lt;/taglib&gt;  </div><div class="line">    &lt;/jsp-config&gt;  </div><div class="line">    &lt;welcome-file-list&gt;  </div><div class="line">        &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;  </div><div class="line">    &lt;/welcome-file-list&gt;  </div><div class="line">&lt;/web-app&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.在jsp页面中引入和使用</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">    &lt;%@ page language=&quot;java&quot; pageEncoding=&quot;UTF-8&quot;%&gt;</div><div class="line">&lt;%@ taglib prefix=&quot;lvc&quot;  uri=&quot;/WEB-INF/mytaglib.tld&quot; %&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">     用户名:$&#123;name&#125;&lt;br /&gt;</div><div class="line">     留言:$&#123;message&#125;&lt;br/&gt;</div><div class="line">   过滤后的留言：$&#123;lvc:filter(message)&#125;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示效果<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-15/5051867-file_1489576026703_e637.png" alt="" title="过滤前后对比"></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/13/js页面跳转/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/13/js页面跳转/" itemprop="url">
+                  js页面跳转
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-13T09:10:13+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/13/js页面跳转/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/js页面跳转/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/13/js页面跳转/" class="leancloud_visitors" data-flag-title="js页面跳转">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="js-页面跳转"><a href="#js-页面跳转" class="headerlink" title="js 页面跳转"></a>js 页面跳转</h1><p>参考资料: &lt; <a href="http://www.w3cschool.com.cn" target="_blank" rel="external">http://www.w3cschool.com.cn</a> &gt;</p>
+<h2 id="当前页面-跳转"><a href="#当前页面-跳转" class="headerlink" title="当前页面 跳转"></a>当前页面 跳转</h2><p><code>window.location.self=&quot;url&quot;;</code><br>‘ ‘</p>
+<h2 id="新建窗口-跳转"><a href="#新建窗口-跳转" class="headerlink" title="新建窗口 跳转"></a>新建窗口 跳转</h2><p><code>window.open(&quot;URL&quot;)</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/11/闲言碎语-心灵访客/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -717,14 +1249,16 @@
         
           
             <blockquote>
-<p>转载请标明出处：<br><a href="http://blog.csdn.net/lmj623565791/article/details/45022631；" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/45022631；</a> 本文出自:【张鸿洋的博客】</p>
+<p>转载请标明出处：<br><a href="http://blog.csdn.net/lmj623565791/article/details/45022631" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/45022631</a>  本文出自:【张鸿洋的博客】</p>
 </blockquote>
 <h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h1><p>对于自定义属性，大家肯定都不陌生，遵循以下几步，就可以实现：</p>
-<pre><code>* 自定义一个CustomView(extends View )类
-* 编写values/attrs.xml，在其中编写styleable和item等标签元素
-* 在布局文件中CustomView使用自定义的属性（注意namespace）
-* 在CustomView的构造方法中通过TypedArray获取
-</code></pre>
+<ul>
+<li>自定义一个CustomView(extends View )类</li>
+<li>编写values/attrs.xml，在其中编写styleable和item等标签元素</li>
+<li>在布局文件中CustomView使用自定义的属性（注意namespace）</li>
+<li>在CustomView的构造方法中通过TypedArray获取</li>
+</ul>
+
           
         
       
@@ -1170,8 +1704,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaee笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaee笔记</span>
+                  <a href="/categories/javaee/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee</span>
                   </a>
                 </span>
 
@@ -1445,546 +1979,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/01/javaee上课笔记-DBUtils工具/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lvc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lvc唯爱">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/01/javaee上课笔记-DBUtils工具/" itemprop="url">
-                  javaee上课笔记:DBUtils工具
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T13:56:54+08:00">
-                2017-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaee笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javaee笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/01/javaee上课笔记-DBUtils工具/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/javaee上课笔记-DBUtils工具/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/03/01/javaee上课笔记-DBUtils工具/" class="leancloud_visitors" data-flag-title="javaee上课笔记:DBUtils工具">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="javaee上课笔记-DBUtils工具"><a href="#javaee上课笔记-DBUtils工具" class="headerlink" title="javaee上课笔记:DBUtils工具"></a>javaee上课笔记:DBUtils工具</h1><h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
-<li>了解DBUtils工具中的api</li>
-<li>学会使用DBUtils工具对数据库进行增删改查的操作</li>
-<li>学会使用DBUtils工具处理事务<br><a href="http://commons.apache.org/dbutils/index.html">点我下载DBUtils</a></li>
-</ul>
-<h1 id="API介绍"><a href="#API介绍" class="headerlink" title="API介绍"></a>API介绍</h1><h2 id="核心类-amp-接口"><a href="#核心类-amp-接口" class="headerlink" title="核心类 &amp; 接口"></a>核心类 &amp; 接口</h2><blockquote>
-<p>类<br>  <code>org.apache.commons.dbutils.DbUtils</code><br>  <code>org.apache.commons.dbutils.QueryRunner</code></p>
-<p>接口<br>  <code>org.apache.commons.dbutils.ResultSetHandler</code></p>
-</blockquote>
-<h2 id="DBUtils-类"><a href="#DBUtils-类" class="headerlink" title="DBUtils 类"></a>DBUtils 类</h2><p>  DBUtils类 主要为如何关闭，装载JDBC驱动程序之类的常规工作提供方法，它提供的方法都是静态方法，</p>
-<ul>
-<li><p>1.close() 方法<br>关闭数据库连接</p>
-</li>
-<li><p>2.closeQuietly(Connection con,Statement stmt,ResultSet rs) 方法<br>该方法用来关闭Connection，Statement和ResultSet对象。<br>还会隐藏一些在程序中抛出的sql异常</p>
-</li>
-<li><p>3.commitAndCloseQuiely(Connection con)<br>该方法用来提交连接，然后关闭连接， 且在关闭时不抛出sql异常</p>
-</li>
-<li><p>4.LoadDrive（java.lang.String driverClassName）<br>该方法用于装载jdbc驱动程序，如果成功返回true。<br>使用时，不需要捕捉ClassNotFoundException异常</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/01/javaee上课笔记-DBUtils工具/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/25/Android上课笔记-快速入门/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lvc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lvc唯爱">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/25/Android上课笔记-快速入门/" itemprop="url">
-                  Android上课笔记-快速入门
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-25T10:41:51+08:00">
-                2017-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Android笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/25/Android上课笔记-快速入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/Android上课笔记-快速入门/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/02/25/Android上课笔记-快速入门/" class="leancloud_visitors" data-flag-title="Android上课笔记-快速入门">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Android项目的目录结构"><a href="#Android项目的目录结构" class="headerlink" title="Android项目的目录结构"></a>Android项目的目录结构</h1><ul>
-<li>Activity：应用被打开时显示的界面</li>
-<li>src：项目代码</li>
-<li>R.java：项目中所有资源文件的资源id</li>
-<li>Android.jar：Android的jar包，导入此包方可使用Android的api</li>
-<li>libs：导入第三方jar包</li>
-<li>assets：存放资源文件，比方说mp3、视频文件</li>
-<li>bin：存放编译打包后的文件</li>
-<li>res：存放资源文件，存放在此文件夹下的所有资源文件都会生成资源id</li>
-<li>drawable：存放图片资源</li>
-<li>layout：存放布局文件，把布局文件通过资源id指定给activity，界面就会显示出该布局文件定义的布局</li>
-<li>menu：定义菜单的样式</li>
-<li>Strings.xml：存放字符串资源，每个资源都会有一个资源id</li>
-</ul>
-<h2 id="Android的配置文件（清单文件）"><a href="#Android的配置文件（清单文件）" class="headerlink" title="Android的配置文件（清单文件）"></a>Android的配置文件（清单文件）</h2><ul>
-<li><p>指定应用的包名</p>
-<blockquote>
-<p>package=”com.itheima.helloworld”<br>data/data/com.itheima.helloworld(上面代码指定的包名)<br>应用生成的文件都会存放在此路径下</p>
-</blockquote>
-</li>
-<li><p>Android的四大组件在使用前全部需要在清单文件中配置</p>
-</li>
-<li>的配置对整个应用生效</li>
-<li>的配置对该activity生效<h1 id="DDMS"><a href="#DDMS" class="headerlink" title="DDMS"></a>DDMS</h1></li>
-<li>Dalvik debug monitor service</li>
-<li>Dalvik调试监控服务</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/25/Android上课笔记-快速入门/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/24/android笔记-Drawable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lvc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lvc唯爱">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/24/android笔记-Drawable/" itemprop="url">
-                  android笔记-Drawable
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-24T09:22:51+08:00">
-                2017-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/24/android笔记-Drawable/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/24/android笔记-Drawable/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2017/02/24/android笔记-Drawable/" class="leancloud_visitors" data-flag-title="android笔记-Drawable">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Android-的-Drawable"><a href="#Android-的-Drawable" class="headerlink" title="Android 的 Drawable"></a>Android 的 Drawable</h1><p>  Drawable 表示的是一中可以在Canvas上进行绘制的抽象概念，它的种类很多，最常见的颜色和<br>  图片度可以是一个Drawable。<br>  Drawable一般都是通过XML定义的，也可以使用代码来创建。</p>
-<h1 id="Drawable的分类"><a href="#Drawable的分类" class="headerlink" title="Drawable的分类"></a>Drawable的分类</h1><h2 id="BitmapDrawable"><a href="#BitmapDrawable" class="headerlink" title="BitmapDrawable"></a>BitmapDrawable</h2><p>  几乎是是最简单的Drawable，它就是表示一张图片。<br>  xml文件，<bitmap /></p>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">android:antialias		抗锯齿            </div><div class="line">android:dither		  抖动效果        </div><div class="line">android:filter		  过滤效果</div><div class="line">android:gravity		  对图片进行定位，当图片小于容器时。</div><div class="line">android:mipMap	     </div><div class="line">android:src		      </div><div class="line">android:tileMode		平铺模式          disabled 、clamp、reapt 、mirror</div><div class="line">android:tileModeX</div><div class="line">android:tileModeY</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/24/android笔记-Drawable/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2034,7 +2028,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
