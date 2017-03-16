@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习," />
+  <meta name="keywords" content="Struts2框架系列," />
 
 
 
@@ -87,31 +87,43 @@
 
 
 
-<meta name="description" content="没有正式文章，仅作为当前内容的测试！
-做个简单的小结昨天在慕课网手记中看到 hexo + github pages 搭建个人博客  经过长时间的学习，再一次觉得开源的伟大!  用了不到一天的时间，杂七杂八的也就成这个样子了
+<meta name="description" content="学习目标
+理解拦截器的工作原理
+掌握拦截器的配置和使用
+学会自定义拦截器
 
-  实践才是检验真理的唯一标准
-
-坚持每天学点东西吧。这也算还了我一个小愿望！2017 任重而道远! 下一步，开发一个APP！ ——Lvc">
+拦截器概述拦截器（Interceptor）是Struts2的核心组成部分。
+它可以动态拦截Action调用的对象，类似Servlet中的过滤器。
+Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）的一种实现策略，
+是可以“插拔”，需要就插入，不需要就拔出。
+拦截器的工作原理通">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇博客">
-<meta property="og:url" content="http://pjc.party/2017/02/03/我的第一篇博客/index.html">
+<meta property="og:title" content="Struts2框架-拦截器(Interceptor)">
+<meta property="og:url" content="http://pjc.party/2017/03/16/Struts2框架-拦截器-Interceptor/index.html">
 <meta property="og:site_name" content="Lvc唯爱">
-<meta property="og:description" content="没有正式文章，仅作为当前内容的测试！
-做个简单的小结昨天在慕课网手记中看到 hexo + github pages 搭建个人博客  经过长时间的学习，再一次觉得开源的伟大!  用了不到一天的时间，杂七杂八的也就成这个样子了
+<meta property="og:description" content="学习目标
+理解拦截器的工作原理
+掌握拦截器的配置和使用
+学会自定义拦截器
 
-  实践才是检验真理的唯一标准
-
-坚持每天学点东西吧。这也算还了我一个小愿望！2017 任重而道远! 下一步，开发一个APP！ ——Lvc">
-<meta property="og:updated_time" content="2017-02-05T07:21:48.850Z">
+拦截器概述拦截器（Interceptor）是Struts2的核心组成部分。
+它可以动态拦截Action调用的对象，类似Servlet中的过滤器。
+Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）的一种实现策略，
+是可以“插拔”，需要就插入，不需要就拔出。
+拦截器的工作原理通">
+<meta property="og:updated_time" content="2017-03-16T15:23:47.161Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的第一篇博客">
-<meta name="twitter:description" content="没有正式文章，仅作为当前内容的测试！
-做个简单的小结昨天在慕课网手记中看到 hexo + github pages 搭建个人博客  经过长时间的学习，再一次觉得开源的伟大!  用了不到一天的时间，杂七杂八的也就成这个样子了
+<meta name="twitter:title" content="Struts2框架-拦截器(Interceptor)">
+<meta name="twitter:description" content="学习目标
+理解拦截器的工作原理
+掌握拦截器的配置和使用
+学会自定义拦截器
 
-  实践才是检验真理的唯一标准
-
-坚持每天学点东西吧。这也算还了我一个小愿望！2017 任重而道远! 下一步，开发一个APP！ ——Lvc">
+拦截器概述拦截器（Interceptor）是Struts2的核心组成部分。
+它可以动态拦截Action调用的对象，类似Servlet中的过滤器。
+Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）的一种实现策略，
+是可以“插拔”，需要就插入，不需要就拔出。
+拦截器的工作原理通">
 
 
 
@@ -139,13 +151,13 @@
 
 
 
-  <link rel="canonical" href="http://pjc.party/2017/02/03/我的第一篇博客/"/>
+  <link rel="canonical" href="http://pjc.party/2017/03/16/Struts2框架-拦截器-Interceptor/"/>
 
 
 
 
 
-  <title> 我的第一篇博客 | Lvc唯爱 </title>
+  <title> Struts2框架-拦截器(Interceptor) | Lvc唯爱 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -284,7 +296,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/02/03/我的第一篇博客/">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/16/Struts2框架-拦截器-Interceptor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lvc">
@@ -305,7 +317,7 @@
             
             
               
-                我的第一篇博客
+                Struts2框架-拦截器(Interceptor)
               
             
           </h1>
@@ -320,8 +332,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-03T17:20:13+08:00">
-                2017-02-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T11:34:17+08:00">
+                2017-03-16
               </time>
             
 
@@ -331,6 +343,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SSH/" itemprop="url" rel="index">
+                    <span itemprop="name">SSH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -339,8 +373,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/03/我的第一篇博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/03/我的第一篇博客/" itemprop="commentCount"></span>
+                <a href="/2017/03/16/Struts2框架-拦截器-Interceptor/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/16/Struts2框架-拦截器-Interceptor/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -348,7 +382,7 @@
 
           
           
-             <span id="/2017/02/03/我的第一篇博客/" class="leancloud_visitors" data-flag-title="我的第一篇博客">
+             <span id="/2017/03/16/Struts2框架-拦截器-Interceptor/" class="leancloud_visitors" data-flag-title="Struts2框架-拦截器(Interceptor)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -377,15 +411,30 @@
       
 
       
-        <blockquote>
-<p>没有正式文章，仅作为当前内容的测试！</p>
-<p>做个简单的小结<br>昨天在慕课网手记中看到 hexo + github pages 搭建个人博客<br>  经过长时间的学习，再一次觉得开源的伟大!<br>  用了不到一天的时间，杂七杂八的也就成这个样子了</p>
-</blockquote>
-<p>  实践才是检验真理的唯一标准</p>
-<blockquote>
-<p>坚持每天学点东西吧。<br>这也算还了我一个小愿望！<br>2017 任重而道远! 下一步，开发一个APP！ ——Lvc</p>
-</blockquote>
+        <h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>理解拦截器的工作原理</li>
+<li>掌握拦截器的配置和使用</li>
+<li>学会自定义拦截器</li>
+</ul>
+<h1 id="拦截器概述"><a href="#拦截器概述" class="headerlink" title="拦截器概述"></a>拦截器概述</h1><pre><code>拦截器（Interceptor）是Struts2的核心组成部分。
+它可以动态拦截Action调用的对象，类似Servlet中的过滤器。
+Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）的一种实现策略，
+是可以“插拔”，需要就插入，不需要就拔出。
+</code></pre><h2 id="拦截器的工作原理"><a href="#拦截器的工作原理" class="headerlink" title="拦截器的工作原理"></a>拦截器的工作原理</h2><pre><code>通常情况下，拦截器都是以代理方式调用的，它在一个Action 执行前后进行拦截，围绕着Action和Result的执行而执行。
 
+对真正要执行的方法（execute()）进行拦截。首先执行ACtion配置的拦截器，在Action和Result执行之后，拦截器在再次执行（与先前的调用的顺序相反）,在次链式执行的过程中，每一个拦截器在执行execute（）方法前都可以直接返回。
+</code></pre><h1 id="拦截器的配置"><a href="#拦截器的配置" class="headerlink" title="拦截器的配置"></a>拦截器的配置</h1><h2 id="自定义拦截器"><a href="#自定义拦截器" class="headerlink" title="自定义拦截器"></a>自定义拦截器</h2><ul>
+<li><p>1.实现 <code>com.opensymphoy.xwork2.interceptor.Interceptor</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">void destroy();  </div><div class="line">void init();  </div><div class="line">String intercept(ActionInvocation invocation) throws Exception;</div></pre></td></tr></table></figure>
+</li>
+<li><ol>
+<li>继承 <code>com.opensymphony.xwork2.interceptor.AbstractInterceptor</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public String intercept(ActionInvocation invocation) throws Exception</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h2><h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;interceptors&gt;</div><div class="line">		&lt;interceptor name=&quot;myInterceptor&quot; class=&quot;com.java1234.interceptor.MyInterceptor&quot;&gt;&lt;/interceptor&gt;</div><div class="line">		&lt;interceptor name=&quot;privilege&quot; class=&quot;com.java1234.interceptor.PrivilegeInterceptor&quot;&gt;&lt;/interceptor&gt;</div><div class="line">	&lt;/interceptors&gt;</div></pre></td></tr></table></figure>
+<h2 id="拦截器栈"><a href="#拦截器栈" class="headerlink" title="拦截器栈"></a>拦截器栈</h2><h2 id="默认拦截器"><a href="#默认拦截器" class="headerlink" title="默认拦截器"></a>默认拦截器</h2><h1 id="案例–使用拦截器实现权限控制"><a href="#案例–使用拦截器实现权限控制" class="headerlink" title="案例–使用拦截器实现权限控制"></a>案例–使用拦截器实现权限控制</h1>
       
     </div>
 
@@ -429,7 +478,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag"># 学习</a>
+            <a href="/tags/Struts2框架系列/" rel="tag"># Struts2框架系列</a>
           
         </div>
       
@@ -442,15 +491,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/15/Struts2框架入门/" rel="next" title="Struts2框架入门">
+                <i class="fa fa-chevron-left"></i> Struts2框架入门
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/05/android笔记-使用通知/" rel="prev" title="android笔记-使用通知">
-                android笔记-使用通知 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -502,8 +551,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/03/我的第一篇博客/"
-           data-title="我的第一篇博客" data-url="http://pjc.party/2017/02/03/我的第一篇博客/">
+      <div class="ds-thread" data-thread-key="2017/03/16/Struts2框架-拦截器-Interceptor/"
+           data-title="Struts2框架-拦截器(Interceptor)" data-url="http://pjc.party/2017/03/16/Struts2框架-拦截器-Interceptor/">
       </div>
     
   </div>
@@ -527,8 +576,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -633,6 +691,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习目标"><span class="nav-number">1.</span> <span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拦截器概述"><span class="nav-number">2.</span> <span class="nav-text">拦截器概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截器的工作原理"><span class="nav-number">2.1.</span> <span class="nav-text">拦截器的工作原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拦截器的配置"><span class="nav-number">3.</span> <span class="nav-text">拦截器的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义拦截器"><span class="nav-number">3.1.</span> <span class="nav-text">自定义拦截器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置拦截器"><span class="nav-number">3.2.</span> <span class="nav-text">配置拦截器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截器"><span class="nav-number">3.3.</span> <span class="nav-text">拦截器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截器栈"><span class="nav-number">3.4.</span> <span class="nav-text">拦截器栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认拦截器"><span class="nav-number">3.5.</span> <span class="nav-text">默认拦截器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例–使用拦截器实现权限控制"><span class="nav-number">4.</span> <span class="nav-text">案例–使用拦截器实现权限控制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
