@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[CET-4:92day 战起烽火不连天]]></title>
+      <url>%2F2017%2F03%2F17%2FCET-4-92day-%E6%88%98%E8%B5%B7%E7%83%BD%E7%81%AB%E4%B8%8D%E8%BF%9E%E5%A4%A9%2F</url>
+      <content type="text"><![CDATA[战起青春的热血沸腾，在岁月的成长中消磨殆尽。在渐去渐少的日子里，思考着人生的意义，以及几个月后的告别大学生活，越发越重的生活鸭梨。 英语基础(将从考试大纲的能力要求，个人分十级)：1.词汇：0-12.语法：0-13.阅读能力：0-14.听的能力：0-15.说的能力：0-16.写的能力：0-17.翻译能力：0-1能力要求，参见我做的英语四级脑图 资料准备0.计划1.词汇 《新东方四级词汇 词根+联想 记忆法》2.语法 互联网3.试卷：真题 12345678910111213141516171819202122232425262728单词：abandonabilityaboardabroadabcenceabcentabsoluteabsorbabstractabundantabuseaccademicaccademyaccelerateaccentacceptanceaccessaccidentaccidentalaccommodationaccompanyacceplishaccordaccordanceaccordingaccordinglyaccount]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Struts2框架-拦截器(Interceptor)]]></title>
       <url>%2F2017%2F03%2F16%2FStruts2%E6%A1%86%E6%9E%B6-%E6%8B%A6%E6%88%AA%E5%99%A8-Interceptor%2F</url>
       <content type="text"><![CDATA[学习目标 理解拦截器的工作原理 掌握拦截器的配置和使用 学会自定义拦截器 拦截器概述拦截器（Interceptor）是Struts2的核心组成部分。 它可以动态拦截Action调用的对象，类似Servlet中的过滤器。 Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）的一种实现策略， 是可以“插拔”，需要就插入，不需要就拔出。 拦截器的工作原理通常情况下，拦截器都是以代理方式调用的，它在一个Action 执行前后进行拦截，围绕着Action和Result的执行而执行。 对真正要执行的方法（execute()）进行拦截。首先执行ACtion配置的拦截器，在Action和Result执行之后，拦截器在再次执行（与先前的调用的顺序相反）,在次链式执行的过程中，每一个拦截器在执行execute（）方法前都可以直接返回。 拦截器的配置自定义拦截器 1.实现 com.opensymphoy.xwork2.interceptor.Interceptor 123void destroy(); void init(); String intercept(ActionInvocation invocation) throws Exception; 继承 com.opensymphony.xwork2.interceptor.AbstractInterceptor1public String intercept(ActionInvocation invocation) throws Exception 配置拦截器拦截器 1234&lt;interceptors&gt; &lt;interceptor name=&quot;myInterceptor&quot; class=&quot;com.java1234.interceptor.MyInterceptor&quot;&gt;&lt;/interceptor&gt; &lt;interceptor name=&quot;privilege&quot; class=&quot;com.java1234.interceptor.PrivilegeInterceptor&quot;&gt;&lt;/interceptor&gt; &lt;/interceptors&gt; 拦截器栈默认拦截器案例–使用拦截器实现权限控制]]></content>
