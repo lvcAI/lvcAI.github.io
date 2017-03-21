@@ -106,7 +106,7 @@
 3.在WEB.xml文件中配置（可省略）
 4.在jsp 页面引入及">
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-15/5051867-file_1489576026703_e637.png">
-<meta property="og:updated_time" content="2017-03-15T11:07:47.584Z">
+<meta property="og:updated_time" content="2017-03-21T18:05:23.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义 EL 函数">
 <meta name="twitter:description" content="EL表达式-自定义函数  表达式语言除了可以使用基本的运运算符之外，还可以使用自定义的函数。  通过使用自定义函数，加强了表达式语言功能。
@@ -414,6 +414,7 @@
 </ul>
 <h1 id="案例——自定义-EL-函数防止-HTML-注入"><a href="#案例——自定义-EL-函数防止-HTML-注入" class="headerlink" title="案例——自定义 EL 函数防止 HTML 注入"></a>案例——自定义 EL 函数防止 HTML 注入</h1><ul>
 <li><p>1.开发函数处理类</p>
+<a id="more"></a>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">      package  com.lvc.chapter7.utils;</div><div class="line">public class HTMLFilter &#123;</div><div class="line"></div><div class="line">	public static String filter(String message) &#123;</div><div class="line">		if (message == null)&#123;</div><div class="line">			return (null);</div><div class="line">		&#125;</div><div class="line">		char content[] = new char[message.length()];</div><div class="line">		message.getChars(0, message.length(), content, 0);</div><div class="line">		StringBuffer result = new StringBuffer(content.length + 50);</div><div class="line">		for (int i = 0; i &lt; content.length; i++) &#123;</div><div class="line">			switch (content[i]) &#123;</div><div class="line">			case &apos;&lt;&apos;:</div><div class="line">				result.append(&quot;&amp;lt;&quot;);</div><div class="line">				break;</div><div class="line">			case &apos;&gt;&apos;:</div><div class="line">				result.append(&quot;&amp;gt;&quot;);</div><div class="line">				break;</div><div class="line">			case &apos;&amp;&apos;:</div><div class="line">				result.append(&quot;&amp;amp;&quot;);</div><div class="line">				break;</div><div class="line">			case &apos;&quot;&apos;:</div><div class="line">				result.append(&quot;&amp;quot;&quot;);</div><div class="line">				break;</div><div class="line">			default:</div><div class="line">				result.append(content[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return (result.toString());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </code></pre></li>
 <li><p>2.建立TLD文件</p>
@@ -601,7 +602,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

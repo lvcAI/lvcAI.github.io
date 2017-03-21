@@ -111,7 +111,7 @@ Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）�
 Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）的一种实现策略，
 是可以“插拔”，需要就插入，不需要就拔出。
 拦截器的工作原理通">
-<meta property="og:updated_time" content="2017-03-16T15:23:47.161Z">
+<meta property="og:updated_time" content="2017-03-21T18:04:14.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Struts2框架-拦截器(Interceptor)">
 <meta name="twitter:description" content="学习目标
@@ -423,6 +423,7 @@ Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）�
 </code></pre><h2 id="拦截器的工作原理"><a href="#拦截器的工作原理" class="headerlink" title="拦截器的工作原理"></a>拦截器的工作原理</h2><pre><code>通常情况下，拦截器都是以代理方式调用的，它在一个Action 执行前后进行拦截，围绕着Action和Result的执行而执行。
 
 对真正要执行的方法（execute()）进行拦截。首先执行ACtion配置的拦截器，在Action和Result执行之后，拦截器在再次执行（与先前的调用的顺序相反）,在次链式执行的过程中，每一个拦截器在执行execute（）方法前都可以直接返回。
+&lt;!-- more --&gt;
 </code></pre><h1 id="拦截器的配置"><a href="#拦截器的配置" class="headerlink" title="拦截器的配置"></a>拦截器的配置</h1><h2 id="自定义拦截器"><a href="#自定义拦截器" class="headerlink" title="自定义拦截器"></a>自定义拦截器</h2><ul>
 <li><p>1.实现 <code>com.opensymphoy.xwork2.interceptor.Interceptor</code></p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">void destroy();  </div><div class="line">void init();  </div><div class="line">String intercept(ActionInvocation invocation) throws Exception;</div></pre></td></tr></table></figure>
@@ -605,7 +606,7 @@ Struts2中拦截器是AOP（Aspect-Object—Programming，面向切面编程）�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
