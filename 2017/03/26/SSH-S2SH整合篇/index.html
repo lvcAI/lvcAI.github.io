@@ -1,0 +1,1038 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SSH," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="整合SSH 基于XML配置准备整合环境SSH 使用的版本：123struts2-2.3.24-allspring-framework-4.0.1.RELEASEhibernate-release-4.3.5.Final
+Eclipse Java EE IDE for Web Developers.Version: Neon.1 Release RC3 (4.6.1RC3)JDK : 1.8.0_7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH:S2SH整合篇">
+<meta property="og:url" content="http://pjc.party/2017/03/26/SSH-S2SH整合篇/index.html">
+<meta property="og:site_name" content="Lvc唯爱">
+<meta property="og:description" content="整合SSH 基于XML配置准备整合环境SSH 使用的版本：123struts2-2.3.24-allspring-framework-4.0.1.RELEASEhibernate-release-4.3.5.Final
+Eclipse Java EE IDE for Web Developers.Version: Neon.1 Release RC3 (4.6.1RC3)JDK : 1.8.0_7">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/36249628-file_1490514498771_7f41.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/87438631-file_1490512301841_14ad7.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/38335289-file_1490512785105_bcd7.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/64650780-file_1490513107544_6042.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/46168591-file_1490516719176_71db.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/44088026-file_1490516760279_615b.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/69262381-file_1490516813825_17a68.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/40526929-file_1490516837926_7bab.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/89626502-file_1490516869791_8259.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/66223734-file_1490516899393_f054.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/68137994-file_1490515265638_3aca.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/21043504-file_1490518692091_532c.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/77501971-file_1490519101200_25cc.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/74555565-file_1490518655321_16259.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/54213404-file_1490518995616_158b.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/57178569-file_1490507180534_5962.png">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/48458440-file_1490509578096_6090.png">
+<meta property="og:updated_time" content="2017-03-26T09:07:28.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSH:S2SH整合篇">
+<meta name="twitter:description" content="整合SSH 基于XML配置准备整合环境SSH 使用的版本：123struts2-2.3.24-allspring-framework-4.0.1.RELEASEhibernate-release-4.3.5.Final
+Eclipse Java EE IDE for Web Developers.Version: Neon.1 Release RC3 (4.6.1RC3)JDK : 1.8.0_7">
+<meta name="twitter:image" content="http://ol5smga16.bkt.clouddn.com/17-3-26/36249628-file_1490514498771_7f41.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pjc.party/2017/03/26/SSH-S2SH整合篇/"/>
+
+
+
+
+
+  <title> SSH:S2SH整合篇 | Lvc唯爱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?91a5cf9a85639ea8ef8502003a9f1e44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lvc唯爱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">在这条路上走的越来越远，就不回来了</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/26/SSH-S2SH整合篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SSH:S2SH整合篇
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T13:40:41+08:00">
+                2017-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SSH/" itemprop="url" rel="index">
+                    <span itemprop="name">SSH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/26/SSH-S2SH整合篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/SSH-S2SH整合篇/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/26/SSH-S2SH整合篇/" class="leancloud_visitors" data-flag-title="SSH:S2SH整合篇">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="整合SSH-基于XML配置"><a href="#整合SSH-基于XML配置" class="headerlink" title="整合SSH 基于XML配置"></a>整合SSH 基于XML配置</h1><h2 id="准备整合环境"><a href="#准备整合环境" class="headerlink" title="准备整合环境"></a>准备整合环境</h2><p>SSH 使用的版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struts2-2.3.24-all</div><div class="line">spring-framework-4.0.1.RELEASE</div><div class="line">hibernate-release-4.3.5.Final</div></pre></td></tr></table></figure></p>
+<p>Eclipse Java EE IDE for Web Developers.<br>Version: Neon.1 Release RC3 (4.6.1RC3)<br>JDK : 1.8.0_77<br>mysql: Ver 14.14 Distrib 5.7.15, for Win64 (x86_64)<br>项目的包预览：<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/36249628-file_1490514498771_7f41.png" alt="项目的包预览"></p>
+<h3 id="准备数据库环境"><a href="#准备数据库环境" class="headerlink" title="准备数据库环境"></a>准备数据库环境</h3><p>创建数据库test</p>
+<h3 id="配置-Struts2-环境"><a href="#配置-Struts2-环境" class="headerlink" title="配置 Struts2 环境"></a>配置 Struts2 环境</h3><ul>
+<li>1.导入相关jar包<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/87438631-file_1490512301841_14ad7.png" alt="struts2 jar包"></li>
+<li><p>2.在web.xml中配置 核心过滤器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 添加对struts2的支持 --&gt;  </div><div class="line"> &lt;filter&gt;  </div><div class="line">   &lt;filter-name&gt;struts2&lt;/filter-name&gt;  </div><div class="line">   &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;  </div><div class="line"> &lt;/filter&gt;   </div><div class="line"></div><div class="line"> &lt;filter-mapping&gt;  </div><div class="line">   &lt;filter-name&gt;struts2&lt;/filter-name&gt;  </div><div class="line">   &lt;url-pattern&gt;/*&lt;/url-pattern&gt;  </div><div class="line"> &lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.在src下添加 Struts.xml配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </div><div class="line">&lt;!DOCTYPE struts PUBLIC  </div><div class="line">    &quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;  </div><div class="line">    &quot;http://struts.apache.org/dtds/struts-2.3.dtd&quot;&gt;  </div><div class="line"></div><div class="line">&lt;struts&gt;  </div><div class="line">   &lt;!-- 开发模式 --&gt;</div><div class="line">    &lt;constant name=&quot;struts.devMode&quot; value=&quot;true&quot;&gt;&lt;/constant&gt;  </div><div class="line">    &lt;package name=&quot;s2sh&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;</div><div class="line"></div><div class="line">    &lt;/package&gt;</div><div class="line">&lt;/struts&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="配置-Spring-环境"><a href="#配置-Spring-环境" class="headerlink" title="配置 Spring 环境"></a>配置 Spring 环境</h3><ul>
+<li>1.导入所依赖的jar包<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/38335289-file_1490512785105_bcd7.png" alt="Sprig jar包"></li>
+<li><p>2.在src下添加 applicationContext.xml 配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;    </div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;    </div><div class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;   </div><div class="line">    xmlns:p=&quot;http://www.springframework.org/schema/p&quot;  </div><div class="line">    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;   </div><div class="line">    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;  </div><div class="line">    xmlns:jee=&quot;http://www.springframework.org/schema/jee&quot;  </div><div class="line">    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;  </div><div class="line">    xsi:schemaLocation=&quot;    </div><div class="line">        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  </div><div class="line">        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  </div><div class="line">        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd  </div><div class="line">        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd  </div><div class="line">        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd&quot;&gt;    </div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.在web.xml文件中配置Spring监听器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 添加对spring的支持 --&gt;  </div><div class="line"> &lt;context-param&gt;  </div><div class="line">   &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;  </div><div class="line">   &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;  </div><div class="line"> &lt;/context-param&gt;  </div><div class="line"></div><div class="line">   &lt;!-- 定义Spring监听器，加载Spring  --&gt;</div><div class="line">  &lt;listener&gt;  </div><div class="line">       &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;  </div><div class="line">  &lt;/listener&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="配置-Hibernate-环境"><a href="#配置-Hibernate-环境" class="headerlink" title="配置 Hibernate 环境"></a>配置 Hibernate 环境</h3><ul>
+<li>1.导入相关jar包<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/64650780-file_1490513107544_6042.png" alt="Hibernate jar包"></li>
+<li>2.在src下添加核心配置文件 hibernate.cfg.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&gt;</div><div class="line">&lt;!DOCTYPE hibernate-configuration PUBLIC</div><div class="line">        &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;</div><div class="line">        &quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&gt;</div><div class="line"></div><div class="line">&lt;hibernate-configuration&gt;  </div><div class="line">    &lt;session-factory&gt;  </div><div class="line">	&lt;!-- 	   Database connection settings --&gt;</div><div class="line">        &lt;property name=&quot;connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;connection.url&quot;&gt;jdbc:mysql://localhost:3306/test&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;connection.username&quot;&gt;root&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;connection.password&quot;&gt;lvc159357&lt;/property&gt;</div><div class="line"></div><div class="line"></div><div class="line">		&lt;!--方言--&gt;</div><div class="line">        &lt;property name=&quot;dialect&quot;&gt;org.hibernate.dialect.MySQL5Dialect&lt;/property&gt;  </div><div class="line"></div><div class="line">        &lt;!-- 显示sql语句 --&gt;  </div><div class="line">        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;  </div><div class="line"></div><div class="line">		&lt;!-- 自动更新 --&gt;</div><div class="line">        &lt;property name=&quot;hbm2ddl.auto&quot;&gt;update&lt;/property&gt;</div><div class="line"></div><div class="line">  		&lt;mapping resource=&quot;party/pjc/entity/user.hbm.xml&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;/session-factory&gt;  </div><div class="line">&lt;/hibernate-configuration&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Spring-和-Hibernate-的整合"><a href="#Spring-和-Hibernate-的整合" class="headerlink" title="Spring 和 Hibernate 的整合"></a>Spring 和 Hibernate 的整合</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Spring 和 Hibernate 的整合，需要添加一个支持整合的<code>spring-orm-4.0.1.RELEASE.jar</code>，<br>可以在Spring解压目录的libs目录找到。<br>在整合之前，首先需要了解三个重要的对象</p>
+<ul>
+<li>HibernateTemplate：相当于 Hibernate 的 session 可以直接操作PO类，依赖于SessionFactory</li>
+<li>LocalSessionFactoryBean：获得sessionFactory</li>
+<li>HibernateTransactionManager：Hibernate 的事物管理器<h3 id="使用-Hibernate-cfg-xml"><a href="#使用-Hibernate-cfg-xml" class="headerlink" title="使用 Hibernate.cfg.xml"></a>使用 Hibernate.cfg.xml</h3></li>
+<li>1.entity层<br>User.Java<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/46168591-file_1490516719176_71db.png" alt=""><br>User的 映射文件 User.hbm.xml</li>
+</ul>
+<ul>
+<li>2.Dao层<br>接口 UserDao.java<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/44088026-file_1490516760279_615b.png" alt=""><br>实现类 UserDaoImpl.java<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/69262381-file_1490516813825_17a68.png" alt=""></li>
+<li>3.service层<br>接口 UserService.java<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/40526929-file_1490516837926_7bab.png" alt=""><br>实现类 UserServiceImpl.java<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/89626502-file_1490516869791_8259.png" alt=""></li>
+<li><p>4.Spring 配置文件中进行配置<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/66223734-file_1490516899393_f054.png" alt=""></p>
+</li>
+<li><p>5.测试<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/68137994-file_1490515265638_3aca.png" alt="结果"></p>
+</li>
+</ul>
+<h3 id="不使用-Hibernate-cfg-xml"><a href="#不使用-Hibernate-cfg-xml" class="headerlink" title="不使用 Hibernate.cfg.xml"></a>不使用 Hibernate.cfg.xml</h3><p>（还没写完）</p>
+<h2 id="Spring-与-Struts2-的整合"><a href="#Spring-与-Struts2-的整合" class="headerlink" title="Spring 与 Struts2 的整合"></a>Spring 与 Struts2 的整合</h2><p>Spring 与 Struts2整合的目的是将struts2中的Action 实例化工作交给Spring进行统一管理。</p>
+<h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>在Spring和Struts2整合时，需要导入jar包<code>struts2-spring-plugin-2.3.24.jar</code>，该jar在已下载的<br>Struts2解压目录中lib下找到</p>
+<h3 id="Action-创建交予-Spring"><a href="#Action-创建交予-Spring" class="headerlink" title="Action 创建交予 Spring"></a>Action 创建交予 Spring</h3><p>（没写）</p>
+<h3 id="Struts2-自身创建-Action"><a href="#Struts2-自身创建-Action" class="headerlink" title="Struts2 自身创建 Action"></a>Struts2 自身创建 Action</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  </div><div class="line">&lt;!DOCTYPE struts PUBLIC  </div><div class="line">    &quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;  </div><div class="line">    &quot;http://struts.apache.org/dtds/struts-2.3.dtd&quot;&gt;  </div><div class="line"></div><div class="line">&lt;struts&gt;  </div><div class="line">   &lt;!--  &lt;constant name=&quot;struts.action.extension&quot; value=&quot;action&quot; /&gt;   --&gt;</div><div class="line">   &lt;!-- 开发模式 --&gt;</div><div class="line">    &lt;constant name=&quot;struts.devMode&quot; value=&quot;true&quot;&gt;&lt;/constant&gt;  </div><div class="line">    &lt;package name=&quot;s2sh&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;</div><div class="line">    	&lt;action name=&quot;login&quot; class=&quot;party.pjc.action.UserAction&quot;&gt;</div><div class="line">    		&lt;result &gt;success.jsp&lt;/result&gt;</div><div class="line">    		&lt;result name=&quot;error&quot;&gt;index.jsp&lt;/result&gt;</div><div class="line">    	&lt;/action&gt;</div><div class="line">    &lt;/package&gt;</div><div class="line"></div><div class="line">&lt;/struts&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>测试<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/21043504-file_1490518692091_532c.png" alt="测试页面" title="测试页面"><br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/77501971-file_1490519101200_25cc.png" alt="登录成功后" title="登录成功后"><br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/74555565-file_1490518655321_16259.png" alt="后台" title="后台"><br><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/54213404-file_1490518995616_158b.png" alt="登陆失败" title="登陆失败"><h1 id="那些年踩过的坑"><a href="#那些年踩过的坑" class="headerlink" title="那些年踩过的坑"></a>那些年踩过的坑</h1><h2 id="HibernateTemplate-引入错误"><a href="#HibernateTemplate-引入错误" class="headerlink" title="HibernateTemplate 引入错误"></a>HibernateTemplate 引入错误</h2>首先我们来介绍下，Hibernate3 and Hibernate4 怎么调用 HIbernateTemplate</li>
+</ul>
+<h2 id="Hibernate-事务管理-错误"><a href="#Hibernate-事务管理-错误" class="headerlink" title="Hibernate 事务管理 错误"></a>Hibernate 事务管理 错误</h2><p><img src="http://ol5smga16.bkt.clouddn.com/17-3-26/57178569-file_1490507180534_5962.png" alt="错误贴图"><br>来看一下，报错的地方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void delete(final Object entity, final LockMode lockMode) throws DataAccessException &#123;</div><div class="line">  executeWithNativeSession(new HibernateCallback&lt;Object&gt;() &#123;</div><div class="line">    @Override</div><div class="line">    public Object doInHibernate(Session session) throws HibernateException &#123;</div><div class="line">      checkWriteOperationAllowed(session);</div><div class="line">      if (lockMode != null) &#123;</div><div class="line">        session.buildLockRequest(new LockOptions(lockMode)).lock(entity);</div><div class="line">      &#125;</div><div class="line">      session.delete(entity);</div><div class="line">      return null;</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以看到delete方法里面调用了<code>checkWriteOperationAllowed(session);</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">protected void checkWriteOperationAllowed(Session session) throws InvalidDataAccessApiUsageException &#123;</div><div class="line">  if (isCheckWriteOperations() &amp;&amp; session.getFlushMode().lessThan(FlushMode.COMMIT)) &#123;</div><div class="line">    throw new InvalidDataAccessApiUsageException(</div><div class="line">        &quot;Write operations are not allowed in read-only mode (FlushMode.MANUAL): &quot;+</div><div class="line">        &quot;Turn your Session into FlushMode.COMMIT/AUTO or remove &apos;readOnly&apos; marker from transaction definition.&quot;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>进去之后，我们找到了报错语句的源头，<br>解决办法:加上事务相关的配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 配置事务管理器 --&gt;  </div><div class="line"></div><div class="line">  &lt;bean id=&quot;transactionManager&quot;  </div><div class="line">      class=&quot;org.springframework.orm.hibernate4.HibernateTransactionManager&quot;&gt;  </div><div class="line">      &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot; /&gt;  </div><div class="line">  &lt;/bean&gt;  </div><div class="line"></div><div class="line"> &lt;!--    配置事务通知属性   --&gt;</div><div class="line">  &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;  </div><div class="line">    &lt;!--   定义事务传播属性   --&gt;</div><div class="line">      &lt;tx:attributes&gt;  </div><div class="line">          &lt;tx:method name=&quot;insert*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;update*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;edit*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;save*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;add*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;new*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;set*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;remove*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;delete*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;change*&quot; propagation=&quot;REQUIRED&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;get*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;true&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;find*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;true&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;load*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;true&quot; /&gt;  </div><div class="line">          &lt;tx:method name=&quot;*&quot; propagation=&quot;REQUIRED&quot; read-only=&quot;true&quot; /&gt;  </div><div class="line">      &lt;/tx:attributes&gt;  </div><div class="line">  &lt;/tx:advice&gt;  </div><div class="line"></div><div class="line">&lt;!--      配置事务切面   --&gt;</div><div class="line">  &lt;aop:config&gt;  </div><div class="line">      &lt;aop:pointcut id=&quot;serviceOperation&quot;  </div><div class="line">          expression=&quot;execution(* party.pjc.service..*.*(..))&quot; /&gt;  </div><div class="line">      &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;serviceOperation&quot; /&gt;  </div><div class="line">  &lt;/aop:config&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="Hibernate-不能删除数据"><a href="#Hibernate-不能删除数据" class="headerlink" title="Hibernate 不能删除数据"></a>Hibernate 不能删除数据</h2><p><code>INFO: HHH000114: Handling transient entity in delete processing</code></p>
+<p>首选我们来理解下 Hibernate 持久化对象的状态</p>
+<ul>
+<li>1.瞬时态（transient）</li>
+<li>2.持久态（persistent）</li>
+<li>3.托管态（detached）</li>
+</ul>
+<p>来看一下我们自己代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@Test</div><div class="line">	public void test() &#123;</div><div class="line">		User user = new User();</div><div class="line">		user.setUsername(&quot;lvc&quot;);</div><div class="line">		user.setPassword(&quot;123456&quot;);</div><div class="line">		String xmlPath=&quot;applicationContext.xml&quot;;</div><div class="line">		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);</div><div class="line">		UserService  userService =(UserService) applicationContext.getBean(&quot;userService&quot;);</div><div class="line">	//	userService.findUserById(1);</div><div class="line">	//	userService.saveUser(user);</div><div class="line">		userService.deleteUser(user);</div><div class="line">	//	System.out.println(userService.findUserById(1));</div><div class="line">		System.out.println(userService.findAllUser());</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>我们 new 了一个对象，这个对象 就是<strong>瞬时态</strong>尚未于Hibernate Session 关联起来。<br>而我调用的最底层方法<code>session.delete(entity)</code> 传入的是<strong>持久化</strong>的对象，而不是我new出来的<br> 所以，我们改进一下<code>userService.deleteUser(userService.findUserById(3));</code><br> <img src="http://ol5smga16.bkt.clouddn.com/17-3-26/48458440-file_1490509578096_6090.png" alt="结果"></p>
+<p>那这样删除数据，是不是很麻烦呢？先留下一个问题。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.png" alt="lvc WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="lvc Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSH/" rel="tag"># SSH</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/25/CET-4-84day-Dream-it-Possible/" rel="next" title="CET-4:84day Dream it Possible">
+                <i class="fa fa-chevron-left"></i> CET-4:84day Dream it Possible
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/26/SSH-S2SH整合篇/"
+           data-title="SSH:S2SH整合篇" data-url="http://pjc.party/2017/03/26/SSH-S2SH整合篇/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lvc" />
+          <p class="site-author-name" itemprop="name">lvc</p>
+           
+              <p class="site-description motion-element" itemprop="description">在这条路上走的越来越远，就不回来了</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lvcai" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2883343161?refer_flag=1001030101_" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/lvc-29/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://pjc.party" title="lvc" target="_blank">lvc</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=431534069&auto=1&height=66"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#整合SSH-基于XML配置"><span class="nav-number">1.</span> <span class="nav-text">整合SSH 基于XML配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备整合环境"><span class="nav-number">1.1.</span> <span class="nav-text">准备整合环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据库环境"><span class="nav-number">1.1.1.</span> <span class="nav-text">准备数据库环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Struts2-环境"><span class="nav-number">1.1.2.</span> <span class="nav-text">配置 Struts2 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Spring-环境"><span class="nav-number">1.1.3.</span> <span class="nav-text">配置 Spring 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Hibernate-环境"><span class="nav-number">1.1.4.</span> <span class="nav-text">配置 Hibernate 环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-和-Hibernate-的整合"><span class="nav-number">1.2.</span> <span class="nav-text">Spring 和 Hibernate 的整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.2.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Hibernate-cfg-xml"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用 Hibernate.cfg.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不使用-Hibernate-cfg-xml"><span class="nav-number">1.2.3.</span> <span class="nav-text">不使用 Hibernate.cfg.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-与-Struts2-的整合"><span class="nav-number">1.3.</span> <span class="nav-text">Spring 与 Struts2 的整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action-创建交予-Spring"><span class="nav-number">1.3.2.</span> <span class="nav-text">Action 创建交予 Spring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Struts2-自身创建-Action"><span class="nav-number">1.3.3.</span> <span class="nav-text">Struts2 自身创建 Action</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#那些年踩过的坑"><span class="nav-number">2.</span> <span class="nav-text">那些年踩过的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HibernateTemplate-引入错误"><span class="nav-number">2.1.</span> <span class="nav-text">HibernateTemplate 引入错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate-事务管理-错误"><span class="nav-number">2.2.</span> <span class="nav-text">Hibernate 事务管理 错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate-不能删除数据"><span class="nav-number">2.3.</span> <span class="nav-text">Hibernate 不能删除数据</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lvc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pjcparty"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2vi1e3YzavT3TWjpTtkVlqY-gzGzoHsz", "muWQop9KBdv1ENJRlfahVXM3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
