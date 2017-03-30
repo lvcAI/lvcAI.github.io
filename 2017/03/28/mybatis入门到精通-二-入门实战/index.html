@@ -87,20 +87,20 @@
 
 
 
-<meta name="description" content="开篇有益 项目已经发布到Github本篇主要是对 入门篇 的代码实现。
+<meta name="description" content="开篇有益 项目已经发布到Github本篇主要是对 入门篇 的代码实现。你好吗？:blush:
 搭建 mybatis 开发环境
 使用的mysql数据库，建数据库bd_mybaits ，新建表user
 创建项目Mybatis3，引入mybatis-3.4.2.jar jar包以及mysql驱动包mybatis-3.4.2.jar
-引入模板 Configuration.xml小技巧： D:\WEB\mybatis\mybat">
+引入模板 Configuration.xml小技巧： D:\WEB\my">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis入门到精通:(二)入门实战">
 <meta property="og:url" content="http://pjc.party/2017/03/28/mybatis入门到精通-二-入门实战/index.html">
 <meta property="og:site_name" content="Lvc唯爱">
-<meta property="og:description" content="开篇有益 项目已经发布到Github本篇主要是对 入门篇 的代码实现。
+<meta property="og:description" content="开篇有益 项目已经发布到Github本篇主要是对 入门篇 的代码实现。你好吗？:blush:
 搭建 mybatis 开发环境
 使用的mysql数据库，建数据库bd_mybaits ，新建表user
 创建项目Mybatis3，引入mybatis-3.4.2.jar jar包以及mysql驱动包mybatis-3.4.2.jar
-引入模板 Configuration.xml小技巧： D:\WEB\mybatis\mybat">
+引入模板 Configuration.xml小技巧： D:\WEB\my">
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/95713949-file_1490721745652_11beb.png">
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/70539401-file_1490719245011_11abb.png">
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/27842507-file_1490719656452_32af.png">
@@ -110,14 +110,14 @@
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/92622165-file_1490722958057_8a33.png">
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/8010763-file_1490722997758_7e5c.png">
 <meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/78870910-file_1490723985471_12fa1.png">
-<meta property="og:updated_time" content="2017-03-28T18:00:29.924Z">
+<meta property="og:updated_time" content="2017-03-30T09:57:06.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis入门到精通:(二)入门实战">
-<meta name="twitter:description" content="开篇有益 项目已经发布到Github本篇主要是对 入门篇 的代码实现。
+<meta name="twitter:description" content="开篇有益 项目已经发布到Github本篇主要是对 入门篇 的代码实现。你好吗？:blush:
 搭建 mybatis 开发环境
 使用的mysql数据库，建数据库bd_mybaits ，新建表user
 创建项目Mybatis3，引入mybatis-3.4.2.jar jar包以及mysql驱动包mybatis-3.4.2.jar
-引入模板 Configuration.xml小技巧： D:\WEB\mybatis\mybat">
+引入模板 Configuration.xml小技巧： D:\WEB\my">
 <meta name="twitter:image" content="http://ol5smga16.bkt.clouddn.com/17-3-29/95713949-file_1490721745652_11beb.png">
 
 
@@ -406,11 +406,12 @@
       
 
       
-        <p><strong>开篇有益</strong> 项目已经发布到<a href="https://github.com/lvcAI/Mybatis3" target="_blank" rel="external">Github</a><br>本篇主要是对 入门篇 的代码实现。</p>
+        <p><strong>开篇有益</strong> 项目已经发布到<a href="https://github.com/lvcAI/Mybatis3" target="_blank" rel="external">Github</a><br>本篇主要是对 入门篇 的代码实现。<br>你好吗？:blush:</p>
 <h1 id="搭建-mybatis-开发环境"><a href="#搭建-mybatis-开发环境" class="headerlink" title="搭建 mybatis 开发环境"></a>搭建 mybatis 开发环境</h1><ul>
 <li>使用的mysql数据库，建数据库bd_mybaits ，新建表user<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-29/95713949-file_1490721745652_11beb.png" alt="" title="user表"></li>
 <li>创建项目Mybatis3，引入<code>mybatis-3.4.2.jar</code> jar包以及mysql驱动包<code>mybatis-3.4.2.jar</code></li>
-<li>引入模板 Configuration.xml<br><strong>小技巧：</strong> <code>D:\WEB\mybatis\mybatis-3-mybatis-3.4.2\src\test\java\org\apache\ibatis\submitted\complex_property</code>我的mybatis源码包解压目录如上，在这个目录下可以找到配置模板如图：<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-29/70539401-file_1490719245011_11abb.png" alt="模板" title="模板"><br>configuration.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE configuration</div><div class="line">    PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</div><div class="line">    &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</div><div class="line"></div><div class="line">&lt;configuration&gt;</div><div class="line">  &lt;settings&gt;</div><div class="line">    &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;</div><div class="line">  &lt;/settings&gt;</div><div class="line"></div><div class="line"> &lt;!--  &lt;typeAliases&gt;</div><div class="line">    &lt;typeAlias alias=&quot;UserAlias&quot; type=&quot;org.apache.ibatis.submitted.complex_property.User&quot;/&gt;</div><div class="line">  &lt;/typeAliases&gt; --&gt;</div><div class="line">// 环境配置</div><div class="line">  &lt;environments default=&quot;development&quot;&gt;</div><div class="line">    &lt;environment id=&quot;development&quot;&gt;</div><div class="line">      &lt;transactionManager type=&quot;JDBC&quot;&gt;</div><div class="line">        &lt;property name=&quot;&quot; value=&quot;&quot;/&gt;</div><div class="line">      &lt;/transactionManager&gt;</div><div class="line">      &lt;dataSource type=&quot;POOLED&quot;&gt;</div><div class="line">        &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/db_mybatis&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;sa&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</div><div class="line">		&lt;property name=&quot;password&quot; value=&quot;lvc159357&quot;/&gt;</div><div class="line">      &lt;/dataSource&gt;</div><div class="line">    &lt;/environment&gt;</div><div class="line">  &lt;/environments&gt;</div><div class="line">// 映射文件</div><div class="line">  &lt;mappers&gt;</div><div class="line">    &lt;mapper resource=&quot;&quot;/&gt;</div><div class="line">    &lt;mapper resource=&quot;&quot;/&gt;</div><div class="line">    &lt;package name=&quot;&quot;/&gt;</div><div class="line">  &lt;/mappers&gt;</div><div class="line"></div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<li>引入模板 Configuration.xml<br><strong>小技巧：</strong> <code>D:\WEB\mybatis\mybatis-3-mybatis-3.4.2\src\test\java\org\apache\ibatis\submitted\complex_property</code>我的mybatis源码包解压目录如上，在这个目录下可以找到配置模板如图：<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-29/70539401-file_1490719245011_11abb.png" alt="模板" title="模板"><a id="more"></a>
+configuration.xml<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE configuration</div><div class="line">    PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</div><div class="line">    &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</div><div class="line"></div><div class="line">&lt;configuration&gt;</div><div class="line">  &lt;settings&gt;</div><div class="line">    &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;</div><div class="line">  &lt;/settings&gt;</div><div class="line"></div><div class="line"> &lt;!--  &lt;typeAliases&gt;</div><div class="line">    &lt;typeAlias alias=&quot;UserAlias&quot; type=&quot;org.apache.ibatis.submitted.complex_property.User&quot;/&gt;</div><div class="line">  &lt;/typeAliases&gt; --&gt;</div><div class="line">// 环境配置</div><div class="line">  &lt;environments default=&quot;development&quot;&gt;</div><div class="line">    &lt;environment id=&quot;development&quot;&gt;</div><div class="line">      &lt;transactionManager type=&quot;JDBC&quot;&gt;</div><div class="line">        &lt;property name=&quot;&quot; value=&quot;&quot;/&gt;</div><div class="line">      &lt;/transactionManager&gt;</div><div class="line">      &lt;dataSource type=&quot;POOLED&quot;&gt;</div><div class="line">        &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/db_mybatis&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;sa&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</div><div class="line">		&lt;property name=&quot;password&quot; value=&quot;lvc159357&quot;/&gt;</div><div class="line">      &lt;/dataSource&gt;</div><div class="line">    &lt;/environment&gt;</div><div class="line">  &lt;/environments&gt;</div><div class="line">// 映射文件</div><div class="line">  &lt;mappers&gt;</div><div class="line">    &lt;mapper resource=&quot;&quot;/&gt;</div><div class="line">    &lt;mapper resource=&quot;&quot;/&gt;</div><div class="line">    &lt;package name=&quot;&quot;/&gt;</div><div class="line">  &lt;/mappers&gt;</div><div class="line"></div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h1 id="项目包层次结构"><a href="#项目包层次结构" class="headerlink" title="项目包层次结构"></a>项目包层次结构</h1><p><img src="http://ol5smga16.bkt.clouddn.com/17-3-29/27842507-file_1490719656452_32af.png" alt="包结构" title="项目宝结构以及类"><br>基本讲解：<br>src.party.pjc|<br>              /dao         数据访问<br>              /date        配置文件包<br>              /db          获取SqlSession 类<br>              /model       模型层<br>              /test         测试类</p>
@@ -519,7 +520,7 @@
       
     </footer>
   </article>
-
+  
 
 
     <div class="post-spread">
@@ -550,7 +551,7 @@
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -784,7 +785,7 @@
         
       </div>
     
-    
+
   </div>
 
   
@@ -1011,5 +1012,7 @@
 
   
 
+  
+  
 </body>
 </html>

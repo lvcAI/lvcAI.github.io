@@ -90,11 +90,7 @@
 <meta name="description" content="javaee上课笔记:DBUtils工具学习目标
 了解DBUtils工具中的api
 学会使用DBUtils工具对数据库进行增删改查的操作
-学会使用DBUtils工具处理事务点我下载DBUtils
-
-API介绍核心类 &amp;amp; 接口
-类  org.apache.commons.dbutils.DbUtils  org.apache.commons.dbutils.QueryRunner
-接口  o">
+学会使用DBUtils工具处理事务点我下载DBUtils">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javaee上课笔记:DBUtils工具">
 <meta property="og:url" content="http://pjc.party/2017/03/01/javaee上课笔记-DBUtils工具/index.html">
@@ -102,22 +98,14 @@ API介绍核心类 &amp;amp; 接口
 <meta property="og:description" content="javaee上课笔记:DBUtils工具学习目标
 了解DBUtils工具中的api
 学会使用DBUtils工具对数据库进行增删改查的操作
-学会使用DBUtils工具处理事务点我下载DBUtils
-
-API介绍核心类 &amp;amp; 接口
-类  org.apache.commons.dbutils.DbUtils  org.apache.commons.dbutils.QueryRunner
-接口  o">
-<meta property="og:updated_time" content="2017-03-15T11:10:08.452Z">
+学会使用DBUtils工具处理事务点我下载DBUtils">
+<meta property="og:updated_time" content="2017-03-30T09:14:55.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaee上课笔记:DBUtils工具">
 <meta name="twitter:description" content="javaee上课笔记:DBUtils工具学习目标
 了解DBUtils工具中的api
 学会使用DBUtils工具对数据库进行增删改查的操作
-学会使用DBUtils工具处理事务点我下载DBUtils
-
-API介绍核心类 &amp;amp; 接口
-类  org.apache.commons.dbutils.DbUtils  org.apache.commons.dbutils.QueryRunner
-接口  o">
+学会使用DBUtils工具处理事务点我下载DBUtils">
 
 
 
@@ -408,10 +396,13 @@ API介绍核心类 &amp;amp; 接口
         <h1 id="javaee上课笔记-DBUtils工具"><a href="#javaee上课笔记-DBUtils工具" class="headerlink" title="javaee上课笔记:DBUtils工具"></a>javaee上课笔记:DBUtils工具</h1><h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
 <li>了解DBUtils工具中的api</li>
 <li>学会使用DBUtils工具对数据库进行增删改查的操作</li>
-<li>学会使用DBUtils工具处理事务<br><a href="http://commons.apache.org/dbutils/index.html" target="_blank" rel="external">点我下载DBUtils</a></li>
-</ul>
+<li>学会使用DBUtils工具处理事务<br><a href="http://commons.apache.org/dbutils/index.html" target="_blank" rel="external">点我下载DBUtils</a><a id="more"></a>
 <h1 id="API介绍"><a href="#API介绍" class="headerlink" title="API介绍"></a>API介绍</h1><h2 id="核心类-amp-接口"><a href="#核心类-amp-接口" class="headerlink" title="核心类 &amp; 接口"></a>核心类 &amp; 接口</h2><blockquote>
-<p>类<br>  <code>org.apache.commons.dbutils.DbUtils</code><br>  <code>org.apache.commons.dbutils.QueryRunner</code></p>
+<p>类<br><code>org.apache.commons.dbutils.DbUtils</code><br><code>org.apache.commons.dbutils.QueryRunner</code></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
 <p>接口<br>  <code>org.apache.commons.dbutils.ResultSetHandler</code></p>
 </blockquote>
 <h2 id="DBUtils-类"><a href="#DBUtils-类" class="headerlink" title="DBUtils 类"></a>DBUtils 类</h2><p>  DBUtils类 主要为如何关闭，装载JDBC驱动程序之类的常规工作提供方法，它提供的方法都是静态方法，</p>
@@ -423,16 +414,15 @@ API介绍核心类 &amp;amp; 接口
 <li><p>3.commitAndCloseQuiely(Connection con)<br>该方法用来提交连接，然后关闭连接， 且在关闭时不抛出sql异常</p>
 </li>
 <li><p>4.LoadDrive（java.lang.String driverClassName）<br>该方法用于装载jdbc驱动程序，如果成功返回true。<br>使用时，不需要捕捉ClassNotFoundException异常</p>
-<a id="more"></a>
-<h2 id="QueryRunner-类"><a href="#QueryRunner-类" class="headerlink" title="QueryRunner 类"></a>QueryRunner 类</h2><p>该类简化了执行sql语句的代码，它与ResultSetHandler 组合在一起，能完成大部分的数据库操作，大大减少编码量。<br>提供了两个构造方法：<br>1.默认的构造方法<br>2.需要javax.sql.DataSource 作为参数</p>
+</li>
+</ul>
+<h2 id="QueryRunner-类"><a href="#QueryRunner-类" class="headerlink" title="QueryRunner 类"></a>QueryRunner 类</h2><p>   该类简化了执行sql语句的代码，它与ResultSetHandler 组合在一起，能完成大部分的数据库操作，大大减少编码量。<br>   提供了两个构造方法：<br>    1.默认的构造方法<br>    2.需要javax.sql.DataSource 作为参数</p>
 <ul>
 <li>1.query(Connection conn,String sql,ResultSetHandler rsh,Object[] params) 方法<br>该方法用于执行查询操作参数params表示一个对象数组，该数组中每个元素都被用来作为查询语句的置换参数<br>注意：该方法会自动处理PrepareSatement 和 ResultSet的创建和关闭</li>
 <li>2.query(String sql,ResultSetHandler rsh,Object[] params)方法<br>该方法用于执行查询操作，与第一个方法相比它不需要传递Connection对象给方法，它可以从提供给构造方法的数据源DateSource或使用setDateSource()中获得连接。</li>
 <li>3.query(Connection conn，String sql,ResultSetHandler rsh)方法<br>该方法用于执一个不需要置换参数的查询操作</li>
 <li>4.update(Connection conn，String sql,Object[] params)方法<br>该方法用来执行插入、更新或者删除操作，其中，参数params 表示SQL语句中的置换参数。</li>
 <li>5.update(Connection conn,String sql) 方法<br>该方法用于执行插入、更新或者删操作，它需要置换参数操作。</li>
-</ul>
-</li>
 </ul>
 <p>##　ResultSetHandler 接口<br>    该接口用于处理ResultSet结果集，它可以将结果集中的数据转化为不同的形式。根据结果集中数据类型的不同，ResultHandler提供了不同的实现类。如下：</p>
 <ul>
@@ -535,7 +525,7 @@ API介绍核心类 &amp;amp; 接口
       
     </footer>
   </article>
-
+  
 
 
     <div class="post-spread">
@@ -566,7 +556,7 @@ API介绍核心类 &amp;amp; 接口
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -800,7 +790,7 @@ API介绍核心类 &amp;amp; 接口
         
       </div>
     
-    
+
   </div>
 
   
@@ -1027,5 +1017,7 @@ API介绍核心类 &amp;amp; 接口
 
   
 
+  
+  
 </body>
 </html>
