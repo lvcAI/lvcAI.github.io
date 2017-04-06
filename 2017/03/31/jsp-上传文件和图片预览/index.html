@@ -1,0 +1,1022 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javaee," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="开篇有益： 本篇主要记录jsp文件上传以及上传图片实时动态显示。
+文件上传jsp 文件上传借助commons-fileupload-1.2.2.jar,commons-io-2.0.1.jar这两个jar包。实现过程也较简单，如果对java的I/O流和文件操作熟悉的话，以下代码还是容易理解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp:上传文件和图片预览">
+<meta property="og:url" content="http://pjc.party/2017/03/31/jsp-上传文件和图片预览/index.html">
+<meta property="og:site_name" content="Lvc唯爱">
+<meta property="og:description" content="开篇有益： 本篇主要记录jsp文件上传以及上传图片实时动态显示。
+文件上传jsp 文件上传借助commons-fileupload-1.2.2.jar,commons-io-2.0.1.jar这两个jar包。实现过程也较简单，如果对java的I/O流和文件操作熟悉的话，以下代码还是容易理解。">
+<meta property="og:image" content="http://ol5smga16.bkt.clouddn.com/17-3-31/10879435-file_1490967543038_747f.png">
+<meta property="og:updated_time" content="2017-04-06T16:29:16.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsp:上传文件和图片预览">
+<meta name="twitter:description" content="开篇有益： 本篇主要记录jsp文件上传以及上传图片实时动态显示。
+文件上传jsp 文件上传借助commons-fileupload-1.2.2.jar,commons-io-2.0.1.jar这两个jar包。实现过程也较简单，如果对java的I/O流和文件操作熟悉的话，以下代码还是容易理解。">
+<meta name="twitter:image" content="http://ol5smga16.bkt.clouddn.com/17-3-31/10879435-file_1490967543038_747f.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pjc.party/2017/03/31/jsp-上传文件和图片预览/"/>
+
+
+
+
+
+  <title> jsp:上传文件和图片预览 | Lvc唯爱 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?91a5cf9a85639ea8ef8502003a9f1e44";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lvc唯爱</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">在这条路上走的越来越远，就不回来了</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+
+      
+        
+        <li class="menu-item menu-item-poem">
+          <a href="/categories/Poem" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-circle"></i> <br />
+            
+            诗集
+          </a>
+        </li>
+
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-plane"></i> <br />
+            
+            留言
+          </a>
+        </li>
+
+      
+
+      
+
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://pjc.party/2017/03/31/jsp-上传文件和图片预览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lvc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lvc唯爱">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                jsp:上传文件和图片预览
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T21:05:39+08:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaee/" itemprop="url" rel="index">
+                    <span itemprop="name">javaee</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/31/jsp-上传文件和图片预览/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/31/jsp-上传文件和图片预览/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/31/jsp-上传文件和图片预览/" class="leancloud_visitors" data-flag-title="jsp:上传文件和图片预览">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>开篇有益：</strong> 本篇主要记录jsp文件上传以及上传图片实时动态显示。</p>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><p>jsp 文件上传借助<code>commons-fileupload-1.2.2.jar,commons-io-2.0.1.jar</code>这两个jar包。<br>实现过程也较简单，如果对java的I/O流和文件操作熟悉的话，以下代码还是容易理解。<br><a id="more"></a><br>UpLoadServlet.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">package com.lvc.chapter6;</div><div class="line"></div><div class="line">import java.io.File;</div><div class="line">import java.io.FileOutputStream;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.InputStream;</div><div class="line">import java.io.OutputStream;</div><div class="line">import java.io.PrintWriter;</div><div class="line">import java.util.List;</div><div class="line">import java.util.UUID;</div><div class="line"></div><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.http.HttpServlet;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line">import org.apache.commons.fileupload.FileItem;</div><div class="line">import org.apache.commons.fileupload.FileUploadException;</div><div class="line">import org.apache.commons.fileupload.disk.DiskFileItemFactory;</div><div class="line">import org.apache.commons.fileupload.servlet.ServletFileUpload;</div><div class="line"></div><div class="line"></div><div class="line">public class UpLoadServlet extends HttpServlet &#123;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 *</div><div class="line">	 */</div><div class="line">	private static final long serialVersionUID = 1L;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</div><div class="line">		this.doPost(request, response);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line"></div><div class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</div><div class="line">		 try &#123;</div><div class="line">		//创建工厂</div><div class="line">		DiskFileItemFactory factory = new DiskFileItemFactory();</div><div class="line">		File f = new File(&quot;e:/Target&quot;);</div><div class="line">		if(!f.exists())&#123;</div><div class="line">			f.mkdirs();</div><div class="line">		&#125;</div><div class="line">		//设置文件缓存路径</div><div class="line">		factory.setRepository(f);</div><div class="line">		//创建fileUpload 组件</div><div class="line">		ServletFileUpload fileUpload = new ServletFileUpload(factory);</div><div class="line">		fileUpload.setHeaderEncoding(&quot;utf-8&quot;);</div><div class="line">		//解析request</div><div class="line"></div><div class="line">			@SuppressWarnings(&quot;unchecked&quot;)</div><div class="line">			List&lt;FileItem&gt; fileItems = fileUpload.parseRequest(request);</div><div class="line">			PrintWriter writer = response.getWriter();</div><div class="line">			//遍历集合</div><div class="line">			for (FileItem fileItem : fileItems )&#123;</div><div class="line">				if (fileItem.isFormField())&#123;</div><div class="line">					String name = fileItem.getFieldName();</div><div class="line">					String value = fileItem.getString(&quot;utf-8&quot;);</div><div class="line">					//writer.print(&quot;上传者：&quot;+value+&quot;&lt;br/&gt;&quot;);</div><div class="line">				&#125;else&#123;</div><div class="line">					String fileName = fileItem.getName();</div><div class="line">				//	writer.println(&quot;文件来源:&quot;+fileName+&quot;&lt;br/&gt;&quot;);</div><div class="line">					//fileName=fileName.substring(fileName.lastIndexOf(&quot;\\&quot;));</div><div class="line">				//	writer.println(&quot;成功上传的文件:&quot;+fileName);</div><div class="line">					fileName=UUID.randomUUID().toString()+&quot;_&quot;+fileName;</div><div class="line">				//	String  webPath  = &quot;/WEB-INF/upload/&quot;;</div><div class="line">				//	String filePath = getServletContext().getRealPath(webPath+fileName);</div><div class="line">				//	System.out.println(filePath);</div><div class="line">					File file  = new File(&quot;E:/V/&quot;+fileName);</div><div class="line">				//	File file  = new File(filePath);</div><div class="line">					String str = file.getPath();</div><div class="line">					System.out.println(str);</div><div class="line">					file.getParentFile().mkdirs();</div><div class="line">					file.createNewFile();</div><div class="line">					InputStream in = fileItem.getInputStream();</div><div class="line">					OutputStream out = new FileOutputStream(file);</div><div class="line">					byte[] buffer = new byte[1024];</div><div class="line">					int len;</div><div class="line">					while((len=in.read(buffer))&gt;0)&#123;</div><div class="line">						out.write(buffer, 0, len);</div><div class="line">					&#125;</div><div class="line"></div><div class="line">					in.close();</div><div class="line">					out.close();</div><div class="line">					fileItem.delete();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125; catch (FileUploadException e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上就是一个上传文件处理的Servlet，主要部分都有注释。</p>
+<p>#　fileupload 详解<br><div class="note info"><h2 id="1-DiskFileUpload类"><a href="#1-DiskFileUpload类" class="headerlink" title="1. DiskFileUpload类"></a>1. DiskFileUpload类</h2><p>DiskFileUpload类是Apache文件上传组件的核心类，应用程序开发人员通过这个类来与Apache文件上传组件进行交互。但现在Apache建议使用ServletFileUpload类，两个类的方法类似。下面介绍DiskFileUpload类中的几个常用的重要方法。</p>
+<ul>
+<li>1.1．setSizeMax方法<br>setSizeMax方法用于设置请求消息实体内容的最大允许大小，以防止客户端故意通过上传特大的文件来塞满服务器端的存储空间，单位为字节。其完整语法定义如下：<br>  <code>public void setSizeMax（long sizeMax）</code><br>如果请求消息中的实体内容的大小超过了setSizeMax方法的设置值，该方法将会抛出FileUploadException异常。</li>
+<li>1.2．setSizeThreshold方法<br>Apache文件上传组件在解析和处理上传数据中的每个字段内容时，需要临时保存解析出的数据。因为Java虚拟机默认可以使用的内存空间是有限的（笔者测试不大于100M），超出限制时将会发生“java.lang.OutOfMemoryError”错误，如果上传的文件很大，例如上传800M的文件，在内存中将无法保存该文件内容，Apache文件上传组件将用临时文件来保存这些数据；但如果上传的文件很小，例如上传600个字节的文件，显然将其直接保存在内存中更加有效。setSizeThreshold方法用于设置是否使用临时文件保存解析出的数据的那个临界值，该方法传入的参数的单位是字节。其完整语法定义如下：<br>  <code>public void setSizeThreshold(int sizeThreshold)</code></li>
+<li>1.3. setRepositoryPath方法<br>setRepositoryPath方法用于设置setSizeThreshold方法中提到的临时文件的存放目录，这里要求使用绝对路径。其完整语法定义如下：<br>  <code>public void setRepositoryPath(String repositoryPath)</code><br>如果不设置存放路径，那么临时文件将被储存在”java.io.tmpdir”这个JVM环境属性所指定的目录中，tomcat 5.5.9将这个属性设置为了“<tomcat安装目录>/temp/”目录。</tomcat安装目录></li>
+<li>1.4. parseRequest方法<br>parseRequest 方法是DiskFileUpload类的重要方法，它是对HTTP请求消息进行解析的入口方法，如果请求消息中的实体内容的类型不是“multipart/form-data”，该方法将抛出FileUploadException异常。parseRequest 方法解析出FORM表单中的每个字段的数据，并将它们分别包装成独立的FileItem对象，然后将这些FileItem对象加入进一个List类型的集合对象中返回。parseRequest 方法的完整语法定义如下：<br>  <code>public List parseRequest(HttpServletRequest req)</code><br>parseRequest 方法还有一个重载方法，该方法集中处理上述所有方法的功能，其完整语法定义如下：<br>  <code>parseRequest(HttpServletRequest req,int sizeThreshold,long sizeMax,String path)</code><br>这两个parseRequest方法都会抛出FileUploadException异常。</li>
+<li>1.5. isMultipartContent方法<br>isMultipartContent方法方法用于判断请求消息中的内容是否是“multipart/form-data”类型，是则返回true，否则返回false。isMultipartContent方法是一个静态方法，不用创建DiskFileUpload类的实例对象即可被调用，其完整语法定义如下：<br>  <code>public static final boolean isMultipartContent(HttpServletRequest req)</code></li>
+<li>1.6. setHeaderEncoding方法<br>由于浏览器在提交FORM表单时，会将普通表单中填写的文本内容传递给服务器，对于文件上传字段，除了传递原始的文件内容外，还要传递其文件路径名等信息，如后面的图1.3所示。不管FORM表单采用的是“application/x-www-form-urlencoded”编码，还是“multipart/form-data”编码，它们仅仅是将各个FORM表单字段元素内容组织到一起的一种格式，而这些内容又是由某种字符集编码来表示的。关于浏览器采用何种字符集来编码FORM表单字段中的内容，请参看笔者编著的《深入体验java Web开发内幕——核心基础》一书中的第6.9.2的讲解，“multipart/form-data”类型的表单为表单字段内容选择字符集编码的原理和方式与“application/x-www-form-urlencoded”类型的表单是相同的。FORM表单中填写的文本内容和文件上传字段中的文件路径名在内存中就是它们的某种字符集编码的字节数组形式，Apache文件上传组件在读取这些内容时，必须知道它们所采用的字符集编码，才能将它们转换成正确的字符文本返回。<br>对于浏览器上传给WEB服务器的各个表单字段的描述头内容，Apache文件上传组件都需要将它们转换成字符串形式返回，setHeaderEncoding 方法用于设置转换时所使用的字符集编码，其原理与笔者编著的《深入体验java Web开发内幕——核心基础》一书中的第6.9.4节讲解的ServletRequest.setCharacterEncoding方法相同。setHeaderEncoding 方法的完整语法定义如下：<br>  <code>public void setHeaderEncoding(String encoding)</code><br>其中，encoding参数用于指定将各个表单字段的描述头内容转换成字符串时所使用的字符集编码。<br>注意：如果读者在使用Apache文件上传组件时遇到了中文字符的乱码问题，一般都是没有正确调用setHeaderEncoding方法的原因。</li>
+</ul>
+<h2 id="2-FileItem类"><a href="#2-FileItem类" class="headerlink" title="2.FileItem类"></a>2.FileItem类</h2><p>FileItem类用来封装单个表单字段元素的数据，一个表单字段元素对应一个FileItem对象，通过调用FileItem对象的方法可以获得相关表单字段元素的数据。FileItem是一个接口，在应用程序中使用的实际上是该接口一个实现类，该实现类的名称并不重要，程序可以采用FileItem接口类型来对它进行引用和访问，为了便于讲解，这里将FileItem实现类称之为FileItem类。FileItem类还实现了Serializable接口，以支持序列化操作。<br>对于“multipart/form-data”类型的FORM表单，浏览器上传的实体内容中的每个表单字段元素的数据之间用字段分隔界线进行分割，两个分隔界线间的内容称为一个分区，每个分区中的内容可以被看作两部分，一部分是对表单字段元素进行描述的描述头，另外一部是表单字段元素的主体内容.</p>
+<p>主体部分有两种可能性，要么是用户填写的表单内容，要么是文件内容。FileItem类对象实际上就是对图1.3中的一个分区的数据进行封装的对象，它内部用了两个成员变量来分别存储描述头和主体内容，其中保存主体内容的变量是一个输出流类型的对象。当主体内容的大小小于DiskFileUpload.setSizeThreshold方法设置的临界值大小时，这个流对象关联到一片内存，主体内容将会被保存在内存中。当主体内容的数据超过DiskFileUpload.setSizeThreshold方法设置的临界值大小时，这个流对象关联到硬盘上的一个临时文件，主体内容将被保存到该临时文件中。临时文件的存储目录由DiskFileUpload.setRepositoryPath方法设置，临时文件名的格式为“upload_00000005（八位或八位以上的数字）.tmp”这种形式，FileItem类内部提供了维护临时文件名中的数值不重复的机制，以保证了临时文件名的唯一性。当应用程序将主体内容保存到一个指定的文件中时，或者在FileItem对象被垃圾回收器回收时，或者Java虚拟机结束时，Apache文件上传组件都会尝试删除临时文件，以尽量保证临时文件能被及时清除。<br>下面介绍FileItem类中的几个常用的方法：</p>
+<ul>
+<li>2.1. isFormField方法<br>isFormField方法用于判断FileItem类对象封装的数据是否属于一个普通表单字段，还是属于一个文件表单字段，如果是普通表单字段则返回true，否则返回false。该方法的完整语法定义如下：<br>  <code>public boolean isFormField()</code></li>
+<li>2.2. getName方法<br>getName方法用于获得文件上传字段中的文件名，对于图1.3中的第三个分区所示的描述头，getName方法返回的结果为字符串“C:\bg.gif”。如果FileItem类对象对应的是普通表单字段，getName方法将返回null。即使用户没有通过网页表单中的文件字段传递任何文件，但只要设置了文件表单字段的name属性，浏览器也会将文件字段的信息传递给服务器，只是文件名和文件内容部分都为空，但这个表单字段仍然对应一个FileItem对象，此时，getName方法返回结果为空字符串””，读者在调用Apache文件上传组件时要注意考虑这个情况。getName方法的完整语法定义如下：<br>  <code>public String getName()</code><br>注意：如果用户使用Windows系统上传文件，浏览器将传递该文件的完整路径，如果用户使用Linux或者Unix系统上传文件，浏览器将只传递该文件的名称部分。</li>
+<li>2.3．getFieldName方法<br>getFieldName方法用于返回表单字段元素的name属性值，也就是返回图1.3中的各个描述头部分中的name属性值，例如“name=p1”中的“p1”。getFieldName方法的完整语法定义如下：<br>  <code>public String getFieldName()</code></li>
+<li>2.4. write方法<br>write方法用于将FileItem对象中保存的主体内容保存到某个指定的文件中。如果FileItem对象中的主体内容是保存在某个临时文件中，该方法顺利完成后，临时文件有可能会被清除。该方法也可将普通表单字段内容写入到一个文件中，但它主要用途是将上传的文件内容保存在本地文件系统中。其完整语法定义如下：<br>  <code>public void write(File file)</code></li>
+<li>2.5．getString方法<br>  getString方法用于将FileItem对象中保存的主体内容作为一个字符串返回，它有两个重载的定义形式：<br>  <code>public java.lang.String getString()</code><br>  <code>public java.lang.String getString(java.lang.String encoding) throws  java.io.UnsupportedEncodingException</code><br>前者使用缺省的字符集编码将主体内容转换成字符串，后者使用参数指定的字符集编码将主体内容转换成字符串。如果在读取普通表单字段元素的内容时出现了中文乱码现象，请调用第二个getString方法，并为之传递正确的字符集编码名称。</li>
+<li>2.6. getContentType方法<br>getContentType 方法用于获得上传文件的类型，对于图1.3中的第三个分区所示的描述头，getContentType方法返回的结果为字符串“image/gif”，即“Content-Type”字段的值部分。如果FileItem类对象对应的是普通表单字段，该方法将返回null。getContentType 方法的完整语法定义如下：<br>  <code>public String getContentType()</code><br>2.7. isInMemory方法<br>isInMemory方法用来判断FileItem类对象封装的主体内容是存储在内存中，还是存储在临时文件中，如果存储在内存中则返回true，否则返回false。其完整语法定义如下：<br>  <code>public boolean isInMemory()</code></li>
+<li>2.8. delete方法<br>delete方法用来清空FileItem类对象中存放的主体内容，如果主体内容被保存在临时文件中，delete方法将删除该临时文件。尽管Apache组件使用了多种方式来尽量及时清理临时文件，但系统出现异常时，仍有可能造成有的临时文件被永久保存在了硬盘中。在有些情况下，可以调用这个方法来及时删除临时文件。其完整语法定义如下：<br>  <code>public void delete()</code></li>
+</ul>
+<h2 id="3-FileUploadException类"><a href="#3-FileUploadException类" class="headerlink" title="3.FileUploadException类"></a>3.FileUploadException类</h2><p>在文件上传过程中，可能发生各种各样的异常，例如网络中断、数据丢失等等。为了对不同异常进行合适的处理，Apache文件上传组件还开发了四个异常类，其中FileUploadException是其他异常类的父类，其他几个类只是被间接调用的底层类，对于Apache组件调用人员来说，只需对FileUploadException异常类进行捕获和处理即可。</p>
+<h2 id="4-ServletRequestContext"><a href="#4-ServletRequestContext" class="headerlink" title="4.ServletRequestContext"></a>4.ServletRequestContext</h2><p>ServletRequestContext类提供访问request的方法。实现RequestContext接口。</p>
+</div></p>
+<h1 id="预览图片"><a href="#预览图片" class="headerlink" title="预览图片"></a>预览图片</h1><p>基于以上的了解，我们对文件的上传有了一定的了解。之前我们做了一个简单的新闻发布系统（忽略界面），<br>在实际生活中，新闻往往是有配图的，恩。我们已经了解需求，即在新闻添加页面 加上 图片的预览<br>如：<br><img src="http://ol5smga16.bkt.clouddn.com/17-3-31/10879435-file_1490967543038_747f.png" alt="预览图" title="预览图"></p>
+<p>实现直接复制一下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">function setImagePreview() &#123;</div><div class="line">var docObj=document.getElementById(&quot;doc&quot;);</div><div class="line">var imgObjPreview=document.getElementById(&quot;preview&quot;);</div><div class="line">if(docObj.files &amp;&amp; docObj.files[0])&#123;</div><div class="line">//火狐下，直接设img属性</div><div class="line">imgObjPreview.style.display = &apos;block&apos;;</div><div class="line">imgObjPreview.style.width = &apos;300px&apos;;</div><div class="line">imgObjPreview.style.height = &apos;120px&apos;;</div><div class="line">//imgObjPreview.src = docObj.files[0].getAsDataURL();</div><div class="line">//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式</div><div class="line">imgObjPreview.src = window.URL.createObjectURL(docObj.files[0]);</div><div class="line">alert(imgObjPreview.src);</div><div class="line">&#125;else&#123;</div><div class="line">//IE下，使用滤镜</div><div class="line">docObj.select();</div><div class="line">var imgSrc = document.selection.createRange().text;</div><div class="line">var localImagId = document.getElementById(&quot;localImag&quot;);</div><div class="line">alert(imgSrc);</div><div class="line">//必须设置初始大小</div><div class="line">localImagId.style.width = &quot;250px&quot;;</div><div class="line">localImagId.style.height = &quot;200px&quot;;</div><div class="line">//图片异常的捕捉，防止用户修改后缀来伪造图片</div><div class="line">try&#123;</div><div class="line">localImagId.style.filter=&quot;progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)&quot;;</div><div class="line">localImagId.filters.item(&quot;DXImageTransform.Microsoft.AlphaImageLoader&quot;).src = imgSrc;</div><div class="line">&#125;catch(e)&#123;</div><div class="line">alert(&quot;您上传的图片格式不正确，请重新选择!&quot;);</div><div class="line">return false;</div><div class="line">&#125;</div><div class="line">imgObjPreview.style.display = &apos;none&apos;;</div><div class="line">document.selection.empty();</div><div class="line">&#125;</div><div class="line">return true;</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;input type=file name=&quot;doc&quot; id=&quot;doc&quot; onchange=&quot;javascript:setImagePreview();&quot;&gt;</div><div class="line">&lt;p&gt;&lt;div id=&quot;localImag&quot;&gt;&lt;img id=&quot;preview&quot;  style=&quot;diplay:none&quot; /&gt;&lt;/div&gt;&lt;/p&gt;</div></pre></td></tr></table></figure></p>
+<p>ok!本文到了，这里也就结束，good day！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.png" alt="lvc WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="lvc Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javaee/" rel="tag"># javaee</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/31/SSM框架整合/" rel="next" title="SSM框架整合">
+                <i class="fa fa-chevron-left"></i> SSM框架整合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/01/项目管理利器-maven/" rel="prev" title="项目管理利器-maven">
+                项目管理利器-maven <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+  
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/31/jsp-上传文件和图片预览/"
+           data-title="jsp:上传文件和图片预览" data-url="http://pjc.party/2017/03/31/jsp-上传文件和图片预览/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="lvc" />
+          <p class="site-author-name" itemprop="name">lvc</p>
+           
+              <p class="site-description motion-element" itemprop="description">在这条路上走的越来越远，就不回来了</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lvcai" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2883343161?refer_flag=1001030101_" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/lvc-29/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://pjc.party" title="lvc" target="_blank">lvc</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=405089420&auto=1&height=66"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">1.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DiskFileUpload类"><span class="nav-number">1.1.</span> <span class="nav-text">1. DiskFileUpload类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-FileItem类"><span class="nav-number">1.2.</span> <span class="nav-text">2.FileItem类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-FileUploadException类"><span class="nav-number">1.3.</span> <span class="nav-text">3.FileUploadException类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-ServletRequestContext"><span class="nav-number">1.4.</span> <span class="nav-text">4.ServletRequestContext</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预览图片"><span class="nav-number">2.</span> <span class="nav-text">预览图片</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lvc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"pjcparty"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("L2vi1e3YzavT3TWjpTtkVlqY-gzGzoHsz", "muWQop9KBdv1ENJRlfahVXM3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+  
+  
+</body>
+</html>
